@@ -1,32 +1,32 @@
 .custom-toolbar {
-    background-color: #ffffff; // White background
-    color: #000000; // Black text
+    background-color: #ffffff; 
+    color: #000000; 
     height: 64px;
     padding: 0 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   
     .spacer {
       flex: 1;
     }
   
     .nav-link {
-      color: #000080; // Dark blue
+      color: #000080; 
       font-weight: bold;
-      text-transform: none; // Disable uppercase
-      padding: 8px 16px; // Button spacing
+      text-transform: none;
+      padding: 8px 16px; 
       transition: box-shadow 0.3s, background-color 0.3s;
   
       &:hover {
-        background-color: rgba(0, 0, 128, 0.1); // Light blue on hover
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Add shadow on hover
+        background-color: rgba(0, 0, 128, 0.1); 
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
       }
     }
   
     .active-link {
-      background-color: #d1e8ff; // Highlight active link
-      color: #004080; // Active link color
+      background-color: #d1e8ff; 
+      color: #004080; 
       border-radius: 4px;
-      box-shadow: 0 2px 4px rgba(0, 64, 128, 0.2); // Active link shadow
+      box-shadow: 0 2px 4px rgba(0, 64, 128, 0.2); 
     }
   
     .status-text {
@@ -41,44 +41,106 @@
       align-items: center;
       font-size: 14px;
       font-weight: bold;
-      color: #004080; // Button color
+      color: #004080; 
   
       mat-icon {
-        font-size: 16px; // Small icon for better alignment
-        margin-left: 4px; // Space between text and arrow icon
+        font-size: 16px; 
+        margin-left: 4px; 
       }
     }
   }
   
   .custom-menu {
-    position: fixed; // Fixed position for dropdown
+    position: fixed; 
     mat-menu-item {
       display: flex;
       align-items: center;
-      padding: 12px 16px; // Increase spacing
-      border-radius: 8px; // Rounded corners
+      padding: 12px 16px; 
+      border-radius: 8px; 
       transition: background-color 0.3s;
   
       mat-icon {
-        color: #004080; // Icon color
-        margin-right: 8px; // Spacing between icon and text
+        color: #004080; 
+        margin-right: 8px; 
       }
   
       span {
         font-size: 14px;
         font-weight: 500;
-        color: #333333; // Text color
+        color: #333333; 
       }
   
       &:hover {
-        background-color: rgba(0, 64, 128, 0.1); // Hover effect
+        background-color: rgba(0, 64, 128, 0.1); 
       }
     }
   
     mat-menu-item:last-child {
-      border-top: 1px solid #e0e0e0; // Divider above "Logout"
+      border-top: 1px solid #e0e0e0; 
       margin-top: 8px;
       padding-top: 12px;
     }
+  }
+  
+
+//   for dahboard 
+.dashboard {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .greeting-card {
+    grid-column: 1 / -1;
+    padding: 16px;
+  }
+  
+  .main-content {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .courses {
+    flex: 3;
+  }
+  
+  .course-card {
+    margin-bottom: 16px;
+  }
+  
+  .course-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .profile-card {
+    text-align: center;
+  }
+  
+  .quick-actions mat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .learning-activity {
+    grid-column: 1 / -1;
+    padding: 16px;
   }
   
