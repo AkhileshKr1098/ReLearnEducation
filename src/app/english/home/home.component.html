@@ -1,0 +1,53 @@
+<mat-toolbar color="primary" class="custom-toolbar">
+    <img src="../../../assets/icon/logo_app.png" alt="Logo" width="150px" height="50px" />
+  
+    <span class="spacer"></span>
+  
+    <button
+      mat-button
+      class="nav-link"
+      routerLink="/dashboard"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Dashboard
+    </button>
+    <button mat-button class="nav-link" routerLink="/my-week" routerLinkActive="active-link">
+      My Week
+    </button>
+    <button mat-button class="nav-link" routerLink="/my-report" routerLinkActive="active-link">
+      My Report
+    </button>
+    <button mat-button class="nav-link" routerLink="/class-diary" routerLinkActive="active-link">
+      Class Diary
+    </button>
+    <button mat-button class="nav-link" routerLink="/syllabus" routerLinkActive="active-link">
+      Syllabus
+    </button>
+    <button mat-button class="nav-link" routerLink="/join-class" routerLinkActive="active-link">
+      Join Class
+    </button>
+  
+    <span class="status-text">Status Active</span>
+  
+    <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-button">
+      Akhilesh Kumar
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+  
+    <mat-menu #profileMenu="matMenu" class="custom-menu" xPosition="before">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  

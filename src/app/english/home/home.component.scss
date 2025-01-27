@@ -1,0 +1,84 @@
+.custom-toolbar {
+    background-color: #ffffff; // White background
+    color: #000000; // Black text
+    height: 64px;
+    padding: 0 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow
+  
+    .spacer {
+      flex: 1;
+    }
+  
+    .nav-link {
+      color: #000080; // Dark blue
+      font-weight: bold;
+      text-transform: none; // Disable uppercase
+      padding: 8px 16px; // Button spacing
+      transition: box-shadow 0.3s, background-color 0.3s;
+  
+      &:hover {
+        background-color: rgba(0, 0, 128, 0.1); // Light blue on hover
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Add shadow on hover
+      }
+    }
+  
+    .active-link {
+      background-color: #d1e8ff; // Highlight active link
+      color: #004080; // Active link color
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 64, 128, 0.2); // Active link shadow
+    }
+  
+    .status-text {
+      color: green;
+      font-weight: bold;
+      margin-right: 16px;
+    }
+  
+    .profile-button {
+      text-transform: none;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: #004080; // Button color
+  
+      mat-icon {
+        font-size: 16px; // Small icon for better alignment
+        margin-left: 4px; // Space between text and arrow icon
+      }
+    }
+  }
+  
+  .custom-menu {
+    position: fixed; // Fixed position for dropdown
+    mat-menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px; // Increase spacing
+      border-radius: 8px; // Rounded corners
+      transition: background-color 0.3s;
+  
+      mat-icon {
+        color: #004080; // Icon color
+        margin-right: 8px; // Spacing between icon and text
+      }
+  
+      span {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333333; // Text color
+      }
+  
+      &:hover {
+        background-color: rgba(0, 64, 128, 0.1); // Hover effect
+      }
+    }
+  
+    mat-menu-item:last-child {
+      border-top: 1px solid #e0e0e0; // Divider above "Logout"
+      margin-top: 8px;
+      padding-top: 12px;
+    }
+  }
+  
