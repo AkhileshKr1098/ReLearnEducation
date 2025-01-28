@@ -12,10 +12,21 @@ import {MatCardModule} from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BaseChartDirective } from 'ng2-charts';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+
+import { MatButtonToggleModule } from "@angular/material/button-toggle"
+import { MatDividerModule } from "@angular/material/divider"
+import { MatSelectModule } from "@angular/material/select";
+
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +38,12 @@ import { BaseChartDirective } from 'ng2-charts';
     MatMenuModule,
     MatCardModule,
     MatProgressBarModule,
-    BaseChartDirective
+    BaseChartDirective,
+    MatButtonToggleModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatListModule,
+    MatSidenavModule,
   ]
 })
 export class EnglishModule { }

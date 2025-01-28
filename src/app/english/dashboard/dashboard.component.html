@@ -1,0 +1,180 @@
+<div id="wrapper">
+  <div class="left">
+    <mat-toolbar color="primary" class="header">
+      <div class="greeting">
+        <h1>Hello, <span>Akhi</span> 👋</h1>
+        <p>
+          Nice to have you back, what an exciting day!<br />
+          Get ready and continue your lesson today
+        </p>
+      </div>
+    </mat-toolbar>
+
+    <mat-toolbar class="header">
+      <h1>Today!s Course</h1>
+    </mat-toolbar>
+    <div class="cardwrapper">
+      <mat-card class="mat-elevation-z4">
+        <div class="progress">79%</div>
+        <mat-card-title>English Grammer</mat-card-title>
+        <mat-card-content>
+          <p>📚 21 lessons</p>
+          <p>⏱ 50 min</p>
+          <p>📄 5 assignments</p>
+        </mat-card-content>
+        <mat-card-actions class="buttons">
+          <button mat-button color="primary">Skip</button>
+          <button mat-raised-button color="accent">Continue</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+
+  </div>
+  <div class="right"></div>
+
+  <!-- <mat-toolbar color="primary" class="header">
+    <div class="greeting">
+      <h1>Hello, <span>Akhi</span> 👋</h1>
+      <p>
+        Nice to have you back, what an exciting day!<br />
+        Get ready and continue your lesson today
+      </p>
+    </div>
+    <mat-card class="xp-card">
+      <mat-card-content>
+        <div class="xp-info">
+          <span class="xp-amount">2400 XP</span>
+          <span class="xp-label">Point</span>
+        </div>
+        <div class="xp-actions">
+          <button mat-stroked-button>Redeem</button>
+          <button mat-flat-button color="accent">Collect Point</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-toolbar>
+
+  <div class="main-content">
+    <div class="left-column">
+      <section class="today-course">
+        <h2>Today's course</h2>
+        <mat-card *ngFor="let course of todayCourses" class="course-card">
+          <mat-card-content>
+            <div class="course-icon">{{course.icon}}</div>
+            <div class="course-info">
+              <h3>{{course.title}}</h3>
+              <div class="course-stats">
+                <span>{{course.lessons}} lesson</span>
+                <span>{{course.duration}} min</span>
+                <span>{{course.students}} students</span>
+              </div>
+              <mat-progress-bar [value]="course.progress"></mat-progress-bar>
+            </div>
+            <div class="course-progress">{{course.progress}}%</div>
+            <div class="course-actions">
+              <button mat-stroked-button>Skip</button>
+              <button mat-flat-button color="primary">Continue</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </section>
+
+      <section class="your-class">
+        <h2>Your class</h2>
+        <mat-button-toggle-group>
+          <mat-button-toggle value="all" checked>All</mat-button-toggle>
+          <mat-button-toggle value="design">Design</mat-button-toggle>
+          <mat-button-toggle value="science">Science</mat-button-toggle>
+          <mat-button-toggle value="coding">Coding</mat-button-toggle>
+        </mat-button-toggle-group>
+        <button mat-icon-button><mat-icon>lightbulb</mat-icon></button>
+        <button mat-icon-button><mat-icon>settings</mat-icon></button>
+
+        <mat-card *ngFor="let class of yourClasses" class="class-card">
+          <mat-card-content>
+            <div class="class-icon">{{class.icon}}</div>
+            <div class="class-info">
+              <h3>{{class.title}}</h3>
+              <div class="class-stats">
+                <span>{{class.lessons}} lesson</span>
+                <span>{{class.duration}} min</span>
+                <span>{{class.students}} students</span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </section>
+    </div>
+
+    <div class="right-column">
+      <mat-card class="profile-section">
+        <mat-card-content>
+          <div class="profile-header">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5feb5342d47707667e9cb12d72ce6097.jpg-6MqpqJEfcWESm1BTnOqazTXxCHxDs0.jpeg"
+              alt="Profile" class="profile-image" />
+            <div class="profile-info">
+              <h3>Arka Maulana</h3>
+              <p>Surakarta, INA</p>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="profile-stats">
+            <div class="stat">
+              <span class="number">24</span>
+              <span class="label">Course</span>
+            </div>
+            <div class="stat">
+              <span class="number">18</span>
+              <span class="label">Certification</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="action-cards">
+        <mat-card class="action-card consultation">
+          <mat-card-content>
+            <h3>Consultation</h3>
+            <p>Get a mentor to help your learning process</p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="action-card target">
+          <mat-card-content>
+            <h3>Set target</h3>
+            <p>Set target, reminder and your study timeline</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <mat-card class="learning-activity">
+        <mat-card-content>
+          <div class="activity-header">
+            <h3>Learning activity</h3>
+            <div class="activity-legend">
+              <span class="legend-item">
+                <span class="dot materials"></span>
+                Materials
+              </span>
+              <span class="legend-item">
+                <span class="dot exams"></span>
+                Exams
+              </span>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-select value="3rd">
+                <mat-option value="3rd">3rd semester</mat-option>
+                <mat-option value="2nd">2nd semester</mat-option>
+                <mat-option value="1st">1st semester</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="activity-chart">
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div> -->
+</div>

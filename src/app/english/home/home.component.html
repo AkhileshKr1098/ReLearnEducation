@@ -1,91 +1,33 @@
 <mat-toolbar class="custom-toolbar">
-    <img src="assets/icon/logo_app.png" alt="Logo" class="logo" />
-  
-    <nav class="nav-links">
-      <button mat-button routerLink="/dashboard" routerLinkActive="active-link">Dashboard</button>
-      <button mat-button routerLink="/week" routerLinkActive="active-link">My Week</button>
-      <button mat-button routerLink="/report" routerLinkActive="active-link">My Report</button>
-      <button mat-button routerLink="/class-diary" routerLinkActive="active-link">Class Diary</button>
-      <button mat-button routerLink="/syllabus" routerLinkActive="active-link">Syllabus</button>
-      <button mat-button routerLink="/join-class" routerLinkActive="active-link">Join Class</button>
-    </nav>
-  
-    <div class="status">
-      <span>Status: <strong>Active</strong></span>
-      <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-btn">
-        Akhilesh Kumar <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-    </div>
-  
-    <mat-menu #profileMenu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>person</mat-icon> Profile
-      </button>
-      <button mat-menu-item>
-        <mat-icon>settings</mat-icon> Settings
-      </button>
-      <button mat-menu-item>
-        <mat-icon>logout</mat-icon> Logout
-      </button>
-    </mat-menu>
-  </mat-toolbar>
-  
-  <div class="dashboard">
-    <div class="greeting">
-      <h1>Welcome Back, Arka 👋</h1>
-      <p>Let’s achieve your learning goals for today!</p>
-    </div>
-  
-    <div class="main-content">
-      <!-- Courses Section -->
-      <section class="courses">
-        <h2>Today's Courses</h2>
-        <div *ngFor="let course of courses" class="course-card">
-          <div class="course-info">
-            <mat-icon>science</mat-icon>
-            <div>
-              <h3>{{ course.title }}</h3>
-              <p>{{ course.details }}</p>
-            </div>
-          </div>
-          <mat-progress-bar [value]="course.progress"></mat-progress-bar>
-          <div class="course-actions">
-            <span>{{ course.progress }}%</span>
-            <button mat-raised-button color="primary">Continue</button>
-          </div>
-        </div>
-      </section>
-  
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="profile-card">
-          <img src="assets/avatar.png" alt="Profile Image" />
-          <h3>Arka Maulana</h3>
-          <p>Surakarta, INA</p>
-          <p>24 Courses | 18 Certifications</p>
-        </div>
-  
-        <div class="xp-card">
-          <h3>2400 XP</h3>
-          <button mat-raised-button color="accent">Redeem</button>
-          <button mat-button>Collect Points</button>
-        </div>
-  
-        <div class="quick-actions">
-          <div *ngFor="let action of actions" class="action-card">
-            <mat-icon>{{ action.icon }}</mat-icon>
-            <div>
-              <h4>{{ action.title }}</h4>
-              <p>{{ action.description }}</p>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </div>
-  
-    <div class="learning-activity">
-      <h2>Learning Activity</h2>
-      <canvas baseChart [datasets]="chartData" [labels]="chartLabels"></canvas>
-    </div>
+  <img src="assets/icon/logo_app.png" alt="Logo" class="logo" />
+
+  <nav class="nav-links">
+    <button mat-button routerLink="/dashboard" routerLinkActive="active-link">Dashboard</button>
+    <button mat-button routerLink="/week" routerLinkActive="active-link">My Week</button>
+    <button mat-button routerLink="/report" routerLinkActive="active-link">My Report</button>
+    <button mat-button routerLink="/class-diary" routerLinkActive="active-link">Class Diary</button>
+    <button mat-button routerLink="/syllabus" routerLinkActive="active-link">Syllabus</button>
+    <button mat-button routerLink="/join-class" routerLinkActive="active-link">Join Class</button>
+  </nav>
+
+  <div class="status">
+    <span>Status: <strong>Active</strong></span>
+    <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-btn">
+      Akhi <mat-icon>arrow_drop_down</mat-icon>
+    </button>
   </div>
-  
+
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon> Profile
+    </button>
+    <button mat-menu-item>
+      <mat-icon>settings</mat-icon> Settings
+    </button>
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon> Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<app-dashboard></app-dashboard>
