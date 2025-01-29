@@ -11,7 +11,6 @@ import {MatCardModule} from '@angular/material/card';
 
 import { MatMenuModule } from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { BaseChartDirective } from 'ng2-charts';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 
@@ -38,7 +37,6 @@ import { MatListModule } from '@angular/material/list';
     MatMenuModule,
     MatCardModule,
     MatProgressBarModule,
-    BaseChartDirective,
     MatButtonToggleModule,
     MatDividerModule,
     MatSelectModule,
