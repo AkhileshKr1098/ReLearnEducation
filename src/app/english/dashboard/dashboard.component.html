@@ -1,180 +1,199 @@
 <div id="wrapper">
-  <div class="left">
-    <mat-toolbar color="primary" class="header">
-      <div class="greeting">
-        <h1>Hello, <span>Akhi</span> 👋</h1>
-        <p>
-          Nice to have you back, what an exciting day!<br />
-          Get ready and continue your lesson today
-        </p>
+  <div class="side">
+    <div id="header_area" class="side_boxes">
+      <h1>
+        <b>Hello,</b> Mr. John Doe
+      </h1>
+      <p>
+        Nice to have you back. what exciting today!<br>
+        Get ready and contribute your lessons today.
+      </p>
+    </div>
+
+    <div id="course" class="side_boxes">
+      <div class="title">Today's Course</div>
+      <div class="course_area">
+
+        <div class="box">
+          <div class="progress_bar_area">
+            <img src="assets/icon/progress.png" alt="">
+          </div>
+          <div class="course_title">
+            English Grammer
+          </div>
+          <div class="optisons">
+            <div class="opt">
+              <h4>
+                <mat-icon>library_books</mat-icon>20 lessions
+              </h4>
+              <h4 style="margin-left: 82px;">
+                <mat-icon>timer</mat-icon>52 min
+              </h4>
+            </div>
+            <div class="opt">
+              <h4>
+                <mat-icon>assignment</mat-icon>4 assignment
+              </h4>
+              <h4 style="margin-left: 70px;">
+                <mat-icon>people</mat-icon> Class 10 Days
+              </h4>
+            </div>
+          </div>
+          <div class="buttons_area">
+            <button>Skip</button>
+            <button>Continue</button>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="progress_bar_area">
+            <img src="assets/icon/progress.png" alt="">
+          </div>
+          <div class="course_title">
+            Spoken English
+          </div>
+          <div class="optisons">
+            <div class="opt">
+              <h4>
+                <mat-icon>library_books</mat-icon>20 lessions
+              </h4>
+              <h4 style="margin-left: 82px;">
+                <mat-icon>timer</mat-icon>52 min
+              </h4>
+            </div>
+            <div class="opt">
+              <h4>
+                <mat-icon>assignment</mat-icon>4 assignment
+              </h4>
+              <h4 style="margin-left: 70px;">
+                <mat-icon>people</mat-icon>class 10 Day
+              </h4>
+            </div>
+          </div>
+          <div class="buttons_area">
+            <button>Skip</button>
+            <button>Continue</button>
+          </div>
+        </div>
+
       </div>
-    </mat-toolbar>
+    </div>
 
-    <mat-toolbar class="header">
-      <h1>Today!s Course</h1>
-    </mat-toolbar>
-    <div class="cardwrapper">
-      <mat-card class="mat-elevation-z4">
-        <div class="progress">79%</div>
-        <mat-card-title>English Grammer</mat-card-title>
-        <mat-card-content>
-          <p>📚 21 lessons</p>
-          <p>⏱ 50 min</p>
-          <p>📄 5 assignments</p>
-        </mat-card-content>
-        <mat-card-actions class="buttons">
-          <button mat-button color="primary">Skip</button>
-          <button mat-raised-button color="accent">Continue</button>
-        </mat-card-actions>
-      </mat-card>
-
+    <div id="class_area" class="side_boxes">
+      <div class="title">Your Class</div>
+      <div class="menu">
+        <ul>
+          <li>All</li>
+          <li>Design</li>
+          <li>Service</li>
+          <li>Coding</li>
+          <li><mat-icon>filter_list</mat-icon></li>
+          <li><mat-icon> local_bar</mat-icon></li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="progress_bar_area">
+          <img src="assets/icon/images.jpg" alt="">
+        </div>
+        <div class="course_title">
+          Chemistry Molecular
+        </div>
+        <div class="optisons">
+          <div class="opt">
+            <h4>
+              <mat-icon>library_books</mat-icon>20 lessions
+            </h4>
+            <h4 style="margin-left: 82px;">
+              <mat-icon>timer</mat-icon>52 min
+            </h4>
+          </div>
+          <div class="opt">
+            <h4>
+              <mat-icon>assignment</mat-icon>4 assignment
+            </h4>
+            <h4 style="margin-left: 70px;">
+              <mat-icon>people</mat-icon>200 students
+            </h4>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
-  <div class="right"></div>
-
-  <!-- <mat-toolbar color="primary" class="header">
-    <div class="greeting">
-      <h1>Hello, <span>Akhi</span> 👋</h1>
-      <p>
-        Nice to have you back, what an exciting day!<br />
-        Get ready and continue your lesson today
-      </p>
-    </div>
-    <mat-card class="xp-card">
-      <mat-card-content>
-        <div class="xp-info">
-          <span class="xp-amount">2400 XP</span>
-          <span class="xp-label">Point</span>
-        </div>
-        <div class="xp-actions">
-          <button mat-stroked-button>Redeem</button>
-          <button mat-flat-button color="accent">Collect Point</button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-  </mat-toolbar>
-
-  <div class="main-content">
-    <div class="left-column">
-      <section class="today-course">
-        <h2>Today's course</h2>
-        <mat-card *ngFor="let course of todayCourses" class="course-card">
-          <mat-card-content>
-            <div class="course-icon">{{course.icon}}</div>
-            <div class="course-info">
-              <h3>{{course.title}}</h3>
-              <div class="course-stats">
-                <span>{{course.lessons}} lesson</span>
-                <span>{{course.duration}} min</span>
-                <span>{{course.students}} students</span>
-              </div>
-              <mat-progress-bar [value]="course.progress"></mat-progress-bar>
+  <div class="main">
+    <div class="uppar_section">
+      <div class="profile_section">
+        <div class="profile_box">
+          <div class="cover_img">
+            <img src="assets/icon/profilebgc.jpeg" alt="">
+          </div>
+          <div class="profile_img">
+            <img src="assets/icon/profile.jpeg" alt="">
+          </div>
+          <div class="name">
+            <h1>Mr. John Doe</h1>
+            <p> New York, NY 10001, USA</p>
+          </div>
+          <div class="client_details">
+            <div class="corse_boxes">
+              <h5>
+                <mat-icon>assignment</mat-icon>
+              </h5>
+              <h2>54</h2>
+              <p>Course</p>
             </div>
-            <div class="course-progress">{{course.progress}}%</div>
-            <div class="course-actions">
-              <button mat-stroked-button>Skip</button>
-              <button mat-flat-button color="primary">Continue</button>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </section>
-
-      <section class="your-class">
-        <h2>Your class</h2>
-        <mat-button-toggle-group>
-          <mat-button-toggle value="all" checked>All</mat-button-toggle>
-          <mat-button-toggle value="design">Design</mat-button-toggle>
-          <mat-button-toggle value="science">Science</mat-button-toggle>
-          <mat-button-toggle value="coding">Coding</mat-button-toggle>
-        </mat-button-toggle-group>
-        <button mat-icon-button><mat-icon>lightbulb</mat-icon></button>
-        <button mat-icon-button><mat-icon>settings</mat-icon></button>
-
-        <mat-card *ngFor="let class of yourClasses" class="class-card">
-          <mat-card-content>
-            <div class="class-icon">{{class.icon}}</div>
-            <div class="class-info">
-              <h3>{{class.title}}</h3>
-              <div class="class-stats">
-                <span>{{class.lessons}} lesson</span>
-                <span>{{class.duration}} min</span>
-                <span>{{class.students}} students</span>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </section>
-    </div>
-
-    <div class="right-column">
-      <mat-card class="profile-section">
-        <mat-card-content>
-          <div class="profile-header">
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5feb5342d47707667e9cb12d72ce6097.jpg-6MqpqJEfcWESm1BTnOqazTXxCHxDs0.jpeg"
-              alt="Profile" class="profile-image" />
-            <div class="profile-info">
-              <h3>Arka Maulana</h3>
-              <p>Surakarta, INA</p>
+            <div class="corse_boxes">
+              <h5>
+                <mat-icon>assignment</mat-icon>
+              </h5>
+              <h2>04</h2>
+              <p>Certifications</p>
             </div>
           </div>
-          <mat-divider></mat-divider>
-          <div class="profile-stats">
-            <div class="stat">
-              <span class="number">24</span>
-              <span class="label">Course</span>
-            </div>
-            <div class="stat">
-              <span class="number">18</span>
-              <span class="label">Certification</span>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-
-      <div class="action-cards">
-        <mat-card class="action-card consultation">
-          <mat-card-content>
-            <h3>Consultation</h3>
-            <p>Get a mentor to help your learning process</p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="action-card target">
-          <mat-card-content>
-            <h3>Set target</h3>
-            <p>Set target, reminder and your study timeline</p>
-          </mat-card-content>
-        </mat-card>
+        </div>
       </div>
+      <div class="point_area">
+        <div class="point_box">
+          <div class="point_img">
+            <img src="assets/icon/star.png" alt="">
+          </div>
+          <div class="point_title">
+            <h1>2400 XP</h1>
+            <p>Point</p>
+          </div>
+          <div class="point_btns">
+            <button>Redeem</button>
+            <button>Collect Points</button>
+          </div>
+        </div>
+        <div class="summary_box">
+          <div class="img_icon">
+            <img src="assets/icon/images.jpg" alt="">
+            <mat-icon> call_made</mat-icon>
+          </div>
+          <h2>Consultation</h2>
+          <p>Get a mentor to help your learning project</p>
+        </div>
 
-      <mat-card class="learning-activity">
-        <mat-card-content>
-          <div class="activity-header">
-            <h3>Learning activity</h3>
-            <div class="activity-legend">
-              <span class="legend-item">
-                <span class="dot materials"></span>
-                Materials
-              </span>
-              <span class="legend-item">
-                <span class="dot exams"></span>
-                Exams
-              </span>
-            </div>
-            <mat-form-field appearance="outline">
-              <mat-select value="3rd">
-                <mat-option value="3rd">3rd semester</mat-option>
-                <mat-option value="2nd">2nd semester</mat-option>
-                <mat-option value="1st">1st semester</mat-option>
-              </mat-select>
-            </mat-form-field>
+        <div class="summary_box">
+          <div class="img_icon">
+            <img src="assets/icon/images.jpg" alt="">
+            <mat-icon> call_made</mat-icon>
           </div>
-          <div class="activity-chart">
-          </div>
-        </mat-card-content>
-      </mat-card>
+          <h2>Set Target</h2>
+          <p>Set tearget reminders and your study timeline</p>
+        </div>
+      </div>
     </div>
-  </div> -->
+    <div class="chart_section">
+      <div class="chart-container">
+        <canvas baseChart 
+                [data]="chartData" 
+                
+                [options]="chartOptions"
+                [type]="chartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
 </div>

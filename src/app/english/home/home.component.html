@@ -1,33 +1,34 @@
-<mat-toolbar class="custom-toolbar">
-  <img src="assets/icon/logo_app.png" alt="Logo" class="logo" />
-
-  <nav class="nav-links">
-    <button mat-button routerLink="/dashboard" routerLinkActive="active-link">Dashboard</button>
-    <button mat-button routerLink="/week" routerLinkActive="active-link">My Week</button>
-    <button mat-button routerLink="/report" routerLinkActive="active-link">My Report</button>
-    <button mat-button routerLink="/class-diary" routerLinkActive="active-link">Class Diary</button>
-    <button mat-button routerLink="/syllabus" routerLinkActive="active-link">Syllabus</button>
-    <button mat-button routerLink="/join-class" routerLinkActive="active-link">Join Class</button>
-  </nav>
-
-  <div class="status">
-    <span>Status: <strong>Active</strong></span>
-    <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-btn">
-      Akhi <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-  </div>
-
-  <mat-menu #profileMenu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>person</mat-icon> Profile
-    </button>
-    <button mat-menu-item>
-      <mat-icon>settings</mat-icon> Settings
-    </button>
-    <button mat-menu-item>
-      <mat-icon>logout</mat-icon> Logout
-    </button>
-  </mat-menu>
-</mat-toolbar>
-
-<app-dashboard></app-dashboard>
+<div id="wrapper">
+  <mat-toolbar class="custom-toolbar">
+    <img src="assets/icon/logo_app.png" alt="Logo" class="logo" />
+  
+    <nav class="nav-links">
+      <button mat-button routerLink="dashboard" routerLinkActive="active-link">Dashboard</button>
+      <button mat-button routerLink="/english/weeks" routerLinkActive="active-link">My Week</button>
+      <button mat-button routerLink="/report" routerLinkActive="active-link">My Report</button>
+      <button mat-button routerLink="/class-diary" routerLinkActive="active-link">Class Diary</button>
+      <button mat-button routerLink="/syllabus" routerLinkActive="active-link">Syllabus</button>
+      <button mat-button routerLink="/join-class" routerLinkActive="active-link">Join Class</button>
+    </nav>
+  
+    <div class="status">
+      <span>Status: <strong>Active</strong></span>
+      <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-btn">
+        Mr. John Doe <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </div>
+  
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon> Profile
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon> Settings
+      </button>
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  <app-dashboard></app-dashboard>
+</div>

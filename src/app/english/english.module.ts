@@ -21,11 +21,14 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
+import { BaseChartDirective  } from 'ng2-charts';
+import { WeekByPageComponent } from './week-by-page/week-by-page.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    WeekByPageComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +45,7 @@ import { MatListModule } from '@angular/material/list';
     MatSelectModule,
     MatListModule,
     MatSidenavModule,
+    BaseChartDirective
   ]
 })
 export class EnglishModule { }
