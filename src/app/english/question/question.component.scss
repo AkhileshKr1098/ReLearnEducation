@@ -1,0 +1,428 @@
+#wrapper {
+  width: 100%;
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-image: url('../../../assets/icon/bgc.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .leftarea {
+    width: calc(100% - 400px);
+    float: left;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .topicsarea {
+      width: 100%;
+      height: 80px;
+      background-color: rgba(172, 255, 47, 0.144);
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      span {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 38px;
+        font-weight: 700;
+        color: #c0392b;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  .rightarea {
+    width: 400px;
+    height: 100%;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .reportCard {
+      height: 90%;
+      width: 90%;
+      padding: 10px;
+      background-color: lightblue;
+      border-radius: 50px;
+
+      .profileHeader {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+      }
+
+      .profileimage {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 100%;
+          border: 3px solid lightgreen;
+        }
+      }
+
+      .name {
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .studentid {
+        width: 100%;
+        height: 20px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+      }
+
+    }
+
+    .reportarea {
+      width: 100%;
+      height: calc(100% - 200px);
+
+      .progess {
+        width: 100%;
+        height: calc(50% - 20px);
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .progessline {
+          padding: 10px;
+          width: 90%;
+          height: 20px;
+          margin-left: 5%;
+        }
+
+        .progessCricelarea {
+          width: 100%;
+          height: calc(100% - 30px);
+          display: flex;
+
+        }
+      }
+
+    }
+
+  }
+
+}
+
+#LetterTracing {
+  padding: 20px;
+  max-width: 100%;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+// for BlendWord 
+#BlendWords {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: calc(100% - 150px);
+  // padding: 50px;
+  background: #ffffff;
+  border-radius: 20px;
+
+  .questionheader {
+    width: 100%;
+    height: 100px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #ff5733;
+    margin-bottom: 15px;
+    justify-content: center;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .qarea {
+    width: 100%;
+    height: calc(100% - 200px);
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .imgarea {
+    float: left;
+    width: 30%;
+    display: flex;
+    align-items: right;
+    justify-content: right;
+
+    img {
+      width: 300px;
+    }
+  }
+
+  .question-content {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+  }
+
+  .incomplete-word {
+    width: 100%;
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+
+  }
+
+
+  .option-buttons {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .option-buttons button.active-option {
+    background: #4caf50;
+    color: white;
+    border: 2px solid #3e8e41;
+  }
+
+  .option-buttons button {
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    background: #ff9800;
+    color: white;
+  }
+
+  .option-buttons button:hover {
+    background: #4caf50;
+    color: white;
+    border: 2px solid #3e8e41;
+  }
+
+  .actionbutton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+// for listen_word
+
+#ListenWords {
+  padding: 20px;
+  max-width: 100%;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+
+  .qarea {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+
+  }
+
+  .imgarea {
+    float: left;
+    width: 40%;
+  }
+
+  .question-content {
+    float: right;
+    width: calc(60% - 40px);
+    height: calc(100% - 40px);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .listen_word {
+    width: 100%;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+}
+
+// for MCQ code here
+
+#MCQ {
+  padding: 20px;
+  max-width: 100%;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+
+  .qarea {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+
+  }
+
+  .question-content {
+    float: right;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .option-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    button {
+      width: 40%;
+      height: 60px;
+      margin: 5%;
+      font-size: 18px;
+      padding: 20px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+      background: #ff9800;
+      color: white;
+    }
+
+
+
+    button.active-option {
+      background: #4caf50;
+      color: white;
+      border: 2px solid #3e8e41;
+    }
+
+    button:hover {
+      background: #4caf50;
+      color: white;
+      border: 2px solid #3e8e41;
+    }
+
+  }
+
+}
+
+// for letter match 
+
+#LetterMatch {
+  max-width: 100%;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid greenyellow;
+}
+
+.letter-selector {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff5733;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+
+}
+
+button {
+  font-size: 20px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.reset-btn {
+  background-color: #ff6347;
+  color: white;
+}
+
+.reset-btn:hover {
+  background-color: #d43f2e;
+}
+
+.save-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #388e3c;
+}
+
+.save-btn:disabled {
+  background-color: #a5d6a7;
+  cursor: not-allowed;
+}
+
+
+button {
+  font-size: 24px;
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #218838;
+}

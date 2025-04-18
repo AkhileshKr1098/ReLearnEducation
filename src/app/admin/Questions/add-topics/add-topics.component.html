@@ -1,0 +1,48 @@
+<div class="registration_form" [formGroup]="TopicsForm">
+    <div class="form_head">
+        <h3>Add Topics</h3>
+        <p mat-dialog-close>
+            <mat-icon>cancel</mat-icon>
+        </p>
+    </div>
+
+    <div class="form_area">
+
+        <div class="rowline">
+
+
+            <div class="col-md-6 form-floating">
+                <select class="form-select" id="unitSelect" formControlName="sections">
+                    <option *ngFor="let item of Sections" [value]="item.sections_name">{{ item.sections_name }}</option>
+                </select>
+                <label for="unitSelect">Sections</label>
+            </div>
+        </div>
+
+        <div class="rowline">
+            <div class="col-12 form-floating">
+                <textarea class="form-control" id="topics" placeholder="Enter Topics"
+                    formControlName="topics"></textarea>
+                <label for="topics">Topics</label>
+            </div>
+        </div>
+
+
+
+        <div class="row image-row">
+            <div class="col-12 text-center">
+                <img [src]="topics_img || '../../../../assets/icon/topicsDfultImg.jpg'" alt="Uploaded Image"
+                    class="img-thumbnail preview-image" width="150px">
+                <br>
+                <button class="btn btn-primary btn-sm mt-2" (click)="fileInput.click()">Change</button>
+                <input type="file" #fileInput class="d-none" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg">
+            </div>
+        </div>
+    </div>
+
+    <div class="btn_area">
+        <button type="button" class="btn btn-danger" id="cancel" mat-dialog-close>Cancel</button>
+        <button type="button" class="btn btn-primary" id="submit" (click)="edit_data ? updateForm() : submitForm()">{{
+            edit_data ? 'Update' : 'Submit' }}</button>
+    </div>
+</div>

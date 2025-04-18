@@ -1,0 +1,31 @@
+<div class="registration_form" [formGroup]="TopicsForm">
+    <div class="form_head">
+        <h3>Add Topics</h3>
+        <p mat-dialog-close>
+            <mat-icon>cancel</mat-icon>
+        </p>
+    </div>
+
+    <div class="form_area">
+
+        <div class="form-floating mb-2">
+            <select class="form-select" id="gender" formControlName="topics">
+                <option *ngFor="let item of topics" [value]="item.topics">{{item.topics}}</option>
+
+            </select>
+            <label for="gender">Topics</label>
+        </div>
+
+        <div class="form-floating mb-2">
+            <input type="text" class="form-control" id="topics" placeholder="Enter sub Topics"
+                formControlName="sub_topics">
+            <label for="topics">Sub Topics </label>
+        </div>
+    </div>
+
+    <div class="btn_area">
+        <button type="button" class="btn btn-danger" id="cancel" mat-dialog-close>Cancel</button>
+        <button type="button" class="btn btn-primary" id="submit"
+            (click)="edit_data? updateForm(): submitForm()">{{edit_data?'Update':'Submit'}}</button>
+    </div>
+</div>
