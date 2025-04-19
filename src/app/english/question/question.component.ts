@@ -18,7 +18,49 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   isSaveVisible = false;
   QuestionType: string = ''
   AllQuestion: QuestionData[] = []
-  CurrentQuestion: any
+  CurrentQuestion: QuestionData = {
+    Answer: '',
+    OptionA: '',
+    OptionB: '',
+    OptionC: '',
+    OptionD: '',
+    Question: '',
+    class: '',
+    day: '',
+    id: 0,
+    incomplete_word: '',
+    listen_rec: '',
+    listen_word: '',
+    question_Img: '',
+    question_type: '',
+    sections: '',
+    sub_topics: '',
+    topics: '',
+    unit: '',
+    week: ''
+  }
+  // CurrentQuestion = {
+  //   "id": 9,
+  //   "Question": "Please completed the word ?",
+  //   "Answer": "E",
+  //   "OptionA": "A",
+  //   "OptionB": "S",
+  //   "OptionC": "E",
+  //   "OptionD": "N",
+  //   "incomplete_word": "P__N",
+  //   "question_type": "BlendWords",
+  //   "question_Img": "uploads/2018-MAY-Six-Sites-for-Rhyme-Time-683x1024.png",
+  //   "listen_rec": '',
+  //   "listen_word": null,
+  //   "class": "LKG",
+  //   "unit": "1",
+  //   "day": "1",
+  //   "week": "3",
+  //   "sections": "Grammar",
+  //   "topics": "Noun",
+  //   "sub_topics": "Abstract nouns"
+  // }
+
   base_url: string = ''
   filledWord: string = '';
   audio: HTMLAudioElement | null = null;
@@ -55,8 +97,8 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     this.shared.CurrentQuestionStatus.subscribe(
       (res) => {
         console.log(res);
-        if (res ===  true) {
-            this.NextQuestion()
+        if (res === true) {
+          this.NextQuestion()
         }
       }
     )

@@ -76,6 +76,8 @@ export class LetterMatchComponent implements AfterViewInit {
 
 
   clearMatches() {
+    this.isSave = false
+    this.totalQuestionMark = 0
     this.matchedPairs = [];
     document.querySelectorAll('.word-item[data-side="left"], .word-item[data-side="right"]').forEach(el => {
       (el as HTMLElement).style.backgroundColor = '#f8f8f8';
@@ -196,18 +198,7 @@ export class LetterMatchComponent implements AfterViewInit {
       if (!this.CurrentQyt.OptionA) {
         return;
       }
-      const leftValue = this.CurrentQyt.OptionA.split(',').map(word => word.trim());
-      if (leftValue.length > 0) {
-        console.log('total q', leftValue.length);
-        console.log('total !', );
 
-        if (this.totalQuestionMark !== leftValue.length) {
-          alert('please completd the all ')
-          return
-        }
-      }
-
-      this.isSave = true;
       this.playAudio('../../../../assets/audio/answersavetime.wav');
 
       let correctCount = 0;
@@ -235,6 +226,24 @@ export class LetterMatchComponent implements AfterViewInit {
           match.rightElement.style.color = '#000';
         }
       }
+
+      // for completd or not
+      const leftValue = this.CurrentQyt.OptionA.split(',').map(word => word.trim());
+      if (leftValue.length > 0) {
+        console.log('total q', leftValue.length);
+        console.log('total !',);
+        console.log(this.totalQuestionMark);
+
+        if (this.totalQuestionMark !== leftValue.length) {
+          alert('please completd the all ')
+          return
+        }
+      }
+
+      // for completd or not
+
+      this.isSave = true;
+
 
       const total = correctCount + incorrectCount;
 

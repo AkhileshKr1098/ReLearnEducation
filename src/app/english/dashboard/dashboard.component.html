@@ -4,29 +4,31 @@
       <span> My Course</span>
     </div>
     <div id="scrollarea">
-      <mat-accordion *ngFor="let weeks of weeksList" class="example-headers-align"
-        (click)="getSections(weeks.week_num)">
+      <mat-accordion *ngFor="let weeks of weeksList" class="example-headers-align">
         <mat-expansion-panel>
-          <mat-expansion-panel-header>
+          <mat-expansion-panel-header (click)="onGetSections(weeks.week_num)">
             <mat-panel-title>
               Week {{weeks.week_num}}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <!-- for topics  -->
+
+          <!-- for topics -->
           <mat-accordion *ngFor="let sec of SectionsList" class="example-headers-align">
             <mat-expansion-panel [hideToggle]="true">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  {{sec.sections_name}}- &nbsp;<span style="font-weight: normal;"> {{this.allTopics}}</span>
+                  {{sec.sections_name}} -
+                  <span style="font-weight: normal;">{{ allTopics }}</span>
                 </mat-panel-title>
               </mat-expansion-panel-header>
             </mat-expansion-panel>
           </mat-accordion>
-          <!-- for topics  -->
+          <!-- for topics -->
+
         </mat-expansion-panel>
       </mat-accordion>
-
     </div>
+
   </div>
   <div class="main">
     <div class="uppar_section">
@@ -51,7 +53,10 @@
             <img src="assets/icon/star.png" alt="">
           </div>
           <div class="point_title">
-            <h1>ReLearn Points</h1>
+            <div class="relearnpinttitile">
+              <h1>ReLearn Points</h1>
+
+            </div>
             <div class="pointnumber">{{userLoginData.currentPoint}}</div>
           </div>
         </div>
@@ -60,18 +65,17 @@
     </div>
     <div class="lower_section">
       <div class="timeline">
-        <div *ngFor="let day of days1; let i = index" class="day-container"
+        <div *ngFor="let day of days1; let i = index" (click)="onTopics(day, $event)" class="day-container"
           [ngClass]="{ activeClass: i + 1 === current_day }">
-          <img [src]="day.url" alt="">
+          <img [src]="day.url" alt="" (click)="onTopics(day, $event)">
         </div>
       </div>
 
       <div class="timeline">
-        <div *ngFor="let day of days2; let i = index" class="day-container2"
+        <div *ngFor="let day of days2; let i = index" (click)="onTopics(day, $event)" class="day-container2"
           [ngClass]="{ activeClass: i + 1 === current_day }">
-          <img [src]="day.url" alt="">
+          <img [src]="day.url" alt="" (click)="onTopics(day, $event)">
         </div>
       </div>
-
     </div>
   </div>

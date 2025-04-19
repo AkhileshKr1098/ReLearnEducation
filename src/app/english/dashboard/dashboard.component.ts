@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
+import { Router } from '@angular/router';
 import { isArray } from 'chart.js/dist/helpers/helpers.core';
 import { CRUDService } from 'src/app/crud.service';
 import { Sections, SectionsRes, SubTopic, Topics, Week } from 'src/app/interface/Question.interface';
@@ -46,12 +47,14 @@ export class DashboardComponent {
 
   constructor(
     private _crud: CRUDService,
-    private _shared: SharedService
+    private _shared: SharedService,
+    private _router: Router
   ) { }
 
 
   ngOnInit() {
     this.getWeeks()
+    this.getSections()
   }
 
   getWeeks() {
@@ -65,8 +68,7 @@ export class DashboardComponent {
     )
   }
 
-  getTopics(week: number) {
-
+  getTopics() {
     this._crud.getTopics().subscribe(
       (res) => {
         this.allTopics = ''
@@ -88,7 +90,8 @@ export class DashboardComponent {
     )
   }
 
-  getSections(weekno: number) {
+
+  getSections() {
     this._crud.getsections().subscribe(
       (res: SectionsRes) => {
         if (Array.isArray(res.data)) {
@@ -97,8 +100,21 @@ export class DashboardComponent {
       }
     )
 
-    this.getTopics(weekno)
+    this.getTopics()
   }
+
+  onTopics(day: any, event: MouseEvent) {
+    event.preventDefault();
+    console.log(day);
+    this._router.navigate(['/english/topics']);
+  }
+
+
+  onGetSections(week: number) {
+    console.log(week);
+    console.log(this.SectionsList);
+  }
+
 
 }
 

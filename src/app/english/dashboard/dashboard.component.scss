@@ -104,7 +104,7 @@
 
 .profile_box {
   width: calc(100% - 40px);
-  height: 85%;
+  height: 200px;
   background-color: rgb(255, 255, 255);
   box-shadow: 2px 2px 7px rgb(231, 230, 230);
   border-radius: 1rem;
@@ -165,7 +165,7 @@
 
 .point_box {
   width: calc(100% - 40px);
-  height: 85%;
+  height: 200px;
   background-color: rgb(255, 255, 255);
   float: left;
   box-shadow: 2px 2px 7px rgb(231, 230, 230);
@@ -189,29 +189,34 @@
 
 .point_title {
   width: calc(100% - 40%);
-  height: 100%;
+  height: 221px;
   float: left;
-  padding: 15px 15px 15px 0px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-content: center;
+
+  .relearnpinttitile {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      width: 100%;
+      font-weight: bold;
+      font-size: 2vw;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #6b70cb;
+    }
+  }
 }
 
-
-.point_title h1 {
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
-  font-size: 36px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #6b70cb;
-}
 
 .pointnumber {
   width: 100%;
+  height: calc(100% - 80px);
   text-align: center;
-  margin-top: 30px;
   font-size: 100px;
   padding: 40px 30px 40px 20px;
   font-weight: bold;
@@ -249,6 +254,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+
   img {
     width: 130px;
     height: 130px;
@@ -265,8 +271,10 @@
   transition: transform 0.3s ease-in-out;
   border: 5px solid #b5d01f;
   border-radius: 100%;
-  padding: 25px;
+  padding: 20px;
+  cursor: pointer;
 }
+
 .day-container2 {
   display: flex;
   flex-direction: column;
@@ -276,7 +284,8 @@
   transition: transform 0.3s ease-in-out;
   border: 5px solid #b5d01f;
   border-radius: 100%;
-  padding: 25px;
+  padding: 20px;
+  cursor: pointer;
 }
 
 .day-container:nth-child(1) {
@@ -305,6 +314,7 @@
   position: relative;
   top: -60px;
 }
+
 .day-container2:nth-child(3) {
   position: relative;
   top: 60px;
@@ -313,8 +323,8 @@
 
 .day-container:hover {
   img {
-    transform: scale(1.2) rotate(10deg);
-    filter: brightness(1.2);
+    transform: scale(1.1) rotate(10deg);
+    filter: brightness(1.1);
   }
 
   transform: scale(1.1) rotate(10deg);
@@ -324,8 +334,8 @@
 
 .day-container2:hover {
   img {
-    transform: scale(1.2) rotate(10deg);
-    filter: brightness(1.2);
+    transform: scale(1.1) rotate(10deg);
+    filter: brightness(1.1);
   }
 
   transform: scale(1.1) rotate(10deg);
@@ -355,11 +365,35 @@
 
 
 // for media 
+@media (max-width: 1500px) {
+
+  .timeline {
+    width: 50%;
+    height: 100%;
+
+    img {
+      width: 100px;
+      height: 100px;
+    }
+
+  }
+
+
+  .day-container {
+    padding: 20px;
+  }
+
+  .day-container2 {
+    padding: 20px;
+  }
+
+
+
+}
 
 @media (max-width: 1300px) {
 
   .profile_section {
-    width: 50%;
     height: 100%;
     float: left;
     display: flex;
@@ -369,8 +403,6 @@
 
   .profile_box {
     .profiledeatils {
-      width: 50%;
-
       .row {
         height: 35px;
         font-size: 18px;
@@ -401,39 +433,38 @@
 @media (max-width: 1200px) {
   .uppar_section {
     width: 100%;
-    height: 600px;
+    height: 450px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
   }
 
   .profile_section {
     width: 100%;
-    height: 300px;
+    height: 221px;
     justify-content: center;
     align-items: center;
-    border: 2px solid yellowgreen;
   }
 
   .profile_box {
     width: calc(100% - 40px);
-    height: calc(100% - 40px);
+    height: calc(100% - 20px);
     margin: 0px;
   }
 
   .point_area {
     width: 100%;
-    height: 300px;
+    height: 221px;
     display: flex;
     align-items: center;
   }
 
 
   .point_box {
-    width: 100%;
-    margin: px
+    width: calc(100% - 40px);
+    height: calc(100% - 20px);
+    margin: 0px;
   }
 
 

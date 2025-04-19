@@ -103,19 +103,19 @@ export interface DayInfo {
 
 
 export interface QuestionData {
-    Answer: string | null;
-    OptionA: string | null;
-    OptionB: string | null;
-    OptionC: string | null;
-    OptionD: string | null;
+    Answer: string ;
+    OptionA: string ;
+    OptionB: string ;
+    OptionC: string ;
+    OptionD: string ;
     Question: string;
     class: string;
     day: string;
     id: number;
-    incomplete_word: string | null;
-    listen_rec: string | null;
-    listen_word: string | null;
-    question_Img: string | null;
+    incomplete_word: string ;
+    listen_rec: string ;
+    listen_word: string ;
+    question_Img: string ;
     question_type: string;
     sections: string;
     sub_topics: string;

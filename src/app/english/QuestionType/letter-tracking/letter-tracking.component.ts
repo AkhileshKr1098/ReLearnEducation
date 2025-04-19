@@ -79,6 +79,8 @@ export class LetterTrackingComponent implements AfterViewInit {
   stopDrawing(event?: MouseEvent | TouchEvent) {
     if (event) event.preventDefault();
     this.isDrawing = false;
+    this._shared.playAudio('../../../../assets/audio/linematchtime.wav');
+
   }
 
   paintCharacter(event: MouseEvent | TouchEvent) {
@@ -106,10 +108,14 @@ export class LetterTrackingComponent implements AfterViewInit {
   }
 
   saveCanvas() {
+    this.startPainting()
     const canvas = this.canvasRef.nativeElement as HTMLCanvasElement;
     this.imageData = canvas.toDataURL("image/png");
     this.uploadToServer(this.imageData);
     this.onCorrect();
+
+    this._shared.playAudio('../../../../assets/audio/answersavetime.wav');
+
   }
 
   uploadToServer(imageBase64: string) {
@@ -168,6 +174,7 @@ export class LetterTrackingComponent implements AfterViewInit {
     oopsDilog.afterClosed().subscribe((res) => {
       if (res == 'next') {
         // this.NextQuestion();
+        this._shared.playAudio('../../../../assets/audio/answersavetime.wav');
       }
     });
   }

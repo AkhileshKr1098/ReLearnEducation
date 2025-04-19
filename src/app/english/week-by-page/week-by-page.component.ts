@@ -13,14 +13,13 @@ export class WeekByPageComponent {
     private _router: Router,
   ) { }
   days = [
-    { name: 'Day 1', url: '../../../assets/icon/day1.png' },
-    { name: 'Day 2', url: '../../../assets/icon/day2.png' },
-    { name: 'Day 3', url: '../../../assets/icon/day3.png' },
-    { name: 'Day 4', url: '../../../assets/icon/day4.png' },
-    { name: 'Day 5', url: '../../../assets/icon/day5.png' },
-    { name: 'Day 6', url: '../../../assets/icon/day6.png' },
+    { name: 'Day 1', url: 'assets/icon/day1.png' },
+    { name: 'Day 2', url: 'assets/icon/day2.png' },
+    { name: 'Day 3', url: 'assets/icon/day3.png' },
+    { name: 'Day 4', url: 'assets/icon/day4.png' },
+    { name: 'Day 5', url: 'assets/icon/day5.png' },
+    { name: 'Day 6', url: 'assets/icon/day6.png' },
   ];
-
   onQuestion(day: any) {
     console.log(day)
     this._router.navigate(['/english/topics'])

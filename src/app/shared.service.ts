@@ -16,4 +16,8 @@ export class SharedService {
 
   CurrentQuestionStatus = new BehaviorSubject<boolean>(false)
 
+  playAudio(url: string): void {
+    const audio = new Audio(url);
+    audio.play().catch(err => console.error('Failed to play audio:', err));
+  }
 }

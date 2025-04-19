@@ -15,79 +15,29 @@
         </div>
 
 
-        <div *ngIf="QuestionType == 'BlendWords'" id="BlendWords">
-            <div class="questionheader">
-                <span>🎨 {{ CurrentQuestion?.Question }} 🖍️</span>
-            </div>
-
-            <div class="qarea">
-                <div class="imgarea">
-                    <img [src]="base_url + CurrentQuestion?.question_Img" alt="Question Image" />
-                </div>
-
-                <div class="question-content">
-                    <div class="option-buttons">
-                        <button mat-button *ngIf="CurrentQuestion?.OptionA"
-                            (click)="selectOption(CurrentQuestion.OptionA)"
-                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionA}">
-                            {{ CurrentQuestion.OptionA }}
-                        </button>
-                        <button mat-button *ngIf="CurrentQuestion?.OptionB"
-                            (click)="selectOption(CurrentQuestion.OptionB)"
-                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionB}">
-                            {{ CurrentQuestion.OptionB }}
-                        </button>
-                        <button mat-button *ngIf="CurrentQuestion?.OptionC"
-                            (click)="selectOption(CurrentQuestion.OptionC)"
-                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionC}">
-                            {{ CurrentQuestion.OptionC }}
-                        </button>
-                        <button mat-button *ngIf="CurrentQuestion?.OptionD"
-                            (click)="selectOption(CurrentQuestion.OptionD)"
-                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionD}">
-                            {{ CurrentQuestion.OptionD }}
-                        </button>
-                    </div>
-
-                    <span style="width: 100%; height: 70px;"></span>
-
-
-                    <div class="incomplete-word">
-                        <span>{{ (CurrentQuestion?.incomplete_word || '').replace('__', filledWord || '__') }}</span>
-                    </div>
-
-                    <div class="actionbutton">
-                        <button class="reset-btn" (click)="resetSelection()">🔄 Reset</button> &nbsp; &nbsp;
-                        <button class="save-btn" (click)="CheckCorrect()">✅ Save & Next</button>
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
+        <div *ngIf="QuestionType == 'BlendWords'"  id="BlendWords">
+            <app-blend-words [CurrentQuestion]="CurrentQuestion"></app-blend-words>
         </div>
 
 
         <!-- for ListenWords  -->
         <div *ngIf="QuestionType == 'ListenWords'" id="ListenWords">
             <div class="letter-selector">
-                <span>🎨 {{ CurrentQuestion?.Question }} 🖍️</span>
+                <span>🎨 {{ CurrentQuestion.Question }} 🖍️</span>
             </div>
 
             <div class="qarea">
                 <div class="imgarea">
-                    <img [src]="base_url + CurrentQuestion?.question_Img" alt="Question Image" width="200px"
+                    <img [src]="base_url + CurrentQuestion.question_Img" alt="Question Image" width="200px"
                         height="200px" />
                 </div>
 
                 <div class="question-content">
                     <div class="listen_word">
-                        <span>{{CurrentQuestion?.listen_word }}</span>
+                        <span>{{CurrentQuestion.listen_word }}</span>
                     </div>
 
-                    <button class="btn btn-primary btn-sm mt-2" (click)="onPlayRec(CurrentQuestion?.listen_rec)">Listen
+                    <button class="btn btn-primary btn-sm mt-2" (click)="onPlayRec(CurrentQuestion.listen_rec)">Listen
                         Word</button>
                 </div>
             </div>
@@ -103,13 +53,13 @@
         <!-- for ListenWords  -->
         <div *ngIf="QuestionType == 'MCQ'" id="MCQ">
             <div class="letter-selector">
-                <span>🎨 {{ CurrentQuestion?.Question }} 🖍️</span>
+                <span>🎨 {{ CurrentQuestion.Question }} 🖍️</span>
             </div>
 
             <div class="qarea">
                 <div class="question-content">
                     <div class="option-buttons">
-                        <button mat-button *ngIf="CurrentQuestion?.OptionA"
+                        <button mat-button *ngIf="CurrentQuestion.OptionA"
                             (click)="selectOption(CurrentQuestion.OptionA)"
                             [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionA}">
                             {{ CurrentQuestion.OptionA }}
@@ -119,12 +69,12 @@
                             [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionB}">
                             {{ CurrentQuestion.OptionB }}
                         </button>
-                        <button mat-button *ngIf="CurrentQuestion?.OptionC"
+                        <button mat-button *ngIf="CurrentQuestion.OptionC"
                             (click)="selectOption(CurrentQuestion.OptionC)"
                             [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionC}">
                             {{ CurrentQuestion.OptionC }}
                         </button>
-                        <button mat-button *ngIf="CurrentQuestion?.OptionD"
+                        <button mat-button *ngIf="CurrentQuestion.OptionD"
                             (click)="selectOption(CurrentQuestion.OptionD)"
                             [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionD}">
                             {{ CurrentQuestion.OptionD }}
@@ -189,7 +139,7 @@
                     </div>
                 </div>
                 <div class="progess">
-                    <span>{{CurrentQuestion?.topics}} Progress Report: {{i}}/{{AllQuestion.length}}
+                    <span>{{CurrentQuestion.topics}} Progress Report: {{i}}/{{AllQuestion.length}}
                     </span>
                     <div class="progessline">
                         <section class="example-section">
