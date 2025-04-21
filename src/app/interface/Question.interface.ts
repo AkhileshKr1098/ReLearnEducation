@@ -109,6 +109,7 @@ export interface QuestionData {
     OptionC: string ;
     OptionD: string ;
     Question: string;
+    instruction: string;
     class: string;
     day: string;
     id: number;

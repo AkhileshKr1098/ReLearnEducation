@@ -25,6 +25,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     OptionC: '',
     OptionD: '',
     Question: '',
+    instruction: '',
     class: '',
     day: '',
     id: 0,

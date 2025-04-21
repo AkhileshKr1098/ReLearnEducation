@@ -44,6 +44,7 @@ export class AddQuestionComponent {
       unit: ['', Validators.required],
       question_type: ['', Validators.required],
       Question: ['', Validators.required],
+      instruction: [''],
       OptionA: [''],
       OptionB: [''],
       OptionC: [''],
@@ -226,6 +227,7 @@ export class AddQuestionComponent {
         OptionA: this.options.value.map((row: any) => row.OptionA).join(', '),
         OptionB: this.options.value.map((row: any) => row.OptionB).join(', '),
         Question: this.QuestionForm.get('Question')?.value,
+        instruction: this.QuestionForm.get('instruction')?.value,
         question_type: this.QuestionForm.get('question_type')?.value,
         class: this.QuestionForm.get('class')?.value,
         week: this.QuestionForm.get('week')?.value,
@@ -260,6 +262,7 @@ export class AddQuestionComponent {
       fromdata.append('unit', this.QuestionForm.get('unit')?.value)
       fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
       fromdata.append('Question', this.QuestionForm.get('Question')?.value)
+      fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
       fromdata.append('OptionA', this.QuestionForm.get('OptionA')?.value)
       fromdata.append('OptionB', this.QuestionForm.get('OptionB')?.value)
       fromdata.append('OptionC', this.QuestionForm.get('OptionC')?.value)
@@ -290,6 +293,7 @@ export class AddQuestionComponent {
       fromdata.append('unit', this.QuestionForm.get('unit')?.value)
       fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
       fromdata.append('Question', this.QuestionForm.get('Question')?.value)
+      fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
       fromdata.append('Answer', this.QuestionForm.get('Answer')?.value)
       fromdata.append('listen_word', this.QuestionForm.get('listen_word')?.value)
       fromdata.append('listen_rec', this.listen_rec)
@@ -315,6 +319,7 @@ export class AddQuestionComponent {
         "id": this.QuestionForm.get('id')?.value,
         "question_type": this.QuestionForm.get('question_type')?.value,
         "Question": this.QuestionForm.get('Question')?.value,
+        "instruction": this.QuestionForm.get('instruction')?.value,
         "OptionA": this.QuestionForm.get('OptionA')?.value,
         "OptionB": this.QuestionForm.get('OptionB')?.value,
         "OptionC": this.QuestionForm.get('OptionC')?.value,
@@ -350,6 +355,7 @@ export class AddQuestionComponent {
         OptionD: '.',
         Answer: '.',
         Question: this.QuestionForm.get('Question')?.value,
+        instruction: this.QuestionForm.get('instruction')?.value,
         question_type: this.QuestionForm.get('question_type')?.value,
         class: this.QuestionForm.get('class')?.value,
         week: this.QuestionForm.get('week')?.value,
@@ -374,6 +380,7 @@ export class AddQuestionComponent {
         OptionA: this.options.value.map((row: any) => row.OptionA).join(', '),
         OptionB: this.options.value.map((row: any) => row.OptionB).join(', '),
         Question: this.QuestionForm.get('Question')?.value,
+        instruction: this.QuestionForm.get('instruction')?.value,
         question_type: this.QuestionForm.get('question_type')?.value,
         class: this.QuestionForm.get('class')?.value,
         week: this.QuestionForm.get('week')?.value,
@@ -409,6 +416,7 @@ export class AddQuestionComponent {
       fromdata.append('unit', this.QuestionForm.get('unit')?.value)
       fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
       fromdata.append('Question', this.QuestionForm.get('Question')?.value)
+      fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
       fromdata.append('OptionA', this.QuestionForm.get('OptionA')?.value)
       fromdata.append('OptionB', this.QuestionForm.get('OptionB')?.value)
       fromdata.append('OptionC', this.QuestionForm.get('OptionC')?.value)
@@ -447,6 +455,7 @@ export class AddQuestionComponent {
       fromdata.append('unit', this.QuestionForm.get('unit')?.value)
       fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
       fromdata.append('Question', this.QuestionForm.get('Question')?.value)
+      fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
       fromdata.append('Answer', this.QuestionForm.get('Answer')?.value)
       fromdata.append('listen_word', this.QuestionForm.get('listen_word')?.value)
       fromdata.append('listen_rec', this.listen_rec)
@@ -517,6 +526,7 @@ export class AddQuestionComponent {
 
   resetForm() {
     this.QuestionForm.get('Question')?.reset();
+    this.QuestionForm.get('instruction')?.reset();
     this.QuestionForm.get('OptionA')?.reset();
     this.QuestionForm.get('OptionB')?.reset();
     this.QuestionForm.get('OptionC')?.reset();
