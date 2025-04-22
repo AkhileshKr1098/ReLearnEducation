@@ -1,7 +1,13 @@
 <div id="LetterTracing">
-    <div class="letter-selector">
-        <span>🎨 {{CurrentQyt.Question }} 🖍️</span>
-    </div>
+    <div class="qArea">
+        <div class="letter-selector">
+          <span>🎨 {{ CurrentQyt.Question}} 🖍️</span>
+        </div>
+    
+        <div class="letter-selector2">
+          <span> {{ CurrentQyt.instruction}}</span>
+        </div>
+      </div>
 
     <div class="canvas-container">
         <canvas #letterCanvas width="400" height="400" (mousedown)="startDrawing($event)" (mouseup)="stopDrawing()"

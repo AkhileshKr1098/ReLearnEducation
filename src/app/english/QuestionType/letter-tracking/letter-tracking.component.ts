@@ -59,16 +59,44 @@ export class LetterTrackingComponent implements AfterViewInit {
     this.isSaveVisible = false;
   }
 
+  // drawCharacter() {
+  //   const canvas = this.canvasRef.nativeElement as HTMLCanvasElement;
+  //   this.ctx = canvas.getContext('2d')!;
+  //   this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   this.ctx.font = "200px Arial";
+  //   this.ctx.textAlign = "center";
+  //   this.ctx.textBaseline = "middle";
+  //   this.ctx.fillStyle = "black";
+  //   this.ctx.fillText(this.currentCharacter.getValue(), canvas.width / 2, canvas.height / 2);
+  // }
+
   drawCharacter() {
     const canvas = this.canvasRef.nativeElement as HTMLCanvasElement;
     this.ctx = canvas.getContext('2d')!;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.ctx.font = "200px Arial";
+
+    const letter = this.currentCharacter.getValue();
+    let fontSize = canvas.height;
+    this.ctx.font = `${fontSize}px Arial`;
+    let textMetrics = this.ctx.measureText(letter);
+    while (
+      textMetrics.width > canvas.width * 0.8 ||
+      fontSize > canvas.height * 0.8
+    ) {
+      fontSize -= 5;
+      this.ctx.font = `${fontSize}px Arial`;
+      textMetrics = this.ctx.measureText(letter);
+    }
+    this.ctx.setLineDash([5, 5]);
+    this.ctx.lineWidth = 3;
+    this.ctx.strokeStyle = "black";
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
-    this.ctx.fillStyle = "black";
-    this.ctx.fillText(this.currentCharacter.getValue(), canvas.width / 2, canvas.height / 2);
+    this.ctx.strokeText(letter, canvas.width / 2, canvas.height / 2);
+    this.ctx.setLineDash([]);
   }
+
+
 
   startDrawing(event: MouseEvent | TouchEvent) {
     event.preventDefault();

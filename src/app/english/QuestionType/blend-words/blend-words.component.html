@@ -4,10 +4,19 @@
         <span>{{CurrentQuestion.topics}}</span>
         <span></span>
     </div>
+    <div class="qArea">
+        <div class="letter-selector">
+            <span>🎨 {{ CurrentQuestion.Question}} 🖍️</span>
+        </div>
 
-    <div class="questionheader">
-        <span>🎨 {{ CurrentQuestion.Question }} 🖍️</span>
+        <div class="letter-selector2">
+            <span> {{ CurrentQuestion.instruction}}</span>
+        </div>
     </div>
+
+    <!-- <div class="questionheader">
+        <span>🎨 {{ CurrentQuestion.Question }} 🖍️</span>
+    </div> -->
 
     <div class="qarea">
         <div class="imgarea">
@@ -34,11 +43,15 @@
                 </button>
             </div>
 
-            <span style="width: 100%; height: 70px;"></span>
+            <!-- <span style="width: 100%; height: 40px;"></span> -->
 
 
             <div class="incomplete-word">
-                <span>{{ (CurrentQuestion.incomplete_word || '').replace('__', filledWord || '__') }}</span>
+                <span *ngIf="CurrentQuestion.incomplete_word">
+                    {{ CurrentQuestion.incomplete_word.split('__')[0] }}
+                    <span class="highlight">{{ filledWord || '__' }}</span>
+                    {{ CurrentQuestion.incomplete_word.split('__')[1] }}
+                </span>
             </div>
         </div>
     </div>

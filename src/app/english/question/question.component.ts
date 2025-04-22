@@ -86,9 +86,10 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this._crud.getQuestion().subscribe(
       (res: QuestionData) => {
-        console.log(res);
         if (Array.isArray(res)) {
           this.AllQuestion = res.reverse()
+          // this.AllQuestion = res.slice(3, 7) // working mode
+          console.log(this.AllQuestion)
           this.NextQuestion()
         }
       }

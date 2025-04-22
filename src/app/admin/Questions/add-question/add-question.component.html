@@ -86,12 +86,6 @@
 
             </div>
 
-            <div class="row">
-                <div class="form-floating full-width">
-                    <input type="text" class="form-control" placeholder="Enter instruction" formControlName="instruction">
-                    <label>Instruction</label>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="form-floating full-width">
@@ -99,6 +93,15 @@
                     <label>Question</label>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="form-floating full-width">
+                    <input type="text" class="form-control" placeholder="Enter instruction"
+                        formControlName="instruction">
+                    <label>Instruction</label>
+                </div>
+            </div>
+
 
             <!-- for MCQ Question Type  start -->
             <div *ngIf="questionType == 'MCQ'">

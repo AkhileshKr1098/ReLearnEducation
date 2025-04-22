@@ -1,7 +1,13 @@
 <div id="wrapper">
 
-  <div class="letter-selector">
-    <span>🎨 {{ CurrentQyt.Question}} 🖍️</span>
+  <div class="qArea">
+    <div class="letter-selector">
+      <span>🎨 {{ CurrentQyt.Question}} 🖍️</span>
+    </div>
+
+    <div class="letter-selector2">
+      <span> {{ CurrentQyt.instruction}}</span>
+    </div>
   </div>
 
   <div class="word-match-wrapper" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)"
@@ -32,9 +38,9 @@
       </div>
     </div>
     <div class="button-container">
-      <button class="reset-btn" (click)="clearMatches()">🔄 Reset</button>
-      <button class="save-btn" (click)="saveMatches('save')" *ngIf="!isSave">✅ Save </button>
-      <button class="save-btn" (click)="saveMatches('submit')" *ngIf="isSave">✅ Submit</button>
+      <!-- <button class="reset-btn" (click)="clearMatches()">🔄 Reset</button> -->
+      <button class="save-btn" (click)="saveMatches('save')" [disabled]="isSave">✅ Save </button>
+      <button class="save-btn" (click)="saveMatches('submit')" [disabled]="!isSave">✅ Submit</button>
     </div>
   </div>
 </div>
