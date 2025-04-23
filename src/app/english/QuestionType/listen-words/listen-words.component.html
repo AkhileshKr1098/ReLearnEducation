@@ -1,1 +1,39 @@
-<p>listen-words works!</p>
+<div id="wrapper">
+    <div class="topicsarea">
+        <button type="button">Leve 1/Week 2/day 5</button>
+        <span>{{CurrentQuestion.topics}}</span>
+        <span></span>
+    </div>
+    <div class="qArea">
+        <div class="letter-selector">
+            <span>🎨 {{ CurrentQuestion.Question}} 🖍️</span>
+        </div>
+
+        <div class="letter-selector2">
+            <span> {{ CurrentQuestion.instruction}}</span>
+        </div>
+    </div>
+    <div class="qarea">
+        <div class="imgarea">
+            <img [src]="base_url + CurrentQuestion.question_Img" alt="Question Image" width="200px" height="200px" />
+        </div>
+
+        <div class="question-content">
+            <div class="listen_word">
+                <span>{{CurrentQuestion.listen_word }}</span>
+            </div>
+
+            <div class="listenword">
+                <button class="btn btn-primary btn-sm mt-2" (click)="onPlayRec(CurrentQuestion.listen_rec)">
+                    <mat-icon>play_circle_outline</mat-icon> Listen
+                    Word </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="reset-btn" (click)="resetSelection()">🔄 Reset</button> &nbsp; &nbsp;
+        <button class="save-btn" (click)="CheckCorrect()">✅ Save & Next</button>
+    </div>
+</div>

@@ -37,6 +37,7 @@ export class BlendWordsComponent {
   CheckCorrect() {
     this.isSaveVisible = false
     if (this.CurrentQuestion?.Answer == this.filledWord) {
+      this.resetSelection()
       this.onCorrect()
     } else {
       this.onOops()

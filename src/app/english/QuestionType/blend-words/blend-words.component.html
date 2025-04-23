@@ -14,10 +14,6 @@
         </div>
     </div>
 
-    <!-- <div class="questionheader">
-        <span>🎨 {{ CurrentQuestion.Question }} 🖍️</span>
-    </div> -->
-
     <div class="qarea">
         <div class="imgarea">
             <img [src]="base_url + CurrentQuestion.question_Img" alt="Question Image" />
@@ -42,9 +38,6 @@
                     {{ CurrentQuestion.OptionD }}
                 </button>
             </div>
-
-            <!-- <span style="width: 100%; height: 40px;"></span> -->
-
 
             <div class="incomplete-word">
                 <span *ngIf="CurrentQuestion.incomplete_word">

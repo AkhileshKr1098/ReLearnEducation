@@ -1,10 +1,5 @@
 <div id="wrapper">
     <div class="leftarea">
-        <!-- <div class="topicsarea">
-            <button type="button">Level/Week2/day5</button>
-            <span>{{CurrentQuestion?.topics}}</span>
-            <span></span>
-        </div> -->
 
         <div *ngIf="QuestionType == 'LetterTracing'" id="LetterTracing">
             <app-letter-tracking [CurrentQyt]="CurrentQuestion"></app-letter-tracking>
@@ -14,84 +9,20 @@
             <app-letter-match [CurrentQyt]="CurrentQuestion"></app-letter-match>
         </div>
 
-
-        <div *ngIf="QuestionType == 'BlendWords'"  id="BlendWords">
+        <div *ngIf="QuestionType == 'BlendWords'" id="BlendWords">
             <app-blend-words [CurrentQuestion]="CurrentQuestion"></app-blend-words>
         </div>
 
-
-        <!-- for ListenWords  -->
         <div *ngIf="QuestionType == 'ListenWords'" id="ListenWords">
-            <div class="letter-selector">
-                <span>🎨 {{ CurrentQuestion.Question }} 🖍️</span>
-            </div>
-
-            <div class="qarea">
-                <div class="imgarea">
-                    <img [src]="base_url + CurrentQuestion.question_Img" alt="Question Image" width="200px"
-                        height="200px" />
-                </div>
-
-                <div class="question-content">
-                    <div class="listen_word">
-                        <span>{{CurrentQuestion.listen_word }}</span>
-                    </div>
-
-                    <button class="btn btn-primary btn-sm mt-2" (click)="onPlayRec(CurrentQuestion.listen_rec)">Listen
-                        Word</button>
-                </div>
-            </div>
-
-            <div class="button-container">
-                <button class="reset-btn" (click)="resetSelection()">🔄 Reset</button>
-                <button class="save-btn" [disabled]="!isSaveVisible" (click)="NextQuestion()">✅ Save & Next</button>
-            </div>
+            <app-listen-words [CurrentQuestion]="CurrentQuestion"></app-listen-words>
         </div>
 
-
-
-        <!-- for ListenWords  -->
         <div *ngIf="QuestionType == 'MCQ'" id="MCQ">
-            <div class="letter-selector">
-                <span>🎨 {{ CurrentQuestion.Question }} 🖍️</span>
-            </div>
-
-            <div class="qarea">
-                <div class="question-content">
-                    <div class="option-buttons">
-                        <button mat-button *ngIf="CurrentQuestion.OptionA"
-                            (click)="selectOption(CurrentQuestion.OptionA)"
-                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionA}">
-                            {{ CurrentQuestion.OptionA }}
-                        </button>
-                        <button mat-button *ngIf="CurrentQuestion?.OptionB"
-                            (click)="selectOption(CurrentQuestion.OptionB)"
-                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionB}">
-                            {{ CurrentQuestion.OptionB }}
-                        </button>
-                        <button mat-button *ngIf="CurrentQuestion.OptionC"
-                            (click)="selectOption(CurrentQuestion.OptionC)"
-                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionC}">
-                            {{ CurrentQuestion.OptionC }}
-                        </button>
-                        <button mat-button *ngIf="CurrentQuestion.OptionD"
-                            (click)="selectOption(CurrentQuestion.OptionD)"
-                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionD}">
-                            {{ CurrentQuestion.OptionD }}
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="button-container">
-                <button class="reset-btn" (click)="resetSelection()">🔄 Reset</button>
-                <button class="save-btn" [disabled]="!isSaveVisible" (click)="CheckCorrect()">✅ Save & Next</button>
-            </div>
+            <app-mcq [CurrentQuestion]="CurrentQuestion"></app-mcq>
         </div>
-
 
     </div>
+
 
     <div class="rightarea">
         <div class="reportCard">

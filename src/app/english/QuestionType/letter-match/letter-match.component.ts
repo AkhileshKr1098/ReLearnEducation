@@ -192,6 +192,8 @@ export class LetterMatchComponent implements AfterViewInit {
     if (type === 'submit') {
       this.isSave = false;
       this.shared.CurrentQuestionStatus.next(true)
+      this.resetWords()
+      this.clearMatches()
     }
 
     if (type === 'save') {
@@ -203,7 +205,7 @@ export class LetterMatchComponent implements AfterViewInit {
 
       let correctCount = 0;
       let incorrectCount = 0;
-
+      this.totalQuestionMark = 0
       for (const match of this.matchedPairs) {
         const leftWord = this.leftWords[match.leftIndex].word.trim().toLowerCase();
         const rightWord = this.rightWords[match.rightIndex].word.trim().toLowerCase();
@@ -230,10 +232,10 @@ export class LetterMatchComponent implements AfterViewInit {
       // for completd or not
       const leftValue = this.CurrentQyt.OptionA.split(',').map(word => word.trim());
       if (leftValue.length > 0) {
-        console.log('total q', leftValue.length);
-        console.log('total !',);
-        console.log(this.totalQuestionMark);
+        console.log('total left valuee', leftValue.length);
+        console.log(this.totalQuestionMark,'totalQuestionMark');
 
+        
         if (this.totalQuestionMark !== leftValue.length) {
           alert('please completd the all ')
           return

@@ -1,16 +1,45 @@
 <div id="wrapper">
+    <div class="topicsarea">
+        <button type="button">Leve 1/Week 2/day 5</button>
+        <span>{{CurrentQuestion.topics}}</span>
+        <span></span>
+    </div>
+    <div class="qArea">
+        <div class="letter-selector">
+            <span>🎨 {{ CurrentQuestion.Question}} 🖍️</span>
+        </div>
 
-    <div id="mcq-container">
-        <h2>{{ question }}</h2>
-        <ul>
-            <li *ngFor="let option of options" (click)="selectOption(option)"
-                [class.selected]="selectedOption === option">
-                {{ option }}
-            </li>
-        </ul>
-        <button (click)="submitAnswer()" [disabled]="!selectedOption">Submit</button>
-        <p *ngIf="result !== null" [class.correct]="result" [class.incorrect]="!result">
-            {{ result ? 'Correct!' : 'Incorrect, try again!' }}
-        </p>
+        <div class="letter-selector2">
+            <span> {{ CurrentQuestion.instruction}}</span>
+        </div>
+    </div>
+
+    <div class="qarea">
+        <div class="question-content">
+            <div class="option-buttons">
+                <button mat-button *ngIf="CurrentQuestion.OptionA" (click)="selectOption(CurrentQuestion.OptionA)"
+                    [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionA}">
+                    {{ CurrentQuestion.OptionA }}
+                </button>
+                <button mat-button *ngIf="CurrentQuestion?.OptionB" (click)="selectOption(CurrentQuestion.OptionB)"
+                    [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionB}">
+                    {{ CurrentQuestion.OptionB }}
+                </button>
+                <button mat-button *ngIf="CurrentQuestion.OptionC" (click)="selectOption(CurrentQuestion.OptionC)"
+                    [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionC}">
+                    {{ CurrentQuestion.OptionC }}
+                </button>
+                <button mat-button *ngIf="CurrentQuestion.OptionD" (click)="selectOption(CurrentQuestion.OptionD)"
+                    [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionD}">
+                    {{ CurrentQuestion.OptionD }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="reset-btn" (click)="resetSelection()">🔄 Reset</button>
+        <button class="save-btn" [disabled]="!isSaveVisible" (click)="CheckCorrect()">✅ Save & Next</button>
     </div>
 </div>

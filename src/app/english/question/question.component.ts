@@ -63,8 +63,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   // }
 
   base_url: string = ''
-  filledWord: string = '';
-  audio: HTMLAudioElement | null = null;
+
 
 
   // for report 
@@ -88,7 +87,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
       (res: QuestionData) => {
         if (Array.isArray(res)) {
           this.AllQuestion = res.reverse()
-          // this.AllQuestion = res.slice(3, 7) // working mode
+          // this.AllQuestion = res.slice(0, 7) // working mode
           console.log(this.AllQuestion)
           this.NextQuestion()
         }
@@ -115,21 +114,12 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   i = 0
 
 
-  selectOption(option: string) {
-    this.filledWord = option;
-    console.log(this.filledWord)
-    this.isSaveVisible = true
-  }
-
-  resetSelection() {
-    this.filledWord = '';
-  }
+  
 
 
 
 
   NextQuestion() {
-    this.filledWord = ''
     if (this.i < this.AllQuestion.length - 1) {
       this.i++;
     } else {
@@ -139,76 +129,5 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     this.QuestionType = this.CurrentQuestion.question_type
     console.log(this.CurrentQuestion)
   }
-
-  CheckCorrect() {
-    this.isSaveVisible = false
-    if (this.QuestionType == 'BlendWords') {
-      if (this.CurrentQuestion?.Answer == this.filledWord) {
-        this.onCorrect()
-      } else {
-        this.onOops()
-      }
-    }
-
-    if (this.QuestionType == 'MCQ') {
-      if (this.CurrentQuestion?.Answer == this.filledWord) {
-        this.onCorrect()
-      } else {
-        this.onOops()
-      }
-    }
-
-  }
-
-
-
-  onPlayRec(rec: string) {
-    console.log(rec)
-    const fullUrl = this.base_url + rec
-    if (this.audio) {
-      this.audio.pause();
-    }
-    this.audio = new Audio(fullUrl);
-    this.audio.play();
-
-    this.isSaveVisible = true
-  }
-
-  onCorrect() {
-    const dilogclosed = this.dialog.open(CorrectBoxComponent, {
-      disableClose: true,
-      width: "40vw",
-      height: "90vh"
-    });
-
-    dilogclosed.afterClosed().subscribe(
-      (res) => {
-        console.log(res)
-        if (res == 'next') {
-          this.NextQuestion()
-        }
-      }
-    )
-  }
-
-  onOops() {
-    const oopsDilog = this.dialog.open(OppsBoxComponent, {
-      disableClose: true,
-      width: "40vw",
-      height: "90vh"
-    });
-    oopsDilog.afterClosed().subscribe(
-      (res) => {
-        console.log(res)
-        if (res == 'next') {
-          this.NextQuestion()
-        }
-
-      }
-    )
-
-  }
-
-
 
 }

@@ -1,0 +1,202 @@
+#wrapper {
+    width: 100%;
+    height: calc(100vh - 70px);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.topicsarea {
+    width: 100%;
+    height: 80px;
+    background-color: rgba(172, 255, 47, 0.144);
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 38px;
+        font-weight: 700;
+        color: #c0392b;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        letter-spacing: 1px;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+}
+
+.qArea {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.letter-selector {
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff5733;
+    justify-content: center;
+    padding: 5px;
+}
+
+.letter-selector2 {
+    width: 100%;
+    font-size: 22px;
+    font-weight: bold;
+    color: #863501;
+    justify-content: center;
+    margin-left: 45px;
+    margin-top: 8px;
+}
+
+.qarea {
+    width: 100%;
+    height: calc(100% - 210px);
+
+    display: flex;
+    justify-content: center;
+}
+
+.imgarea {
+    float: left;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+.question-content {
+    width: calc(100% - 300px);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.listen_word {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.listenword {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        font-size: large;
+        padding: 10px 20px;
+
+        mat-icon {
+           position: relative;
+           top: 5px;
+        }
+    }
+
+}
+
+
+.actionbutton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    button {
+        font-size: 20px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .reset-btn {
+        background-color: #ff6347;
+        color: white;
+    }
+
+    .reset-btn:hover {
+        background-color: #d43f2e;
+    }
+
+    .save-btn {
+        background-color: #4caf50;
+        color: white;
+    }
+
+    .save-btn:hover {
+        background-color: #388e3c;
+    }
+
+    .save-btn:disabled {
+        background-color: #a5d6a7;
+        cursor: not-allowed;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+}
+
+
+.highlight {
+    color: #cc0000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.highlight {
+    color: #cc0000;
+    font-weight: bold;
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
