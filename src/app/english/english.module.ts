@@ -42,6 +42,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {  MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReportPageComponent } from './Report/report-page/report-page.component';
+import { ReportPageDeatilsComponent } from './Report/report-page-deatils/report-page-deatils.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     OopsDialogComponent,
     ConfirmDialogComponent,
     CorrectBoxComponent,
-    OppsBoxComponent],
+    OppsBoxComponent,
+    ReportPageComponent,
+    ReportPageDeatilsComponent],
   imports: [
     CommonModule,
     EnglishRoutingModule,
@@ -88,7 +93,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     MatExpansionModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule
 
   ],
 

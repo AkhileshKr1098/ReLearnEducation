@@ -1,7 +1,9 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
+import { CRUDService } from 'src/app/crud.service';
 import { QuestionData } from 'src/app/interface/Question.interface';
+import { UserData } from 'src/app/interface/student.interface';
 import { SharedService } from 'src/app/shared.service';
 
 interface Point {
@@ -26,9 +28,37 @@ interface Match {
 })
 export class LetterMatchComponent implements AfterViewInit {
   @Input() CurrentQyt!: QuestionData;
+  userData: UserData = {
+    LoginId: '',
+    ID: '',
+    UserName: '',
+    DOB: '',
+    AbacusMaster: '',
+    AsignDate: '',
+    AsignDay: '',
+    CSDate: '',
+    ContactNo: '',
+    Course: '',
+    Currency: '',
+    CustomWeek: '',
+    GameTimeInterval: '',
+    GraceDays: '',
+    Group1: '',
+    HolidayFrom: null,
+    HolidayTo: null,
+    Level: '',
+    LittleChamp: '',
+    LittleLeap: '',
+    LittleMaster: '',
+    LittleProdigy: '',
+    LittleStart: '',
+    MaxQToDo: '',
+    Status: '',
+    Validity: null,
+    Week: '',
+    narratorSpeed: ''
+  };
 
-  rightvalue = ['ball', 'sun', 'water', 'fly', 'elephant'];
-  leftValue = ['ball', 'sun', 'water', 'fly', 'elephant'];
   leftWords: any[] = [];
   rightWords: any[] = [];
   matchedPairs: Match[] = [];
@@ -41,8 +71,26 @@ export class LetterMatchComponent implements AfterViewInit {
 
   constructor(
     private dialog: MatDialog,
-    private shared: SharedService
-  ) { }
+    private shared: SharedService,
+    private _crud: CRUDService
+  ) {
+
+  }
+
+  ngOnInit() {
+    console.log('ngonint call')
+    const updatedUserDataString = sessionStorage.getItem('rluser');
+    console.log(updatedUserDataString);
+
+    if (updatedUserDataString) {
+      try {
+        this.userData = JSON.parse(updatedUserDataString) as UserData;
+        console.log('User data loaded:', this.userData);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
+    }
+  }
 
   ngAfterViewInit() {
     console.log(this.CurrentQyt);
@@ -50,6 +98,7 @@ export class LetterMatchComponent implements AfterViewInit {
     setTimeout(() => {
       this.resetWords();
     });
+
   }
 
   shuffleArray(array: any[]) {
@@ -194,6 +243,14 @@ export class LetterMatchComponent implements AfterViewInit {
       this.shared.CurrentQuestionStatus.next(true)
       this.resetWords()
       this.clearMatches()
+      console.log(this.totalQuestionMark);
+      if (this.totalQuestionMark == 100) {
+        console.log(' save call ')
+        this.save(1)
+      } else {
+        console.log(' save call ')
+        this.save(0)
+      }
     }
 
     if (type === 'save') {
@@ -233,9 +290,9 @@ export class LetterMatchComponent implements AfterViewInit {
       const leftValue = this.CurrentQyt.OptionA.split(',').map(word => word.trim());
       if (leftValue.length > 0) {
         console.log('total left valuee', leftValue.length);
-        console.log(this.totalQuestionMark,'totalQuestionMark');
+        console.log(this.totalQuestionMark, 'totalQuestionMark');
 
-        
+
         if (this.totalQuestionMark !== leftValue.length) {
           alert('please completd the all ')
           return
@@ -276,4 +333,43 @@ export class LetterMatchComponent implements AfterViewInit {
     alert('Check feature not implemented yet.');
   }
 
+
+
+  save(status: number) {
+    console.log(this.userData);
+
+    if (!this.userData.ID) {
+      console.error('User ID not found. Cannot save answer.');
+      return;
+    }
+
+    const answerData = {
+      std_id: this.userData.ID,
+      question_id: this.CurrentQyt.id,
+      class: this.CurrentQyt.class,
+      week: this.CurrentQyt.week,
+      day: this.CurrentQyt.day,
+      sections: this.CurrentQyt.sections,
+      topics: this.CurrentQyt.topics,
+      answer_status: status,
+      teacher_id_fk: 0
+    };
+
+    console.log('Saving answer:', answerData);
+
+    this._crud.ans_save(answerData).subscribe(
+      (response) => {
+        console.log('Server response:', response);
+        if (response.success) {
+          console.log('Answer saved successfully!');
+        } else {
+          console.error('Server message:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error saving answer:', error);
+        alert('Something went wrong while saving the answer!');
+      }
+    );
+  }
 }

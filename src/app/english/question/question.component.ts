@@ -87,7 +87,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
       (res: QuestionData) => {
         if (Array.isArray(res)) {
           this.AllQuestion = res.reverse()
-          // this.AllQuestion = res.slice(0, 7) // working mode
+          // this.AllQuestion = res.slice(1, 7) // working mode
           console.log(this.AllQuestion)
           this.NextQuestion()
         }

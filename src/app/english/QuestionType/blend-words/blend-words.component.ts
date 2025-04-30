@@ -1,91 +1,160 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionData } from 'src/app/interface/Question.interface';
 import { CorrectBoxComponent } from '../../correct-box/correct-box.component';
 import { OppsBoxComponent } from '../../opps-box/opps-box.component';
 import { CRUDService } from 'src/app/crud.service';
 import { SharedService } from 'src/app/shared.service';
+import { UserData } from 'src/app/interface/student.interface';
 
 @Component({
   selector: 'app-blend-words',
   templateUrl: './blend-words.component.html',
   styleUrls: ['./blend-words.component.scss']
 })
-export class BlendWordsComponent {
+export class BlendWordsComponent implements OnInit {
   @Input() CurrentQuestion!: QuestionData;
+
   base_url: string = '';
   filledWord: string = '';
   isSaveVisible = false;
+
+  userData: UserData = {
+    LoginId: '',
+    ID: '',
+    UserName: '',
+    DOB: '',
+    AbacusMaster: '',
+    AsignDate: '',
+    AsignDay: '',
+    CSDate: '',
+    ContactNo: '',
+    Course: '',
+    Currency: '',
+    CustomWeek: '',
+    GameTimeInterval: '',
+    GraceDays: '',
+    Group1: '',
+    HolidayFrom: null,
+    HolidayTo: null,
+    Level: '',
+    LittleChamp: '',
+    LittleLeap: '',
+    LittleMaster: '',
+    LittleProdigy: '',
+    LittleStart: '',
+    MaxQToDo: '',
+    Status: '',
+    Validity: null,
+    Week: '',
+    narratorSpeed: ''
+  };
 
   constructor(
     private dialog: MatDialog,
     private _crud: CRUDService,
     private shared: SharedService
-  ) {
-    this._crud.img_base_url.subscribe(
-      (res) => {
-        this.base_url = res
-      }
-    )
-  }
-  selectOption(option: string) {
-    this.filledWord = option;
-    console.log(this.filledWord)
-    this.isSaveVisible = true
-  }
+  ) { }
 
-  CheckCorrect() {
-    this.isSaveVisible = false
-    if (this.CurrentQuestion?.Answer == this.filledWord) {
-      this.resetSelection()
-      this.onCorrect()
-    } else {
-      this.onOops()
+  ngOnInit() {
+
+
+    const updatedUserDataString = sessionStorage.getItem('rluser');
+    if (updatedUserDataString) {
+      try {
+        this.userData = JSON.parse(updatedUserDataString) as UserData;
+        console.log('User data loaded:', this.userData);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
     }
   }
 
+  selectOption(option: string) {
+    this.filledWord = option;
+    console.log('Selected option:', this.filledWord);
+    this.isSaveVisible = true;
+  }
+
+  CheckCorrect() {
+    this.isSaveVisible = false;
+    if (this.CurrentQuestion?.Answer === this.filledWord) {
+      this.resetSelection();
+      this.onCorrect();
+      this.save(1);
+    } else {
+      this.onOops();
+      this.save(0);
+    }
+  }
 
   onCorrect() {
-    const dilogclosed = this.dialog.open(CorrectBoxComponent, {
+    const dialogClosed = this.dialog.open(CorrectBoxComponent, {
       disableClose: true,
       width: "40vw",
       height: "90vh"
     });
 
-    dilogclosed.afterClosed().subscribe(
-      (res) => {
-        console.log(res)
-        if (res == 'next') {
-          // this.NextQuestion()
-          this.shared.CurrentQuestionStatus.next(true)
-
-        }
+    dialogClosed.afterClosed().subscribe((res) => {
+      console.log('Correct dialog closed with:', res);
+      if (res === 'next') {
+        this.shared.CurrentQuestionStatus.next(true);
       }
-    )
+    });
   }
 
   onOops() {
-    const oopsDilog = this.dialog.open(OppsBoxComponent, {
+    const oopsDialog = this.dialog.open(OppsBoxComponent, {
       disableClose: true,
       width: "40vw",
       height: "90vh"
     });
-    oopsDilog.afterClosed().subscribe(
-      (res) => {
-        console.log(res)
-        if (res == 'next') {
-          // this.NextQuestion()
-          this.shared.CurrentQuestionStatus.next(true)
-        }
 
+    oopsDialog.afterClosed().subscribe((res) => {
+      console.log('Oops dialog closed with:', res);
+      if (res === 'next') {
+        this.shared.CurrentQuestionStatus.next(true);
       }
-    )
-
+    });
   }
-
 
   resetSelection() {
     this.filledWord = '';
   }
 
+  save(status: number) {
+    if (!this.userData.ID) {
+      console.error('User ID not found. Cannot save answer.');
+      return;
+    }
+
+    const answerData = {
+      std_id: this.userData.ID,
+      question_id: this.CurrentQuestion.id,
+      class: this.CurrentQuestion.class,
+      week: this.CurrentQuestion.week,
+      day: this.CurrentQuestion.day,
+      sections: this.CurrentQuestion.sections,
+      topics: this.CurrentQuestion.topics,
+      answer_status: status,
+      teacher_id_fk: 0
+    };
+
+    console.log('Saving answer:', answerData);
+
+    this._crud.ans_save(answerData).subscribe(
+      (response) => {
+        console.log('Server response:', response);
+        if (response.success) {
+          console.log('Answer saved successfully!');
+        } else {
+          console.error('Server message:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error saving answer:', error);
+        alert('Something went wrong while saving the answer!');
+      }
+    );
+  }
 }

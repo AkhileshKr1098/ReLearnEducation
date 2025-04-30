@@ -103,20 +103,20 @@ export interface DayInfo {
 
 
 export interface QuestionData {
-    Answer: string ;
-    OptionA: string ;
-    OptionB: string ;
-    OptionC: string ;
-    OptionD: string ;
+    Answer: string;
+    OptionA: string;
+    OptionB: string;
+    OptionC: string;
+    OptionD: string;
     Question: string;
     instruction: string;
     class: string;
     day: string;
     id: number;
-    incomplete_word: string ;
-    listen_rec: string ;
-    listen_word: string ;
-    question_Img: string ;
+    incomplete_word: string;
+    listen_rec: string;
+    listen_word: string;
+    question_Img: string;
     question_type: string;
     sections: string;
     sub_topics: string;
@@ -124,4 +124,27 @@ export interface QuestionData {
     unit: string;
     week: string;
 
+}
+
+export interface AnsReport {
+    id: number;
+    std_id: string;
+    class: string;
+    sections: string;
+    topics: string;
+    question_id: string;
+    answer_image: string;
+    answer_status: number;
+    teacher_id_fk: number;
+    cur_date: string; // ISO format (e.g., "2025-04-29")
+    day: string;
+    week: string;
+    total_qty: number;
+    right_ans: number;
+    wrong_ans: number;
+}
+
+export interface AnsReportRes {
+    data: AnsReport,
+    success: number
 }

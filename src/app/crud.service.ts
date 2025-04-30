@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserProfile } from './interface/student.interface';
-import { ClassRes, DayRes, GradeRes, QuestionData, SectionsRes, SubTopicRes, TopicsRes, Week, WeekInsertRes, WeekRes } from './interface/Question.interface';
+import { AnsReportRes, ClassRes, DayRes, GradeRes, QuestionData, SectionsRes, SubTopicRes, TopicsRes, Week, WeekInsertRes, WeekRes } from './interface/Question.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -233,6 +233,32 @@ export class CRUDService {
   Get_answers_api(data: any): Observable<any> {
     return this._http.post<any>(`${this.base_url}answers_api.php`, data)
   }
+
+  // by answer
+  ans_save(data: any): Observable<any> {
+    return this._http.post<any>(`${this.base_url}ans_save.php`, data)
+  }
+
+  ans_get(filters: { std_id: string, class: string, week: string, topics: string }): Observable<AnsReportRes> {
+    let params = new HttpParams();
+
+    // Dynamically add each param only if it exists
+    if (filters.std_id) {
+      params = params.set('std_id', filters.std_id);
+    }
+    if (filters.class) {
+      params = params.set('class', filters.class);
+    }
+    if (filters.week) {
+      params = params.set('week', filters.week);
+    }
+    if (filters.topics) {
+      params = params.set('topics', filters.topics);
+    }
+
+    return this._http.get<AnsReportRes>(`${this.base_url}ans_save.php`, { params });
+  }
+
 
 
 

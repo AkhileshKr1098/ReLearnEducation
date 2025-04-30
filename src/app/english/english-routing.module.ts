@@ -10,6 +10,8 @@ import { LetterMatchComponent } from './QuestionType/letter-match/letter-match.c
 import { LetterTrackingComponent } from './QuestionType/letter-tracking/letter-tracking.component';
 import { ListenWordsComponent } from './QuestionType/listen-words/listen-words.component';
 import { QTypeComponent } from './QuestionType/qtype/qtype.component';
+import { ReportPageComponent } from './Report/report-page/report-page.component';
+import { ReportPageDeatilsComponent } from './Report/report-page-deatils/report-page-deatils.component';
 
 const routes: Routes = [
   // { path: '', component: LetterMatchComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
       { path: 'lettermatch', component: LetterMatchComponent },
       { path: 'lettertracking', component: LetterTrackingComponent },
       { path: 'ListenWords', component: ListenWordsComponent },
+      { path: 'report', component: ReportPageComponent },
+      { path: 'reportdeatils', component: ReportPageDeatilsComponent },
 
     ]
   },

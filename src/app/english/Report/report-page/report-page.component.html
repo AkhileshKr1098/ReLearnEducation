@@ -1,0 +1,76 @@
+<div class="homework-container">
+  <button mat-button class="previous-btn">Previous Week Report</button>
+
+  <h2 class="report-title">HOME WORK REPORT</h2>
+
+  <div class="filters">
+
+    <mat-form-field appearance="fill">
+      <mat-select placeholder="Class">
+        <mat-option *ngFor="let cls of Classes" [value]="cls.class">{{cls.class}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-select placeholder="Week">
+        <mat-option *ngFor="let week of Weeks" [value]="week.week_num">{{week.week_num}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="AnsReports" class="mat-elevation-z1 report-table">
+
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary">
+          <img src="../../../../assets/icon/add.png" alt="">
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sno">
+      <th mat-header-cell *matHeaderCellDef> S.NO </th>
+      <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> DATE </th>
+      <td mat-cell *matCellDef="let element"> {{element.cur_date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="day">
+      <th mat-header-cell *matHeaderCellDef> DAY </th>
+      <td mat-cell *matCellDef="let element"> {{element.day}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalQuestion">
+      <th mat-header-cell *matHeaderCellDef> TOTAL QUESTION </th>
+      <td mat-cell *matCellDef="let element"> {{element.total_qty}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="attempted">
+      <th mat-header-cell *matHeaderCellDef> ATTEMPTED QUESTIONS </th>
+      <td mat-cell *matCellDef="let element"> {{element.total_qty}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="correct">
+      <th mat-header-cell *matHeaderCellDef> CORRECT ANS </th>
+      <td mat-cell *matCellDef="let element" class="green"> {{element.right_ans}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="wrong">
+      <th mat-header-cell *matHeaderCellDef> WRONG ANS </th>
+      <td mat-cell *matCellDef="let element" class="red"> {{element.wrong_ans}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="percent">
+      <th mat-header-cell *matHeaderCellDef> CORRECT % </th>
+      <td mat-cell *matCellDef="let element" class="green"> {{element.percent}} % </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

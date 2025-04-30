@@ -43,3 +43,34 @@ export interface UserProfile {
     Date1: string;
 }
 
+
+export interface UserData {
+    LoginId: string;
+    ID: string;
+    UserName: string;
+    DOB: string;
+    AbacusMaster: string;
+    AsignDate: string;
+    AsignDay: string;
+    CSDate: string;
+    ContactNo: string;
+    Course: string;
+    Currency: string;
+    CustomWeek: string;
+    GameTimeInterval: string;
+    GraceDays: string;
+    Group1: string;
+    HolidayFrom: string | null;
+    HolidayTo: string | null;
+    Level: string;
+    LittleChamp: string;
+    LittleLeap: string;
+    LittleMaster: string;
+    LittleProdigy: string;
+    LittleStart: string;
+    MaxQToDo: string;
+    Status: string;
+    Validity: string | null;
+    Week: string;
+    narratorSpeed: string;
+}
