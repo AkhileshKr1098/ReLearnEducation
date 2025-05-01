@@ -1,0 +1,72 @@
+.homework-container {
+    border: 2px solid orange;
+    background: white;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.previous-btn {
+    background-color: #f44336;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.report-title {
+    text-align: center;
+    color: #f39c12;
+    font-weight: 700;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+
+    mat-form-field {
+        width: 150px;
+        background: #f4f4f4;
+        border-radius: 6px;
+    }
+}
+
+.report-table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+
+    th {
+        background-color: maroon;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .red {
+        color: red;
+    }
+
+    tr:nth-child(even) {
+        background-color: #fef6e4;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #ecfdf5;
+    }
+}

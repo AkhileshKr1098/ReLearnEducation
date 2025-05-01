@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { CRUDService } from 'src/app/crud.service';
 import { AnsReport, AnsReportRes, Class, ClassRes, Week, WeekRes } from 'src/app/interface/Question.interface';
 import { UserData } from 'src/app/interface/student.interface';
 import { SharedService } from 'src/app/shared.service';
+import { ReportPageDeatilsComponent } from '../report-page-deatils/report-page-deatils.component';
 
 @Component({
   selector: 'app-report-page',
@@ -10,7 +12,19 @@ import { SharedService } from 'src/app/shared.service';
   styleUrls: ['./report-page.component.scss']
 })
 export class ReportPageComponent implements OnInit {
-  displayedColumns: string[] = ['expand', 'sno', 'date', 'day', 'totalQuestion', 'attempted', 'correct', 'wrong', 'percent'];
+  displayedColumns: string[] = [
+    'expand',
+    'sl',
+    'date',
+    'day',
+    'totalQuestion',
+    'attempted',
+    'present',
+    'correct',
+    'wrong',
+    'percent'
+  ];
+
   AnsReports: AnsReport[] = []
   Weeks: Week[] = []
   Classes: Class[] = []
@@ -51,7 +65,8 @@ export class ReportPageComponent implements OnInit {
 
   constructor(
     private _crud: CRUDService,
-    private _shared: SharedService
+    private _shared: SharedService,
+    private _dialog: MatDialog
   ) {
 
   }
@@ -72,14 +87,6 @@ export class ReportPageComponent implements OnInit {
 
 
   }
-  dataSource = [
-    { sno: 1, date: '', day: 1, total: 90, attempted: 0, correct: 0, wrong: 0, percent: 0 },
-    { sno: 2, date: '', day: 2, total: 25, attempted: 0, correct: 0, wrong: 0, percent: 0 },
-    { sno: 3, date: '', day: 3, total: 25, attempted: 0, correct: 0, wrong: 0, percent: 0 },
-    { sno: 4, date: '', day: 4, total: 25, attempted: 0, correct: 0, wrong: 0, percent: 0 },
-    { sno: 5, date: '', day: 5, total: 25, attempted: 0, correct: 0, wrong: 0, percent: 0 },
-    { sno: 6, date: '', day: 6, total: 24, attempted: 0, correct: 0, wrong: 0, percent: 0 }
-  ];
 
   get_ans() {
     this._crud.ans_get({
@@ -118,4 +125,39 @@ export class ReportPageComponent implements OnInit {
       }
     )
   }
+
+  getCorrectPercentage(element: any): number {
+    return element.total_qty > 0
+      ? (element.right_ans / element.total_qty) * 100
+      : 0;
+  }
+
+  onClassChange(classValue: string): void {
+    this.Seletedclass = classValue;
+    this.get_ans();
+  }
+
+  onWeekChange(weekValue: string): void {
+    this.Seletedweek = weekValue;
+    this.get_ans();
+  }
+
+
+  OneOpenDilog(day: string) {
+    const data = {
+      day: day,
+      std_id: this.userData.ID
+    }
+    this._dialog.open(ReportPageDeatilsComponent, {
+      data: data,
+      width: '100vw',
+      maxWidth: '100vw',
+      height: 'auto',
+      maxHeight: '90vh',
+      panelClass: 'full-width-no-padding-dialog',
+      autoFocus: false
+    });
+  }
+
+
 }

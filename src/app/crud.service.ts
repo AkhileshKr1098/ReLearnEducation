@@ -259,6 +259,21 @@ export class CRUDService {
     return this._http.get<AnsReportRes>(`${this.base_url}ans_save.php`, { params });
   }
 
+  ans_get_topics(filters: { std_id: string, day: string }): Observable<AnsReportRes> {
+    let params = new HttpParams();
+
+    // Dynamically add each param only if it exists
+    if (filters.std_id) {
+      params = params.set('std_id', filters.std_id);
+    }
+    if (filters.day) {
+      params = params.set('day', filters.day);
+    }
+  
+
+    return this._http.get<AnsReportRes>(`${this.base_url}get_ans_topics.php`, { params });
+  }
+
 
 
 

@@ -1,23 +1,26 @@
 <div id="LetterTracing">
-    <div class="qArea">
-        <div class="letter-selector">
-          <span>🎨 {{ CurrentQyt.Question}} 🖍️</span>
-        </div>
-    
-        <div class="letter-selector2">
-          <span> {{ CurrentQyt.instruction}}</span>
-        </div>
-      </div>
-
-    <div class="canvas-container">
-        <canvas #letterCanvas width="400" height="400" (mousedown)="startDrawing($event)" (mouseup)="stopDrawing()"
-            (mousemove)="paintCharacter($event)" (touchstart)="startDrawing($event)" (touchend)="stopDrawing()"
-            (touchmove)="paintCharacter($event)">
-        </canvas>
+  <div class="qArea">
+    <div class="letter-selector">
+      <span>🎨 {{ CurrentQyt.Question}} 🖍️</span>
+      <button (click)="downloadTracingPDF()">
+        Download PDF
+      </button>
     </div>
 
-    <div class="button-container">
-        <button class="reset-btn" (click)="startPainting()">🔄 Reset</button>
-        <button class="save-btn" [disabled]="!isSaveVisible" (click)="saveCanvas()">✅ Save & Next</button>
+    <div class="letter-selector2">
+      <span> {{ CurrentQyt.instruction}}</span>
     </div>
+  </div>
+
+  <div class="canvas-container">
+    <canvas #letterCanvas width="400" height="400" (mousedown)="startDrawing($event)" (mouseup)="stopDrawing()"
+      (mousemove)="paintCharacter($event)" (touchstart)="startDrawing($event)" (touchend)="stopDrawing()"
+      (touchmove)="paintCharacter($event)">
+    </canvas>
+  </div>
+
+  <div class="button-container">
+    <button class="reset-btn" (click)="startPainting()">🔄 Reset</button>
+    <button class="save-btn" [disabled]="!isSaveVisible" (click)="saveCanvas()">✅ Save & Next</button>
+  </div>
 </div>

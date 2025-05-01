@@ -6,6 +6,7 @@ import { CorrectBoxComponent } from '../../correct-box/correct-box.component';
 import { MatDialog } from '@angular/material/dialog';
 import { OppsBoxComponent } from '../../opps-box/opps-box.component';
 import { SharedService } from 'src/app/shared.service';
+import { LetterTracingService } from 'src/app/letter-tracing.service';
 
 @Component({
   selector: 'app-letter-tracking',
@@ -34,7 +35,8 @@ export class LetterTrackingComponent implements AfterViewInit {
   constructor(
     private _crud: CRUDService,
     private dialog: MatDialog,
-    private _shared: SharedService
+    private _shared: SharedService,
+    private tracingService: LetterTracingService
   ) { }
 
   ngOnInit() {
@@ -206,6 +208,15 @@ export class LetterTrackingComponent implements AfterViewInit {
       }
     });
   }
+
+
+  downloadTracingPDF() {
+    // this.tracingService.generateLargeTracingPDF(['A', 'B', 'C']);
+    this.tracingService.generatePageWith4LettersPDF(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
+
+  }
+
+
 
 
 }
