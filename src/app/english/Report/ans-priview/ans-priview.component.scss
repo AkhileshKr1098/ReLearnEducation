@@ -1,0 +1,145 @@
+#wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+#header {
+    width: 100%;
+    height: 50px;
+    background-color: green;
+}
+
+#questionarea {
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+}
+
+#ListenWords {
+    width: 100%;
+    border: 1px solid rebeccapurple;
+
+    #questionHeader {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    #questionarea {
+        width: 100%;
+        height: 500px;
+        border: 1px solid darkblue;
+        display: flex;
+        justify-content: center;
+
+
+        .imgarea {
+            float: left;
+            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        .question-content {
+            width: calc(100% - 300px);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+        }
+
+        .listen_word {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .listenword {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            button {
+                font-size: large;
+                padding: 10px 20px;
+
+                mat-icon {
+                    position: relative;
+                    top: 5px;
+                }
+            }
+
+        }
+
+    }
+
+}
+
+#mcq {
+    .qarea {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+
+    }
+
+    .question-content {
+        float: right;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .option-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+
+        button {
+            width: 40%;
+            height: 60px;
+            margin: 5%;
+            font-size: 18px;
+            padding: 20px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            background: #ff9800;
+            color: white;
+        }
+
+
+
+        button.active-option {
+            background: #4caf50;
+            color: white;
+            border: 2px solid #3e8e41;
+        }
+
+        button:hover {
+            background: #4caf50;
+            color: white;
+            border: 2px solid #3e8e41;
+        }
+
+    }
+
+}

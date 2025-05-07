@@ -5,6 +5,7 @@ import { AnsReport, AnsReportRes, Class, ClassRes, Week, WeekRes } from 'src/app
 import { UserData } from 'src/app/interface/student.interface';
 import { SharedService } from 'src/app/shared.service';
 import { ReportPageDeatilsComponent } from '../report-page-deatils/report-page-deatils.component';
+import { AnsPriviewComponent } from '../ans-priview/ans-priview.component';
 
 @Component({
   selector: 'app-report-page',
@@ -22,7 +23,8 @@ export class ReportPageComponent implements OnInit {
     'present',
     'correct',
     'wrong',
-    'percent'
+    'percent',
+    'view'
   ];
 
   AnsReports: AnsReport[] = []
@@ -84,8 +86,6 @@ export class ReportPageComponent implements OnInit {
     this.get_week()
     this.get_cls()
     this.get_ans()
-
-
   }
 
   get_ans() {
@@ -140,6 +140,27 @@ export class ReportPageComponent implements OnInit {
   onWeekChange(weekValue: string): void {
     this.Seletedweek = weekValue;
     this.get_ans();
+  }
+
+  onView(el: any) {
+    const data = {
+      day: el.day,
+      week: el.week,
+      std_id: this.userData.ID
+    }
+
+    this._dialog.open(AnsPriviewComponent, {
+      data: data,
+      width: '70vw',
+      maxWidth: '70vw',
+      height: '100vh',
+      maxHeight: '100vh',
+      panelClass: 'full-width-no-padding-dialogans',
+      autoFocus: false
+    }
+
+    )
+
   }
 
 

@@ -1,0 +1,73 @@
+<div id="wrapper">
+
+    <div id="header">
+
+    </div>
+    <div id="questionarea">
+        <div *ngFor="let item of  AnsQuestionList">
+            <div *ngIf="item.question_type == 'LetterTracing'" id="LetterTracing">
+
+            </div>
+
+            <div *ngIf="item.question_type == 'LetterMatch'" id="LetterMatch">
+
+            </div>
+
+            <div *ngIf="item.question_type == 'BlendWords'" id="BlendWords">
+            </div>
+
+
+            <div *ngIf="item.question_type == 'ListenWords'" id="ListenWords">
+                <div id="questionHeader">
+                    <h1> {{item.Question}} </h1>
+                </div>
+                <div id="questionarea">
+                    <div class="imgarea">
+                        <img [src]="base_url + item.question_Img" alt="Question Image" width="200px"
+                            height="200px" />
+                    </div>
+
+                    <div class="question-content">
+                        <div class="listen_word">
+                            <span>{{item.listen_word }}</span>
+                        </div>
+
+                        <div class="listenword">
+                            <button class="btn btn-primary btn-sm mt-2" (click)="onPlayRec(item.listen_rec)">
+                                <mat-icon>play_circle_outline</mat-icon> Listen
+                                Word </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngIf="item.question_type == 'MCQ'" id="MCQ">
+                {{item.Question}}
+                <div class="qarea">
+                    <div class="question-content">
+                        <div class="option-buttons">
+                            <button mat-button *ngIf="item.OptionA"
+                                [ngClass]="{'active-option': item.answer_status == 1  || item.Answer == item.OptionA}">
+                                {{ item.OptionA }}
+                            </button>
+                            <button mat-button *ngIf="item.OptionB">
+                                {{ item.OptionB }}
+                            </button>
+                            <button mat-button *ngIf="item.OptionC">
+                                {{ item.OptionC }}
+                            </button>
+                            <button mat-button *ngIf="item.OptionD">
+                                {{ item.OptionD }}
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

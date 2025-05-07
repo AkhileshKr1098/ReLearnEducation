@@ -45,6 +45,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReportPageComponent } from './Report/report-page/report-page.component';
 import { ReportPageDeatilsComponent } from './Report/report-page-deatils/report-page-deatils.component';
 import { MatTableModule } from '@angular/material/table';
+import { AnsPriviewComponent } from './Report/ans-priview/ans-priview.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { MatTableModule } from '@angular/material/table';
     CorrectBoxComponent,
     OppsBoxComponent,
     ReportPageComponent,
-    ReportPageDeatilsComponent],
+    ReportPageDeatilsComponent,
+    AnsPriviewComponent],
   imports: [
     CommonModule,
     EnglishRoutingModule,

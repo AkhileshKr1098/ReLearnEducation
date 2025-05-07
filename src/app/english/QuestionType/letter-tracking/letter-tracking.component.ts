@@ -211,8 +211,10 @@ export class LetterTrackingComponent implements AfterViewInit {
 
 
   downloadTracingPDF() {
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+    this.tracingService.generateLetterTracingPDF(letters);
     // this.tracingService.generateLargeTracingPDF(['A', 'B', 'C']);
-    this.tracingService.generatePageWith4LettersPDF(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
+    // this.tracingService.generatePageWith4LettersPDF(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
 
   }
 

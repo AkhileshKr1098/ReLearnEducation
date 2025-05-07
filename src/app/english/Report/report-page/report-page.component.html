@@ -4,21 +4,21 @@
   <h2 class="report-title">HOME WORK REPORT</h2>
 
   <div class="filters">
-<mat-form-field appearance="fill">
-  <mat-select placeholder="Class" (selectionChange)="onClassChange($event.value)">
-    <mat-option *ngFor="let cls of Classes" [value]="cls.class">
-      {{ cls.class }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-select placeholder="Class" (selectionChange)="onClassChange($event.value)">
+        <mat-option *ngFor="let cls of Classes" [value]="cls.class">
+          {{ cls.class }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-<mat-form-field appearance="fill">
-  <mat-select placeholder="Week" (selectionChange)="onWeekChange($event.value)">
-    <mat-option *ngFor="let week of Weeks" [value]="week.week_num">
-      {{ week.week_num }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-select placeholder="Week" (selectionChange)="onWeekChange($event.value)">
+        <mat-option *ngFor="let week of Weeks" [value]="week.week_num">
+          {{ week.week_num }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
   </div>
 
@@ -27,7 +27,7 @@
     <ng-container matColumnDef="expand">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="primary" (click)="OneOpenDilog(element.day)" >
+        <button mat-icon-button color="primary" (click)="OneOpenDilog(element.day)">
           <img src="../../../../assets/icon/add.png" alt="">
         </button>
       </td>
@@ -77,6 +77,14 @@
       <th mat-header-cell *matHeaderCellDef> CORRECT % </th>
       <td mat-cell *matCellDef="let element" class="green">
         {{ getCorrectPercentage(element) | number:'1.0-0' }} %
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef> View</th>
+      <td mat-cell *matCellDef="let element" class="green">
+        <button mat-button (click)="onView(element)"> <mat-icon>visibility</mat-icon></button>
+
       </td>
     </ng-container>
 

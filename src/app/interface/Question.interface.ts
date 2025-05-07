@@ -148,3 +148,36 @@ export interface AnsReportRes {
     data: AnsReport,
     success: number
 }
+
+export interface AnswerWithQuestion {
+    id: number;
+    class: string;
+    week: string;
+    day: string;
+    sections: string;
+    topics: string;
+    sub_topics: string;
+    unit: string;
+    question_type: string;
+    instruction: string;
+    Question: string;
+    OptionA: string;
+    OptionB: string;
+    OptionC: string;
+    OptionD: string;
+    Answer: string;
+    question_Img: string | null;
+    incomplete_word: string | null;
+    listen_word: string | null;
+    listen_rec: string | null;
+    answer_status: number;
+    answer_image: string;
+    std_id: string;
+    cur_date: string;
+}
+
+export interface AnswerWithQuestionRes {
+    data: AnswerWithQuestion,
+    success: number
+}
+

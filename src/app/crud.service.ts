@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserProfile } from './interface/student.interface';
-import { AnsReportRes, ClassRes, DayRes, GradeRes, QuestionData, SectionsRes, SubTopicRes, TopicsRes, Week, WeekInsertRes, WeekRes } from './interface/Question.interface';
+import { AnsReportRes, AnswerWithQuestionRes, ClassRes, DayRes, GradeRes, QuestionData, SectionsRes, SubTopicRes, TopicsRes, Week, WeekInsertRes, WeekRes } from './interface/Question.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -261,17 +261,27 @@ export class CRUDService {
 
   ans_get_topics(filters: { std_id: string, day: string }): Observable<AnsReportRes> {
     let params = new HttpParams();
-
-    // Dynamically add each param only if it exists
     if (filters.std_id) {
       params = params.set('std_id', filters.std_id);
     }
     if (filters.day) {
       params = params.set('day', filters.day);
     }
-  
-
     return this._http.get<AnsReportRes>(`${this.base_url}get_ans_topics.php`, { params });
+  }
+
+  ans_priview(filters: { std_id: string, day: string, week: string }): Observable<AnswerWithQuestionRes> {
+    let params = new HttpParams();
+    if (filters.std_id) {
+      params = params.set('std_id', filters.std_id);
+    }
+    if (filters.day) {
+      params = params.set('day', filters.day);
+    }
+    if (filters.week) {
+      params = params.set('week', filters.week);
+    }
+    return this._http.get<AnswerWithQuestionRes>(`${this.base_url}get_ans_priview.php`, { params });
   }
 
 

@@ -9,5 +9,18 @@
 	transform: none !important;
 	box-shadow: none;
 	background: white;
-  }
-  
+}
+
+::ng-deep .full-width-no-padding-dialogans .mat-dialog-container {
+	width: 70vw !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: none !important;
+	box-shadow: none;
+	background: white;
+	overscroll-behavior-y: auto;
+}
