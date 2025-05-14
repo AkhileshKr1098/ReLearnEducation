@@ -174,6 +174,7 @@ export interface AnswerWithQuestion {
     answer_image: string;
     std_id: string;
     cur_date: string;
+    std_answer: string
 }
 
 export interface AnswerWithQuestionRes {

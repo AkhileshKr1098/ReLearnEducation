@@ -82,9 +82,11 @@ export class BlendWordsComponent implements OnInit {
       this.resetSelection();
       this.onCorrect();
       this.save(1);
+      this.filledWord = ''
     } else {
       this.onOops();
       this.save(0);
+      this.filledWord = ''
     }
   }
 
@@ -137,7 +139,8 @@ export class BlendWordsComponent implements OnInit {
       sections: this.CurrentQuestion.sections,
       topics: this.CurrentQuestion.topics,
       answer_status: status,
-      teacher_id_fk: 0
+      teacher_id_fk: 0,
+      std_answer: this.filledWord
     };
 
     console.log('Saving answer:', answerData);

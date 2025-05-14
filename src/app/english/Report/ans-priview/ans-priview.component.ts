@@ -31,6 +31,7 @@ export class AnsPriviewComponent implements OnInit {
       }
     )
   }
+
   ngOnInit() {
     this.get_report(this.data.std_id, this.data.day, this.data.week)
   }

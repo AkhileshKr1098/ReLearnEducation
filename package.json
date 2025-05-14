@@ -20,7 +20,6 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
-    "chart.js": "^4.4.7",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
     "ng-circle-progress": "^1.7.1",

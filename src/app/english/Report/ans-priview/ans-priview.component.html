@@ -5,26 +5,71 @@
     </div>
     <div id="questionarea">
         <div *ngFor="let item of  AnsQuestionList">
-            <div *ngIf="item.question_type == 'LetterTracing'" id="LetterTracing">
 
+            <div *ngIf="item.question_type == 'LetterTracing'" id="LetterTracing">
+                <img src="" alt="">
             </div>
 
             <div *ngIf="item.question_type == 'LetterMatch'" id="LetterMatch">
-
+                <img src="" alt="">
             </div>
 
+            <!-- for BlendWords start  -->
             <div *ngIf="item.question_type == 'BlendWords'" id="BlendWords">
-            </div>
-
-
-            <div *ngIf="item.question_type == 'ListenWords'" id="ListenWords">
                 <div id="questionHeader">
-                    <h1> {{item.Question}} </h1>
+                    <h1>🎨 {{item.Question}} 🖍️</h1>
                 </div>
                 <div id="questionarea">
                     <div class="imgarea">
-                        <img [src]="base_url + item.question_Img" alt="Question Image" width="200px"
-                            height="200px" />
+                        <img [src]="base_url + item.question_Img" alt="Question Image" width="200px" />
+                    </div>
+
+                    <div class="question-content">
+                        <div class="option-buttons">
+                            <button mat-button *ngIf="item.OptionA"
+                                [ngClass]="{'active-option': item.std_answer === item.OptionA}">
+                                {{ item.OptionA }}
+                            </button>
+                            <button mat-button *ngIf="item.OptionB"
+                                [ngClass]="{'active-option': item.std_answer === item.OptionB}">
+                                {{ item.OptionB }}
+                            </button>
+                            <button mat-button *ngIf="item.OptionC"
+                                [ngClass]="{'active-option': item.std_answer === item.OptionC}">
+                                {{ item.OptionC }}
+                            </button>
+                            <button mat-button *ngIf="item.OptionD"
+                                [ngClass]="{'active-option': item.std_answer === item.OptionD}">
+                                {{ item.OptionD }}
+                            </button>
+                        </div>
+
+                        <div class="incomplete-word">
+                            <span *ngIf="item.incomplete_word">
+                                {{ item.incomplete_word.split('__')[0] }}
+                                <span class="highlight">{{ item.std_answer || '__' }}</span>
+                                {{ item.incomplete_word.split('__')[1] }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="FooterAns">
+                    Status:
+                    <span [ngClass]="item.answer_status == 1 ? 'text-green' : 'text-red'">
+                        {{ item.answer_status == 1 ? 'Correct' : 'Wrong' }}
+                    </span>
+                    <div *ngIf="item.Answer"> &nbsp; - Right Answer: <strong>{{ item.Answer }}</strong></div>
+                </div>
+            </div>
+
+            <!-- for ListenWords word  -->
+            <div *ngIf="item.question_type == 'ListenWords'" id="ListenWords">
+                <div id="questionHeader">
+                    <h1>🎨 {{item.Question}} 🖍️</h1>
+                </div>
+                <div id="questionarea">
+                    <div class="imgarea">
+                        <img [src]="base_url + item.question_Img" alt="Question Image" width="200px" height="200px" />
                     </div>
 
                     <div class="question-content">
@@ -40,30 +85,51 @@
 
                     </div>
                 </div>
+                <div class="FooterAns">
+                    Status:
+                    <span [ngClass]="item.answer_status == 1 ? 'text-green' : 'text-red'">
+                        {{ item.answer_status == 1 ? 'Correct' : 'Wrong' }}
+                    </span>
+                    <div *ngIf="item.Answer"> &nbsp; - Right Answer: <strong>{{ item.Answer }}</strong></div>
+                </div>
 
             </div>
 
             <div *ngIf="item.question_type == 'MCQ'" id="MCQ">
-                {{item.Question}}
-                <div class="qarea">
+                <div id="questionHeader">
+                    <h1>🎨 {{item.Question}} 🖍️</h1>
+                </div>
+                <div id="questionarea">
                     <div class="question-content">
                         <div class="option-buttons">
                             <button mat-button *ngIf="item.OptionA"
-                                [ngClass]="{'active-option': item.answer_status == 1  || item.Answer == item.OptionA}">
+                                [ngClass]="{'active-option': item.std_answer == item.OptionA}">
                                 {{ item.OptionA }}
                             </button>
-                            <button mat-button *ngIf="item.OptionB">
+
+                            <button mat-button *ngIf="item.OptionB"
+                                [ngClass]="{'active-option': item.std_answer == item.OptionB}">
                                 {{ item.OptionB }}
                             </button>
-                            <button mat-button *ngIf="item.OptionC">
+                            <button mat-button *ngIf="item.OptionC"
+                                [ngClass]="{'active-option': item.std_answer == item.OptionC}">
                                 {{ item.OptionC }}
                             </button>
-                            <button mat-button *ngIf="item.OptionD">
+                            <button mat-button *ngIf="item.OptionD"
+                                [ngClass]="{'active-option': item.std_answer == item.OptionD}">
                                 {{ item.OptionD }}
                             </button>
                         </div>
 
                     </div>
+                </div>
+
+                <div class="FooterAns">
+                    Status:
+                    <span [ngClass]="item.answer_status == 1 ? 'text-green' : 'text-red'">
+                        {{ item.answer_status == 1 ? 'Correct' : 'Wrong' }}
+                    </span>
+                    <div *ngIf="item.Answer"> &nbsp; - Right Answer: <strong>{{ item.Answer }}</strong></div>
                 </div>
             </div>
 

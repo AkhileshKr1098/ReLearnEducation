@@ -149,7 +149,9 @@ export class ReportPageComponent implements OnInit {
       std_id: this.userData.ID
     }
 
-    this._dialog.open(AnsPriviewComponent, {
+    document.body.classList.add('dialog-blur-bg');
+
+    const dialogRef = this._dialog.open(AnsPriviewComponent, {
       data: data,
       width: '70vw',
       maxWidth: '70vw',
@@ -157,19 +159,23 @@ export class ReportPageComponent implements OnInit {
       maxHeight: '100vh',
       panelClass: 'full-width-no-padding-dialogans',
       autoFocus: false
-    }
+    });
 
-    )
+    dialogRef.afterClosed().subscribe(() => {
+      document.body.classList.remove('dialog-blur-bg');
+    });
 
   }
 
 
   OneOpenDilog(day: string) {
+    document.body.classList.add('dialog-blur-bg');
+
     const data = {
       day: day,
       std_id: this.userData.ID
     }
-    this._dialog.open(ReportPageDeatilsComponent, {
+    const dialogRef = this._dialog.open(ReportPageDeatilsComponent, {
       data: data,
       width: '100vw',
       maxWidth: '100vw',
@@ -178,7 +184,13 @@ export class ReportPageComponent implements OnInit {
       panelClass: 'full-width-no-padding-dialog',
       autoFocus: false
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      document.body.classList.remove('dialog-blur-bg');
+    });
   }
+
+
 
 
 }
