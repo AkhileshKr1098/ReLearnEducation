@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OppsBoxComponent } from '../../opps-box/opps-box.component';
 import { SharedService } from 'src/app/shared.service';
 import { LetterTracingService } from 'src/app/letter-tracing.service';
+import { UserData } from 'src/app/interface/student.interface';
 
 @Component({
   selector: 'app-letter-tracking',
@@ -32,12 +33,54 @@ export class LetterTrackingComponent implements AfterViewInit {
   imageData: string = '';
   i = 0;
 
+
+  userData: UserData = {
+    LoginId: '',
+    ID: '',
+    UserName: '',
+    DOB: '',
+    AbacusMaster: '',
+    AsignDate: '',
+    AsignDay: '',
+    CSDate: '',
+    ContactNo: '',
+    Course: '',
+    Currency: '',
+    CustomWeek: '',
+    GameTimeInterval: '',
+    GraceDays: '',
+    Group1: '',
+    HolidayFrom: null,
+    HolidayTo: null,
+    Level: '',
+    LittleChamp: '',
+    LittleLeap: '',
+    LittleMaster: '',
+    LittleProdigy: '',
+    LittleStart: '',
+    MaxQToDo: '',
+    Status: '',
+    Validity: null,
+    Week: '',
+    narratorSpeed: ''
+  };
+
   constructor(
     private _crud: CRUDService,
     private dialog: MatDialog,
     private _shared: SharedService,
     private tracingService: LetterTracingService
-  ) { }
+  ) {
+    const updatedUserDataString = sessionStorage.getItem('rluser');
+    if (updatedUserDataString) {
+      try {
+        this.userData = JSON.parse(updatedUserDataString) as UserData;
+        console.log('User data loaded:', this.userData);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
+    }
+  }
 
   ngOnInit() {
     this.populateCharacters();
@@ -61,16 +104,6 @@ export class LetterTrackingComponent implements AfterViewInit {
     this.isSaveVisible = false;
   }
 
-  // drawCharacter() {
-  //   const canvas = this.canvasRef.nativeElement as HTMLCanvasElement;
-  //   this.ctx = canvas.getContext('2d')!;
-  //   this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //   this.ctx.font = "200px Arial";
-  //   this.ctx.textAlign = "center";
-  //   this.ctx.textBaseline = "middle";
-  //   this.ctx.fillStyle = "black";
-  //   this.ctx.fillText(this.currentCharacter.getValue(), canvas.width / 2, canvas.height / 2);
-  // }
 
   drawCharacter() {
     const canvas = this.canvasRef.nativeElement as HTMLCanvasElement;
@@ -138,14 +171,14 @@ export class LetterTrackingComponent implements AfterViewInit {
   }
 
   saveCanvas() {
-    this.startPainting()
     const canvas = this.canvasRef.nativeElement as HTMLCanvasElement;
-    this.imageData = canvas.toDataURL("image/png");
-    this.uploadToServer(this.imageData);
-    this.onCorrect();
-
-    this._shared.playAudio('../../../../assets/audio/answersavetime.wav');
-
+    // Wait a moment to ensure drawing is done (optional)
+    setTimeout(() => {
+      this.imageData = canvas.toDataURL("image/png");
+      this.uploadToServer(this.imageData);
+      this.onCorrect();
+      this._shared.playAudio('../../../../assets/audio/answersavetime.wav');
+    }, 100);
   }
 
   uploadToServer(imageBase64: string) {
@@ -156,8 +189,13 @@ export class LetterTrackingComponent implements AfterViewInit {
     const file = new File([imageBlob], 'uploaded_image.png', { type: 'image/png' });
 
     const formData = new FormData();
-    formData.append('std_id', '123');
-    formData.append('question_id', '456');
+    formData.append('std_id', this.userData.ID);
+    formData.append('question_id', `${this.CurrentQyt.id}`);
+    formData.append('class', `${this.CurrentQyt.class}`);
+    formData.append('week', `${this.CurrentQyt.week}`);
+    formData.append('day', `${this.CurrentQyt.day}`);
+    formData.append('sections', `${this.CurrentQyt.sections}`);
+    formData.append('topics', `${this.CurrentQyt.topics}`);
     formData.append('answer_status', '1');
     formData.append('answer_image', file);
 

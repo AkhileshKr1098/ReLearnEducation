@@ -223,15 +223,17 @@ export class CRUDService {
 
   // by answer
   Add_answers_api(data: any): Observable<any> {
-    return this._http.post<any>(`${this.base_url}answers_api.php`, data)
+    return this._http.post<any>(`${this.base_url}ans_save_letter_tracking.php
+`, data)
   }
 
   Update_answers_api(data: any): Observable<any> {
-    return this._http.post<any>(`${this.base_url}answers_api.php`, data)
+    return this._http.post<any>(`${this.base_url}ans_save_letter_tracking.php
+`, data)
   }
 
   Get_answers_api(data: any): Observable<any> {
-    return this._http.post<any>(`${this.base_url}answers_api.php`, data)
+    return this._http.post<any>(`${this.base_url}ans_save_letter_tracking.php`, data)
   }
 
   // by answer

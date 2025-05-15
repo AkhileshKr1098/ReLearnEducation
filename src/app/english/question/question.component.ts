@@ -40,33 +40,8 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     unit: '',
     week: ''
   }
-  // CurrentQuestion = {
-  //   "id": 9,
-  //   "Question": "Please completed the word ?",
-  //   "Answer": "E",
-  //   "OptionA": "A",
-  //   "OptionB": "S",
-  //   "OptionC": "E",
-  //   "OptionD": "N",
-  //   "incomplete_word": "P__N",
-  //   "question_type": "BlendWords",
-  //   "question_Img": "uploads/2018-MAY-Six-Sites-for-Rhyme-Time-683x1024.png",
-  //   "listen_rec": '',
-  //   "listen_word": null,
-  //   "class": "LKG",
-  //   "unit": "1",
-  //   "day": "1",
-  //   "week": "3",
-  //   "sections": "Grammar",
-  //   "topics": "Noun",
-  //   "sub_topics": "Abstract nouns"
-  // }
 
   base_url: string = ''
-
-
-
-  // for report 
   topicsRightPro: number = 0
   topicsWorngPro: number = 0
 
@@ -86,11 +61,12 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     this._crud.getQuestion().subscribe(
       (res: QuestionData) => {
         if (Array.isArray(res)) {
+          this.AllQuestion = res.reverse()
           // this.AllQuestion = res.reverse()
-          this.AllQuestion = res.reverse().slice(1, 7)
           // this.AllQuestion = res.slice(1, 7) // working mode
           console.log(this.AllQuestion)
-          this.NextQuestion()
+          this.CurrentQuestion = this.AllQuestion[this.i];
+          this.QuestionType = this.CurrentQuestion.question_type
         }
       }
     )
@@ -115,7 +91,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   i = 0
 
 
-  
+
 
 
 

@@ -5,6 +5,8 @@ import { CRUDService } from 'src/app/crud.service';
 import { QuestionData } from 'src/app/interface/Question.interface';
 import { UserData } from 'src/app/interface/student.interface';
 import { SharedService } from 'src/app/shared.service';
+import html2canvas from 'html2canvas';
+
 
 interface Point {
   x: number;
@@ -244,13 +246,6 @@ export class LetterMatchComponent implements AfterViewInit {
       this.resetWords()
       this.clearMatches()
       console.log(this.totalQuestionMark);
-      if (this.totalQuestionMark == 100) {
-        console.log(' save call ')
-        this.save(1)
-      } else {
-        console.log(' save call ')
-        this.save(0)
-      }
     }
 
     if (type === 'save') {
@@ -321,6 +316,18 @@ export class LetterMatchComponent implements AfterViewInit {
       }
 
       console.log('action  value', this.outputMessage.getValue())
+
+      setTimeout(() => {
+        if (this.totalQuestionMark == 100) {
+          console.log(' save call ')
+          this.saveDivScreenshot(1)
+
+        } else {
+          console.log(' save call ')
+          this.saveDivScreenshot(0)
+        }
+      }, 300)
+
     }
   }
 
@@ -372,4 +379,60 @@ export class LetterMatchComponent implements AfterViewInit {
       }
     );
   }
+
+
+
+  //  saveCanvas() {
+  //   const canvas = this.canvasRef.nativeElement as HTMLCanvasElement;
+  //   // Wait a moment to ensure drawing is done (optional)
+  //   setTimeout(() => {
+  //     this.imageData = canvas.toDataURL("image/png");
+  //     this.uploadToServer(this.imageData);
+  //     this.onCorrect();
+  //     this._shared.playAudio('../../../../assets/audio/answersavetime.wav');
+  //   }, 100);
+  // }
+
+
+
+  saveDivScreenshot(status: any) {
+    const divElement = document.querySelector('.word-match-wrapper') as HTMLElement;
+    console.log(divElement);
+
+    if (!divElement) return;
+    setTimeout(() => {
+      html2canvas(divElement).then(canvas => {
+        const imageData = canvas.toDataURL('image/png');
+        console.log(imageData);
+
+        this.uploadToServer(imageData, status);
+
+      });
+    }, 100);
+  }
+
+  uploadToServer(imageBase64: string, status: any) {
+    const byteCharacters = atob(imageBase64.split(',')[1]);
+    const byteNumbers = Array.from(byteCharacters).map(c => c.charCodeAt(0));
+    const byteArray = new Uint8Array(byteNumbers);
+    const imageBlob = new Blob([byteArray], { type: 'image/png' });
+    const file = new File([imageBlob], 'uploaded_image.png', { type: 'image/png' });
+
+    const formData = new FormData();
+    formData.append('std_id', this.userData.ID);
+    formData.append('question_id', `${this.CurrentQyt.id}`);
+    formData.append('class', `${this.CurrentQyt.class}`);
+    formData.append('week', `${this.CurrentQyt.week}`);
+    formData.append('day', `${this.CurrentQyt.day}`);
+    formData.append('sections', `${this.CurrentQyt.sections}`);
+    formData.append('topics', `${this.CurrentQyt.topics}`);
+    formData.append('answer_status', status);
+    formData.append('answer_image', file);
+
+    this._crud.Add_answers_api(formData).subscribe(
+      (res) => console.log(res),
+      (error) => console.error('Error uploading the image:', error)
+    );
+  }
+
 }
