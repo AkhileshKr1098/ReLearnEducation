@@ -73,7 +73,8 @@ import { AddSectionsComponent } from './Questions/add-sections/add-sections.comp
     MatInputModule,
     MatIconModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    
  ]
 })
 export class AdminModule { }

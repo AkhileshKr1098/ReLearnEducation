@@ -5,6 +5,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CRUDService } from 'src/app/crud.service';
 import { Class, ClassRes, Day, Sections, SubTopic, Topics, TopicsRes, Week } from 'src/app/interface/Question.interface';
 
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+
 @Component({
   selector: 'app-add-question',
   templateUrl: './add-question.component.html',
@@ -27,12 +30,18 @@ export class AddQuestionComponent {
   audioURL: string | null = null;
   audio: HTMLAudioElement | null = null;
   listen_rec: any
+  selectedTab: 'local' | 'youtube' = 'local';
+  localVideoUrl: string | null = null;
+  youtubeUrl: string = '';
+  validYoutubeUrl: SafeResourceUrl | null = null;
+
   constructor(
     private _fb: FormBuilder,
     private _crud: CRUDService,
     private matref: MatDialogRef<AddQuestionComponent>,
     private cdr: ChangeDetectorRef,
-    @Inject(MAT_DIALOG_DATA) public edit_data: any
+    @Inject(MAT_DIALOG_DATA) public edit_data: any,
+    private sanitizer: DomSanitizer
   ) {
     this.QuestionForm = this._fb.group({
       class: ['', Validators.required],
@@ -541,4 +550,45 @@ export class AddQuestionComponent {
     this.QuestionForm.get('LetterMatch')?.reset();
 
   }
+
+
+
+  onTabChange(tab: 'local' | 'youtube') {
+    this.selectedTab = tab;
+    this.localVideoUrl = null;
+    this.validYoutubeUrl = null;
+    this.youtubeUrl = '';
+  }
+
+  onLocalVideoSelected(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      this.localVideoUrl = URL.createObjectURL(file);
+    }
+  }
+
+
+
+  onYoutubeUrlChanged() {
+    const trimmedUrl = this.youtubeUrl.trim();
+    if (trimmedUrl.startsWith('https://www.youtube.com/embed/')) {
+      this.validYoutubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(trimmedUrl);
+    } else {
+      this.validYoutubeUrl = null;
+    }
+  }
+
+  // onYoutubeUrlChanged() {
+  //   const trimmedUrl = this.youtubeUrl.trim();
+  //   console.log(trimmedUrl);
+
+  //   if (trimmedUrl.startsWith('https://www.youtube.com/embed/')) {
+  //     console.log(trimmedUrl);
+
+  //     this.validYoutubeUrl = trimmedUrl;
+  //   } else {
+  //     this.validYoutubeUrl = null;
+  //   }
+  // }
 }

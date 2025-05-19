@@ -53,3 +53,47 @@
     border-radius: 5px;
     font-size: 16px;
 }
+
+#header {
+  width: 100%;
+  height: 50px;
+  background-color: #e0e0e0;
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+
+  .tab-button {
+    flex: 1;
+    height: 100%;
+    background-color: whitesmoke;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+    transition: background-color 0.3s, color 0.3s;
+
+    &.active {
+      background-color: #1976d2;
+      color: white;
+    }
+  }
+}
+
+.video-area {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+
+  input[type='file'],
+  input[type='text'] {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+}
