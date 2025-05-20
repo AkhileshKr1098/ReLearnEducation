@@ -22,6 +22,10 @@
             <app-mcq [CurrentQuestion]="CurrentQuestion"></app-mcq>
         </div>
 
+        <div *ngIf="QuestionType == 'VideosType'" id="VideosType">
+            <app-video-type [CurrentQuestion]="CurrentQuestion"></app-video-type>
+        </div>
+
     </div>
 
 

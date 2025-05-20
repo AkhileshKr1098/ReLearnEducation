@@ -1,0 +1,37 @@
+<div id="wrapper">
+    <div class="topicsarea">
+        <button type="button">Leve 1/Week 2/day 5</button>
+        <span>{{CurrentQuestion.topics}}</span>
+        <span></span>
+    </div>
+    <div class="qArea">
+        <div class="letter-selector">
+            <span>🎨 {{ CurrentQuestion.Question}} 🖍️</span>
+        </div>
+
+        <div class="letter-selector2">
+            <span> {{ CurrentQuestion.instruction}}</span>
+        </div>
+    </div>
+    <div class="qarea">
+
+        <div class="question-content">
+            <video *ngIf="CurrentQuestion.listen_rec" [src]="base_url+CurrentQuestion.listen_rec" controls
+                class="video-player">
+                Your browser does not support the video tag.
+            </video>
+
+            <iframe *ngIf="safeUrl" [src]="safeUrl" frameborder="0"
+                class="iframe-player">
+            </iframe>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="button-container">
+        <button class="save-btn" (click)="CheckCorrect()">✅ Save & Next</button>
+    </div>
+</div>

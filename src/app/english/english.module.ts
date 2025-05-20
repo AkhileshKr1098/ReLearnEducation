@@ -46,6 +46,7 @@ import { ReportPageComponent } from './Report/report-page/report-page.component'
 import { ReportPageDeatilsComponent } from './Report/report-page-deatils/report-page-deatils.component';
 import { MatTableModule } from '@angular/material/table';
 import { AnsPriviewComponent } from './Report/ans-priview/ans-priview.component';
+import { VideoTypeComponent } from './QuestionType/video-type/video-type.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { AnsPriviewComponent } from './Report/ans-priview/ans-priview.component'
     OppsBoxComponent,
     ReportPageComponent,
     ReportPageDeatilsComponent,
-    AnsPriviewComponent],
+    AnsPriviewComponent,
+    VideoTypeComponent],
   imports: [
     CommonModule,
     EnglishRoutingModule,

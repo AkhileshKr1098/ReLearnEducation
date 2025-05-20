@@ -1,8 +1,5 @@
-// src/app/services/letter-tracing.service.ts
-
 import { Injectable } from '@angular/core';
 import { jsPDF } from 'jspdf';
-// import '../assets/font/KGPrimaryDots-normal.js'; 
 
 @Injectable({
   providedIn: 'root',
@@ -21,12 +18,12 @@ export class LetterTracingService {
     const startY = 50;
 
     const logo = new Image();
-    logo.src = '../assets/icon/logo_app.png';
+    logo.src = 'https://www.relearntoday.com/assets/images/logo_app.png';
 
-    // Wait for logo to load
-    await new Promise(resolve => {
-      logo.onload = () => resolve(true);
-      logo.onerror = () => resolve(true);
+    // Wait for the logo to load
+    await new Promise<void>((resolve) => {
+      logo.onload = () => resolve();
+      logo.onerror = () => resolve();
     });
 
     // Header
@@ -38,14 +35,13 @@ export class LetterTracingService {
     doc.setTextColor(255, 102, 0);
     doc.setFont('helvetica', 'bold');
     doc.text('Relearn Education', pageWidth / 2, 20, { align: 'center' });
+
     doc.setFontSize(10);
     doc.setTextColor(0);
     doc.setFont('helvetica', 'normal');
     doc.text(formattedDate, pageWidth - margin, 15, { align: 'right' });
 
-    // Set custom dotted font
-    doc.setFont('KGPrimaryDots', 'normal');
-
+    // Draw letters
     letters.forEach((letter, index) => {
       const row = Math.floor(index / lettersPerRow);
       const col = index % lettersPerRow;
@@ -54,7 +50,7 @@ export class LetterTracingService {
       const y = startY + row * spacing;
 
       doc.setFontSize(letterSize);
-      doc.text(letter.toUpperCase(), x + 20, y);
+      doc.text(letter.toUpperCase(), x + 10, y);
     });
 
     doc.save('letter-tracing.pdf');

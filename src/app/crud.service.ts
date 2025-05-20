@@ -220,6 +220,9 @@ export class CRUDService {
   addQuestion_listen(data: any): Observable<any> {
     return this._http.post<any>(`${this.base_url}question_listen.php`, data)
   }
+  video_type_question(data: any): Observable<any> {
+    return this._http.post<any>(`${this.base_url}video_type_question.php`, data)
+  }
 
   // by answer
   Add_answers_api(data: any): Observable<any> {

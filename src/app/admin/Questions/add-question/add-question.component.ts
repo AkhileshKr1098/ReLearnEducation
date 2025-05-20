@@ -318,6 +318,35 @@ export class AddQuestionComponent {
       )
     }
 
+
+    if (this.questionType == 'VideosType') {
+      const fromdata = new FormData()
+      fromdata.append('class', this.QuestionForm.get('class')?.value)
+      fromdata.append('week', this.QuestionForm.get('week')?.value)
+      fromdata.append('day', this.QuestionForm.get('day')?.value)
+      fromdata.append('sections', this.QuestionForm.get('sections')?.value)
+      fromdata.append('topics', this.QuestionForm.get('topics')?.value)
+      fromdata.append('sub_topics', this.QuestionForm.get('sub_topics')?.value)
+      fromdata.append('unit', this.QuestionForm.get('unit')?.value)
+      fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
+      fromdata.append('Question', this.QuestionForm.get('Question')?.value)
+      fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
+      fromdata.append('Answer', this.QuestionForm.get('Answer')?.value)
+      fromdata.append('listen_word', this.youtubeUrl)
+      fromdata.append('listen_rec', this.listen_rec)
+      fromdata.append('question_Img', '')
+
+      this._crud.video_type_question(fromdata).subscribe(
+        (res: any) => {
+          console.log(res)
+          alert(res.message)
+          this.resetForm()
+
+        }
+      )
+    }
+
+
   }
 
   updateForm() {
@@ -558,12 +587,14 @@ export class AddQuestionComponent {
     this.localVideoUrl = null;
     this.validYoutubeUrl = null;
     this.youtubeUrl = '';
+    this.listen_rec = ''
   }
 
   onLocalVideoSelected(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files[0]) {
       const file = fileInput.files[0];
+      this.listen_rec = fileInput.files[0];
       this.localVideoUrl = URL.createObjectURL(file);
     }
   }

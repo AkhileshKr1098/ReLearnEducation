@@ -45,7 +45,7 @@ export class SharedService {
 
   }
 
-  base_url = new BehaviorSubject<string>('')
+  base_url = new BehaviorSubject<string>('https://ud.mausamstudio.com/relearn_api/')
   base_url_audio = new BehaviorSubject<string>('')
   base_url_icon = new BehaviorSubject<string>('')
   base_url_answer = new BehaviorSubject<string>('')
