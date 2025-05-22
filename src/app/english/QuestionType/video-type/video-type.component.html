@@ -21,10 +21,8 @@
                 Your browser does not support the video tag.
             </video>
 
-            <iframe *ngIf="safeUrl" [src]="safeUrl" frameborder="0"
-                class="iframe-player">
+            <iframe *ngIf="safeUrl" [src]="safeUrl" frameborder="0" class="iframe-player">
             </iframe>
-
 
         </div>
 
@@ -32,6 +30,6 @@
     </div>
 
     <div class="button-container">
-        <button class="save-btn" (click)="CheckCorrect()">✅ Save & Next</button>
+        <button class="save-btn" (click)="CheckCorrect()">✅ Next</button>
     </div>
 </div>

@@ -88,7 +88,7 @@ export class VideoTypeComponent {
     this.CurrentQuestion.listen_rec = ''
     this.CurrentQuestion.listen_word = ''
     this.safeUrl = ''
-          this.shared.CurrentQuestionStatus.next(true);
+    this.shared.CurrentQuestionStatus.next(true);
 
   }
 
