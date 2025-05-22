@@ -92,9 +92,8 @@ export class BlendWordsComponent implements OnInit {
 
   onCorrect() {
     const dialogClosed = this.dialog.open(CorrectBoxComponent, {
-      disableClose: true,
-      width: "40vw",
-      height: "90vh"
+      width: "35vw",
+      height: "80vh"
     });
 
     dialogClosed.afterClosed().subscribe((res) => {
@@ -107,9 +106,8 @@ export class BlendWordsComponent implements OnInit {
 
   onOops() {
     const oopsDialog = this.dialog.open(OppsBoxComponent, {
-      disableClose: true,
-      width: "40vw",
-      height: "90vh"
+     width: "35vw",
+      height: "80vh"
     });
 
     oopsDialog.afterClosed().subscribe((res) => {

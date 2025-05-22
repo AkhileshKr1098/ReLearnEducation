@@ -90,9 +90,8 @@ export class MCQComponent {
     console.log(this.filledWord);
 
     const dilogclosed = this.dialog.open(CorrectBoxComponent, {
-      disableClose: true,
-      width: "40vw",
-      height: "90vh"
+      width: "35vw",
+      height: "80vh"
     });
 
     dilogclosed.afterClosed().subscribe(

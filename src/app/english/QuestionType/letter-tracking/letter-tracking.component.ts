@@ -220,9 +220,8 @@ export class LetterTrackingComponent implements AfterViewInit {
 
   onCorrect() {
     const dilogclosed = this.dialog.open(CorrectBoxComponent, {
-      disableClose: true,
-      width: "40vw",
-      height: "90vh"
+      width: "35vw",
+      height: "80vh"
     });
 
     dilogclosed.afterClosed().subscribe((res) => {
@@ -235,8 +234,8 @@ export class LetterTrackingComponent implements AfterViewInit {
   onOops() {
     const oopsDilog = this.dialog.open(OppsBoxComponent, {
       disableClose: true,
-      width: "40vw",
-      height: "90vh"
+      width: "35vw",
+      height: "80vh"
     });
 
     oopsDilog.afterClosed().subscribe((res) => {

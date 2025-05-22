@@ -125,9 +125,8 @@ export class ListenWordsComponent {
 
   onOops() {
     const oopsDilog = this.dialog.open(OppsBoxComponent, {
-      disableClose: true,
-      width: "40vw",
-      height: "90vh"
+       width: "35vw",
+      height: "80vh"
     });
     oopsDilog.afterClosed().subscribe(
       (res) => {

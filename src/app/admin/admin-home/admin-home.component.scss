@@ -2,15 +2,18 @@
   padding: 0px;
   cursor: default;
 }
+
 .main {
   overflow: auto;
 }
+
 // Header with menu icons code
 mat-toolbar {
   justify-content: space-between;
   background-color: #1d2028;
   border-bottom: 1px solid rgb(134, 134, 134);
 }
+
 .dashboard_top_head mat-icon {
   width: 30px;
   height: 30px;
@@ -19,17 +22,20 @@ mat-toolbar {
   color: rgb(245, 245, 245);
   float: left;
 }
+
 //user login details code start here
 .top_head_details_area {
   width: 420px;
   height: 100%;
 }
+
 .icons_area {
   width: 230px;
   height: 100%;
   float: left;
   padding: 10px;
 }
+
 .icons_area .icons {
   width: 30px;
   height: 30px;
@@ -39,6 +45,7 @@ mat-toolbar {
   justify-content: center;
   align-items: center;
 }
+
 .icons_area .icons mat-icon {
   font-size: 22px;
   font-weight: 0;
@@ -50,6 +57,7 @@ mat-toolbar {
   float: left;
   cursor: pointer;
 }
+
 .user_icon {
   width: 40px;
   height: 40px;
@@ -58,11 +66,13 @@ mat-toolbar {
   margin-top: 12px;
   overflow: hidden;
 }
+
 .user_icon img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .user_name {
   width: calc(100% - 50px);
   height: 50%;
@@ -72,18 +82,21 @@ mat-toolbar {
   font-family: "Sansita", serif;
   color: #eaeaea;
 }
+
 .user_title {
   width: calc(100% - 50px);
   height: calc(100% - 50%);
   float: left;
   padding-left: 10px;
 }
+
 .user_title h3 {
   font-family: "Sansita", serif;
   font-size: 15px;
   margin-top: -5px;
   color: #939393;
 }
+
 //user login details code end here
 
 //Sidebar SCSS start here
@@ -92,9 +105,11 @@ mat-sidenav {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.877);
 }
+
 mat-sidenav-content {
   height: 100vh;
 }
+
 .sidebar_top_logo_area {
   width: 100%;
   height: 64px;
@@ -108,15 +123,21 @@ mat-sidenav-content {
   object-fit: cover;
   margin-left: 5%;
 }
+
 .sidebar_menu_area {
   width: 100%;
-  height: calc(100% - 64px);
-  overflow: auto;
-  padding: 10px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: 10px;
+
 }
+
 ::-webkit-scrollbar {
   width: 4px;
 }
+
 .sidebar_menu_area .btn {
   width: 100%;
   text-align: left;
@@ -127,14 +148,17 @@ mat-sidenav-content {
   font-family: "Nunito Sans", serif;
   color: #555657;
 }
+
 .sidebar_menu_area .btn:hover {
   background-color: rgba(245, 83, 33, 0.132);
   color: rgb(229, 69, 20);
 }
+
 .sidebar_menu_area .btn.active {
   background-color: rgba(245, 83, 33, 0.132);
   color: rgb(229, 69, 20);
 }
+
 .sidebar_menu_area .options {
   width: 100%;
   text-align: left;
@@ -147,17 +171,21 @@ mat-sidenav-content {
   border-bottom: 1px solid silver;
   transition: 0.4s ease-in-out;
 }
+
 .sidebar_menu_area .options:hover:not(.active) {
   background-color: rgba(245, 83, 33, 0.132);
   color: rgb(229, 69, 20);
   padding-left: 30px;
 }
-.active{
+
+.active {
   color: rgb(229, 69, 20);
 }
+
 .sidebar_menu_area .options mat-icon {
   margin-bottom: -8px;
 }
+
 .sidebar_menu_area .btn mat-icon {
   margin-top: 0px;
   margin-right: 6px;
@@ -171,17 +199,21 @@ mat-sidenav-content {
     width: 215px;
     // background-color: green;
   }
+
   .icons_area {
     width: 180px;
   }
+
   .icons_area .icons {
     width: 30px;
     height: 30px;
     margin: 10px 4px;
   }
+
   .icons_area .icons mat-icon {
     font-size: 18px;
   }
+
   .user_details_with_login_icon .user_name,
   .user_title {
     display: none;

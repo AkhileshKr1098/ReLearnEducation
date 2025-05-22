@@ -74,9 +74,10 @@ export class WeekComponent {
         this._crud.Week_delete(item.id).subscribe(
           (res: any) => {
             console.log(res)
+            this.getData()
+
             if (res.success == 1) {
               alert(res.message)
-              this.getData()
             } else {
               alert(res.message)
             }
