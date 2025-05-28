@@ -10,7 +10,6 @@ export class CorrectBoxComponent {
 
   constructor(public dialogRef: MatDialogRef<CorrectBoxComponent>) { }
   
-
   closeDialog() {
     this.dialogRef.close('next');
   }

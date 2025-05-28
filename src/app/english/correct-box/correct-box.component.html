@@ -1,5 +1,13 @@
 <div id="wrapper">
-    <br> <br>
-    <img src="../../../assets/icon/correct answer.gif" alt="Correct Answer" style="width: 400px; height: auto;">
-    <button id="close-btn" (click)="closeDialog()"><i>✖</i> Close</button>
+    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+        <span></span>
+        <button mat-icon-button mat-dialog-close color="primary">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <img src="../../../assets/icon/correct answer.gif" alt="Oops" style="width: 400px; height: 400px;">
+    <div class="button-row">
+        <button id="close-btn" (click)="closeDialog()"><i>✖</i> Close</button>
+    </div>
 </div>

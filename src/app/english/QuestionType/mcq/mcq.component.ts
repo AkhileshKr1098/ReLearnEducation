@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { QuestionData } from 'src/app/interface/Question.interface';
 import { OppsBoxComponent } from '../../opps-box/opps-box.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,17 +6,19 @@ import { CRUDService } from 'src/app/crud.service';
 import { SharedService } from 'src/app/shared.service';
 import { CorrectBoxComponent } from '../../correct-box/correct-box.component';
 import { UserData } from 'src/app/interface/student.interface';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-mcq',
   templateUrl: './mcq.component.html',
   styleUrls: ['./mcq.component.scss']
 })
-export class MCQComponent {
+export class MCQComponent implements OnInit {
   @Input() CurrentQuestion!: QuestionData;
   base_url: string = '';
   filledWord: string = '';
   isSaveVisible = false;
+  safeUrl!: SafeResourceUrl;
 
   userData: UserData = {
     LoginId: '',
@@ -52,9 +54,10 @@ export class MCQComponent {
   constructor(
     private dialog: MatDialog,
     private _crud: CRUDService,
-    private shared: SharedService
-  ) {
+    private shared: SharedService,
+    private sanitizer: DomSanitizer
 
+  ) {
     this._crud.img_base_url.subscribe(
       (res) => {
         this.base_url = res
@@ -71,7 +74,23 @@ export class MCQComponent {
       }
     }
   }
+  ngOnInit(): void {
 
+    setTimeout(() => {
+      if (this.CurrentQuestion?.listen_word) {
+        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.CurrentQuestion.video_url);
+        console.log(this.safeUrl);
+      }
+    }, 1000)
+  }
+
+
+
+
+  getVerify(url: any) {
+    console.log(url);
+    return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url)
+  }
   CheckCorrect() {
     this.isSaveVisible = false
     if (this.CurrentQuestion?.Answer == this.filledWord) {
@@ -88,10 +107,9 @@ export class MCQComponent {
 
   onCorrect() {
     console.log(this.filledWord);
-
     const dilogclosed = this.dialog.open(CorrectBoxComponent, {
-      width: "35vw",
-      height: "80vh"
+      width: "40vw",
+      height: "90vh"
     });
 
     dilogclosed.afterClosed().subscribe(

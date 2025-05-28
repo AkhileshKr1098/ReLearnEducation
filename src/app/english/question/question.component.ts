@@ -38,7 +38,8 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     sub_topics: '',
     topics: '',
     unit: '',
-    week: ''
+    week: '',
+    video_url: ''
   }
 
   base_url: string = ''
@@ -61,8 +62,8 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     this._crud.getQuestion().subscribe(
       (res: QuestionData) => {
         if (Array.isArray(res)) {
+          this.AllQuestion = res
           // this.AllQuestion = res.reverse()
-          this.AllQuestion = res.reverse()
           // this.AllQuestion = res.reverse().slice(1, 7) // working mode
           console.log(this.AllQuestion)
           this.CurrentQuestion = this.AllQuestion[this.i];

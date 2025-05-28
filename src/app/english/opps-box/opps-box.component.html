@@ -1,5 +1,11 @@
 <div id="wrapper">
-    <br> <br>
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <span></span>
+  <button mat-icon-button mat-dialog-close color="primary">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
     <img src="../../../assets/icon/oops.png" alt="Oops" style="width: 400px; height: auto;">
     <div class="button-row">
         <button id="try-again-btn" (click)="closeDialog('tryAgain')"><i>🔁</i> Try Again</button>

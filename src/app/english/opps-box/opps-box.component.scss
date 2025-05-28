@@ -10,7 +10,7 @@
 
 .button-row {
     position: relative;
-    top: 200px;
+    top: 150px;
     display: flex;
     gap: 20px;
     margin-top: 15px;
@@ -47,4 +47,8 @@ button {
 
 button i {
     margin-right: 8px;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
