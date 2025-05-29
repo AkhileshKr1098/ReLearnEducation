@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { QuestionData } from 'src/app/interface/Question.interface';
 import { OppsBoxComponent } from '../../opps-box/opps-box.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -78,7 +78,7 @@ export class MCQComponent implements OnInit {
 
     setTimeout(() => {
       if (this.CurrentQuestion?.listen_word) {
-        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.CurrentQuestion.video_url);
+        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.CurrentQuestion.video_url_local);
         console.log(this.safeUrl);
       }
     }, 1000)
@@ -190,4 +190,62 @@ export class MCQComponent implements OnInit {
       }
     );
   }
+
+
+
+    @ViewChild('videoElement') videoElementRef!: ElementRef;
+  
+    isPlaying = false;
+    progress = 0;
+    volume = 1;
+    duration = 0;
+    currentTime = 0;
+  
+    togglePlay() {
+      const video: HTMLVideoElement = this.videoElementRef.nativeElement;
+      if (video.paused) {
+        video.play();
+        this.isPlaying = true;
+      } else {
+        video.pause();
+        this.isPlaying = false;
+      }
+    }
+  
+    onTimeUpdate() {
+      const video = this.videoElementRef.nativeElement;
+      this.progress = (video.currentTime / video.duration) * 100;
+      this.currentTime = video.currentTime;
+    }
+  
+    onLoadedMetadata() {
+      const video = this.videoElementRef.nativeElement;
+      this.duration = video.duration;
+    }
+  
+    seekVideo(event: Event) {
+      const input = event.target as HTMLInputElement;
+      const video = this.videoElementRef.nativeElement;
+      video.currentTime = (+input.value / 100) * video.duration;
+    }
+  
+    changeVolume(event: Event) {
+      const input = event.target as HTMLInputElement;
+      const video = this.videoElementRef.nativeElement;
+      video.volume = +input.value;
+      this.volume = +input.value;
+    }
+  
+    toggleMute() {
+      const video = this.videoElementRef.nativeElement;
+      video.muted = !video.muted;
+    }
+  
+    toggleFullScreen(video: HTMLVideoElement) {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        video.requestFullscreen();
+      }
+    }
 }

@@ -39,7 +39,8 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     topics: '',
     unit: '',
     week: '',
-    video_url: ''
+    video_url_youtube: '',
+    video_url_local: ''
   }
 
   base_url: string = ''

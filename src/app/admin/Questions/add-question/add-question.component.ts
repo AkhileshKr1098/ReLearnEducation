@@ -84,6 +84,12 @@ export class AddQuestionComponent {
       if (this.edit_data.question_type === 'MCQ') {
         console.log(this.edit_data)
         this.QuestionForm.patchValue(this.edit_data);
+        if (this.edit_data.video_url_youtube) {
+          this.youtubeUrl = this.edit_data.video_url_youtube
+        }
+        if (this.edit_data.video_url_local) {
+          this.localVideoUrl = this.edit_data.video_url_local
+        }
 
       }
 
@@ -208,18 +214,55 @@ export class AddQuestionComponent {
       return
     }
 
-    if (this.questionType == 'MCQ') {
-      this._crud.addQuestion(this.QuestionForm.value).subscribe(
-        (res) => {
-          alert(res.message);
-          this.resetForm()
+  if (this.questionType === 'MCQ') {
+  const formValue = this.QuestionForm.value;
+  const formData = new FormData();
 
-          if (res.success == 1) {
-            // this.matref.close(1);
-          }
-        }
-      );
+  // Include ID only if it's present (used by backend to decide insert/update)
+  if (formValue.id) formData.append('id', formValue.id);
+
+  // Append all form fields
+  formData.append('question_type', formValue.question_type || '');
+  formData.append('Question', formValue.Question || '');
+  formData.append('instruction', formValue.instruction || '');
+  formData.append('OptionA', formValue.OptionA || '');
+  formData.append('OptionB', formValue.OptionB || '');
+  formData.append('OptionC', formValue.OptionC || '');
+  formData.append('OptionD', formValue.OptionD || '');
+  formData.append('Answer', formValue.Answer || '');
+  formData.append('class', formValue.class || '');
+  formData.append('week', formValue.week || '');
+  formData.append('day', formValue.day || '');
+  formData.append('sections', formValue.sections || '');
+  formData.append('topics', formValue.topics || '');
+  formData.append('sub_topics', formValue.sub_topics || '');
+  formData.append('unit', formValue.unit || '');
+  formData.append('incomplete_word', formValue.incomplete_word || '');
+  formData.append('listen_rec', formValue.listen_rec || '');
+  formData.append('listen_word', formValue.listen_word || '');
+  formData.append('video_url_youtube', this.youtubeUrl || '');
+
+  // Handle video file if present
+  if (this.VideoFile) {
+    formData.append('video_url_local', this.VideoFile);
+  }
+
+  this._crud.addQuestion(formData).subscribe(
+    (res: any) => {
+      alert(res.message);
+      this.resetForm();
+
+      if (res.success == 1) {
+        // Optional close dialog or reload
+        // this.matref.close(1);
+      }
+    },
+    (err) => {
+      console.error('Error submitting form:', err);
     }
+  );
+}
+
 
     if (this.questionType == 'LetterTracing') {
       this._crud.addQuestion(this.QuestionForm.value).subscribe(
@@ -352,271 +395,279 @@ export class AddQuestionComponent {
   }
 
   updateForm() {
+    if (this.questionType === 'MCQ') {
+      const formValue = this.QuestionForm.value;
 
-    if (this.questionType == 'MCQ') {
-      console.log(this.QuestionForm.value);
-      const data = {
-        "id": this.QuestionForm.get('id')?.value,
-        "question_type": this.QuestionForm.get('question_type')?.value,
-        "Question": this.QuestionForm.get('Question')?.value,
-        "instruction": this.QuestionForm.get('instruction')?.value,
-        "OptionA": this.QuestionForm.get('OptionA')?.value,
-        "OptionB": this.QuestionForm.get('OptionB')?.value,
-        "OptionC": this.QuestionForm.get('OptionC')?.value,
-        "OptionD": this.QuestionForm.get('OptionD')?.value,
-        "Answer": this.QuestionForm.get('Answer')?.value,
-        "class": this.QuestionForm.get('class')?.value,
-        "week": this.QuestionForm.get('week')?.value,
-        "day": this.QuestionForm.get('day')?.value,
-        "sections": this.QuestionForm.get('sections')?.value,
-        "topics": this.QuestionForm.get('topics')?.value,
-        "sub_topics": this.QuestionForm.get('sub_topics')?.value,
-        "unit": this.QuestionForm.get('unit')?.value,
-        "incomplete_word": this.QuestionForm.get('incomplete_word')?.value,
-        "listen_rec": this.QuestionForm.get('listen_rec')?.value,
-        "listen_word": this.QuestionForm.get('listen_word')?.value,
-        "video_url": '',
-       
-  };
+      const formData = new FormData();
 
-      data.video_url = this.VideoFile ? this.VideoFile : this.youtubeUrl;
+      // Append all fields to formData
+      if (formValue.id) formData.append('id', formValue.id);
 
-      console.log(data,'all data');
-      
-      this._crud.QuestionUpdate(data).subscribe(
-    (res) => {
-      alert(res.message);
-      this.resetForm()
-    }
-  );
-    }
+      formData.append('question_type', formValue.question_type || '');
+      formData.append('Question', formValue.Question || '');
+      formData.append('instruction', formValue.instruction || '');
+      formData.append('OptionA', formValue.OptionA || '');
+      formData.append('OptionB', formValue.OptionB || '');
+      formData.append('OptionC', formValue.OptionC || '');
+      formData.append('OptionD', formValue.OptionD || '');
+      formData.append('Answer', formValue.Answer || '');
+      formData.append('class', formValue.class || '');
+      formData.append('week', formValue.week || '');
+      formData.append('day', formValue.day || '');
+      formData.append('sections', formValue.sections || '');
+      formData.append('topics', formValue.topics || '');
+      formData.append('sub_topics', formValue.sub_topics || '');
+      formData.append('unit', formValue.unit || '');
+      formData.append('incomplete_word', formValue.incomplete_word || '');
+      formData.append('listen_rec', formValue.listen_rec || '');
+      formData.append('listen_word', formValue.listen_word || '');
+      formData.append('video_url_youtube', this.youtubeUrl || '');
 
-
-if (this.questionType == 'LetterTracing') {
-  const data = {
-    id: this.QuestionForm.get('id')?.value,
-    OptionA: this.QuestionForm.get('OptionA')?.value,
-    OptionB: '.',
-    OptionC: ',',
-    OptionD: ',',
-    Answer: ',',
-    Question: this.QuestionForm.get('Question')?.value,
-    instruction: this.QuestionForm.get('instruction')?.value,
-    question_type: this.QuestionForm.get('question_type')?.value,
-    class: this.QuestionForm.get('class')?.value,
-    week: this.QuestionForm.get('week')?.value,
-    day: this.QuestionForm.get('day')?.value,
-    sections: this.QuestionForm.get('sections')?.value,
-    topics: this.QuestionForm.get('topics')?.value,
-    sub_topics: this.QuestionForm.get('sub_topics')?.value,
-    unit: this.QuestionForm.get('unit')?.value,
-
-  }
-  this._crud.QuestionUpdate(data).subscribe(
-    (res) => {
-      alert(res.message);
-      this.resetForm()
-    }
-  );
-}
-
-if (this.questionType == 'LetterMatch') {
-
-  const formData = {
-    OptionA: this.options.value.map((row: any) => row.OptionA).join(', '),
-    OptionB: this.options.value.map((row: any) => row.OptionB).join(', '),
-    Question: this.QuestionForm.get('Question')?.value,
-    OptionC: '.',
-    OptionD: '.',
-    Answer: '.',
-    instruction: this.QuestionForm.get('instruction')?.value,
-    question_type: this.QuestionForm.get('question_type')?.value,
-    class: this.QuestionForm.get('class')?.value,
-    week: this.QuestionForm.get('week')?.value,
-    day: this.QuestionForm.get('day')?.value,
-    sections: this.QuestionForm.get('sections')?.value,
-    topics: this.QuestionForm.get('topics')?.value,
-    sub_topics: this.QuestionForm.get('sub_topics')?.value,
-    unit: this.QuestionForm.get('unit')?.value,
-    id: this.QuestionForm.get('id')?.value,
-
-  };
-
-  console.log(formData)
-
-  this._crud.QuestionUpdate(formData).subscribe(
-    (res) => {
-      console.log(res)
-      this.resetForm()
-    }
-  );
-}
-
-if (this.questionType == 'BlendWords') {
-  const fromdata = new FormData()
-
-  fromdata.append('id', this.QuestionForm.get('id')?.value)
-  fromdata.append('class', this.QuestionForm.get('class')?.value)
-  fromdata.append('week', this.QuestionForm.get('week')?.value)
-  fromdata.append('day', this.QuestionForm.get('day')?.value)
-  fromdata.append('sections', this.QuestionForm.get('sections')?.value)
-  fromdata.append('topics', this.QuestionForm.get('topics')?.value)
-  fromdata.append('sub_topics', this.QuestionForm.get('sub_topics')?.value)
-  fromdata.append('unit', this.QuestionForm.get('unit')?.value)
-  fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
-  fromdata.append('Question', this.QuestionForm.get('Question')?.value)
-  fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
-  fromdata.append('OptionA', this.QuestionForm.get('OptionA')?.value)
-  fromdata.append('OptionB', this.QuestionForm.get('OptionB')?.value)
-  fromdata.append('OptionC', this.QuestionForm.get('OptionC')?.value)
-  fromdata.append('OptionD', this.QuestionForm.get('OptionD')?.value)
-  fromdata.append('Answer', this.QuestionForm.get('Answer')?.value)
-  fromdata.append('incomplete_word', this.QuestionForm.get('incomplete_word')?.value)
-
-  if (this.questionFile) {
-    fromdata.append('question_Img', this.questionFile)
-  }
-
-
-  this._crud.QuestionUpdat_picktheblend(fromdata).subscribe(
-    (res: any) => {
-      console.log(res);
-      this.resetForm()
-      alert(res.message)
-
-      if (res.status == 'success') {
-        this.matref.close()
+      // Add video file if present
+      if (this.VideoFile) {
+        formData.append('video_url_local', this.VideoFile);
       }
+
+      console.log('FormData to be sent:', formData);
+
+      this._crud.addQuestion(formData).subscribe(
+        (res: any) => {
+          alert(res.message);
+          this.resetForm();
+        },
+        (err) => {
+          console.error('Error saving question:', err);
+        }
+      );
     }
-  )
-}
 
 
-if (this.questionType == 'ListenWords') {
-  const fromdata = new FormData()
-  fromdata.append('id', this.QuestionForm.get('id')?.value)
-  fromdata.append('class', this.QuestionForm.get('class')?.value)
-  fromdata.append('week', this.QuestionForm.get('week')?.value)
-  fromdata.append('day', this.QuestionForm.get('day')?.value)
-  fromdata.append('sections', this.QuestionForm.get('sections')?.value)
-  fromdata.append('topics', this.QuestionForm.get('topics')?.value)
-  fromdata.append('sub_topics', this.QuestionForm.get('sub_topics')?.value)
-  fromdata.append('unit', this.QuestionForm.get('unit')?.value)
-  fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
-  fromdata.append('Question', this.QuestionForm.get('Question')?.value)
-  fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
-  fromdata.append('Answer', this.QuestionForm.get('Answer')?.value)
-  fromdata.append('listen_word', this.QuestionForm.get('listen_word')?.value)
-  fromdata.append('listen_rec', this.listen_rec)
-  fromdata.append('question_Img', this.questionFile)
 
-  this._crud.addQuestion_listen(fromdata).subscribe(
-    (res: any) => {
-      console.log(res)
-      alert(res.message)
-      this.resetForm()
+    if (this.questionType == 'LetterTracing') {
+      const data = {
+        id: this.QuestionForm.get('id')?.value,
+        OptionA: this.QuestionForm.get('OptionA')?.value,
+        OptionB: '.',
+        OptionC: ',',
+        OptionD: ',',
+        Answer: ',',
+        Question: this.QuestionForm.get('Question')?.value,
+        instruction: this.QuestionForm.get('instruction')?.value,
+        question_type: this.QuestionForm.get('question_type')?.value,
+        class: this.QuestionForm.get('class')?.value,
+        week: this.QuestionForm.get('week')?.value,
+        day: this.QuestionForm.get('day')?.value,
+        sections: this.QuestionForm.get('sections')?.value,
+        topics: this.QuestionForm.get('topics')?.value,
+        sub_topics: this.QuestionForm.get('sub_topics')?.value,
+        unit: this.QuestionForm.get('unit')?.value,
+
+      }
+      this._crud.QuestionUpdate(data).subscribe(
+        (res) => {
+          alert(res.message);
+          this.resetForm()
+        }
+      );
     }
-  )
-}
+
+    if (this.questionType == 'LetterMatch') {
+
+      const formData = {
+        OptionA: this.options.value.map((row: any) => row.OptionA).join(', '),
+        OptionB: this.options.value.map((row: any) => row.OptionB).join(', '),
+        Question: this.QuestionForm.get('Question')?.value,
+        OptionC: '.',
+        OptionD: '.',
+        Answer: '.',
+        instruction: this.QuestionForm.get('instruction')?.value,
+        question_type: this.QuestionForm.get('question_type')?.value,
+        class: this.QuestionForm.get('class')?.value,
+        week: this.QuestionForm.get('week')?.value,
+        day: this.QuestionForm.get('day')?.value,
+        sections: this.QuestionForm.get('sections')?.value,
+        topics: this.QuestionForm.get('topics')?.value,
+        sub_topics: this.QuestionForm.get('sub_topics')?.value,
+        unit: this.QuestionForm.get('unit')?.value,
+        id: this.QuestionForm.get('id')?.value,
+
+      };
+
+      console.log(formData)
+
+      this._crud.QuestionUpdate(formData).subscribe(
+        (res) => {
+          console.log(res)
+          this.resetForm()
+        }
+      );
+    }
+
+    if (this.questionType == 'BlendWords') {
+      const fromdata = new FormData()
+
+      fromdata.append('id', this.QuestionForm.get('id')?.value)
+      fromdata.append('class', this.QuestionForm.get('class')?.value)
+      fromdata.append('week', this.QuestionForm.get('week')?.value)
+      fromdata.append('day', this.QuestionForm.get('day')?.value)
+      fromdata.append('sections', this.QuestionForm.get('sections')?.value)
+      fromdata.append('topics', this.QuestionForm.get('topics')?.value)
+      fromdata.append('sub_topics', this.QuestionForm.get('sub_topics')?.value)
+      fromdata.append('unit', this.QuestionForm.get('unit')?.value)
+      fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
+      fromdata.append('Question', this.QuestionForm.get('Question')?.value)
+      fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
+      fromdata.append('OptionA', this.QuestionForm.get('OptionA')?.value)
+      fromdata.append('OptionB', this.QuestionForm.get('OptionB')?.value)
+      fromdata.append('OptionC', this.QuestionForm.get('OptionC')?.value)
+      fromdata.append('OptionD', this.QuestionForm.get('OptionD')?.value)
+      fromdata.append('Answer', this.QuestionForm.get('Answer')?.value)
+      fromdata.append('incomplete_word', this.QuestionForm.get('incomplete_word')?.value)
+
+      if (this.questionFile) {
+        fromdata.append('question_Img', this.questionFile)
+      }
+
+
+      this._crud.QuestionUpdat_picktheblend(fromdata).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.resetForm()
+          alert(res.message)
+
+          if (res.status == 'success') {
+            this.matref.close()
+          }
+        }
+      )
+    }
+
+
+    if (this.questionType == 'ListenWords') {
+      const fromdata = new FormData()
+      fromdata.append('id', this.QuestionForm.get('id')?.value)
+      fromdata.append('class', this.QuestionForm.get('class')?.value)
+      fromdata.append('week', this.QuestionForm.get('week')?.value)
+      fromdata.append('day', this.QuestionForm.get('day')?.value)
+      fromdata.append('sections', this.QuestionForm.get('sections')?.value)
+      fromdata.append('topics', this.QuestionForm.get('topics')?.value)
+      fromdata.append('sub_topics', this.QuestionForm.get('sub_topics')?.value)
+      fromdata.append('unit', this.QuestionForm.get('unit')?.value)
+      fromdata.append('question_type', this.QuestionForm.get('question_type')?.value)
+      fromdata.append('Question', this.QuestionForm.get('Question')?.value)
+      fromdata.append('instruction', this.QuestionForm.get('instruction')?.value)
+      fromdata.append('Answer', this.QuestionForm.get('Answer')?.value)
+      fromdata.append('listen_word', this.QuestionForm.get('listen_word')?.value)
+      fromdata.append('listen_rec', this.listen_rec)
+      fromdata.append('question_Img', this.questionFile)
+
+      this._crud.addQuestion_listen(fromdata).subscribe(
+        (res: any) => {
+          console.log(res)
+          alert(res.message)
+          this.resetForm()
+        }
+      )
+    }
 
 
 
   }
 
   get options() {
-  return this.QuestionForm.get('LetterMatch') as FormArray;
-}
-
-createOptionRow(): FormGroup {
-  return this._fb.group({
-    OptionA: [''],
-    OptionB: [''],
-    Answer: ['']
-  });
-}
-
-addRow() {
-  if (this.options.length < 5) {
-    this.options.push(this.createOptionRow());
+    return this.QuestionForm.get('LetterMatch') as FormArray;
   }
-}
 
-onFileChange(event: any) {
-  this.questionFile = event.target.files[0];
-  if (this.questionFile) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.questionIMG = reader.result;
-    };
-    reader.readAsDataURL(this.questionFile);
+  createOptionRow(): FormGroup {
+    return this._fb.group({
+      OptionA: [''],
+      OptionB: [''],
+      Answer: ['']
+    });
   }
-}
 
-onAudioChange(event: any) {
-  this.listen_rec = event.target.files[0];
-  if (this.listen_rec) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.audioURL = reader.result as string;
-    };
-    reader.readAsDataURL(this.listen_rec);
-  }
-}
-
-playAudio() {
-  if (this.audioURL) {
-    if (this.audio) {
-      this.audio.pause();
+  addRow() {
+    if (this.options.length < 5) {
+      this.options.push(this.createOptionRow());
     }
-    this.audio = new Audio(this.audioURL);
-    this.audio.play();
   }
-}
 
-resetForm() {
-  this.QuestionForm.get('Question')?.reset();
-  this.QuestionForm.get('instruction')?.reset();
-  this.QuestionForm.get('OptionA')?.reset();
-  this.QuestionForm.get('OptionB')?.reset();
-  this.QuestionForm.get('OptionC')?.reset();
-  this.QuestionForm.get('OptionD')?.reset();
-  this.QuestionForm.get('Answer')?.reset();
-  this.QuestionForm.get('incomplete_word')?.reset();
-  this.QuestionForm.get('listen_word')?.reset();
-  this.QuestionForm.get('listen_rec')?.reset([]);
-  this.QuestionForm.get('LetterMatch')?.reset();
-
-}
-
-
-
-onTabChange(tab: 'local' | 'youtube') {
-  this.selectedTab = tab;
-  this.localVideoUrl = null;
-  this.validYoutubeUrl = null;
-  this.youtubeUrl = '';
-  this.VideoFile = ''
-}
-
-onLocalVideoSelected(event: Event) {
-  const fileInput = event.target as HTMLInputElement;
-  if (fileInput.files && fileInput.files[0]) {
-    const file = fileInput.files[0];
-    this.VideoFile = fileInput.files[0];
-    this.localVideoUrl = URL.createObjectURL(file);
+  onFileChange(event: any) {
+    this.questionFile = event.target.files[0];
+    if (this.questionFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.questionIMG = reader.result;
+      };
+      reader.readAsDataURL(this.questionFile);
+    }
   }
-}
+
+  onAudioChange(event: any) {
+    this.listen_rec = event.target.files[0];
+    if (this.listen_rec) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.audioURL = reader.result as string;
+      };
+      reader.readAsDataURL(this.listen_rec);
+    }
+  }
+
+  playAudio() {
+    if (this.audioURL) {
+      if (this.audio) {
+        this.audio.pause();
+      }
+      this.audio = new Audio(this.audioURL);
+      this.audio.play();
+    }
+  }
+
+  resetForm() {
+    this.QuestionForm.get('Question')?.reset();
+    this.QuestionForm.get('instruction')?.reset();
+    this.QuestionForm.get('OptionA')?.reset();
+    this.QuestionForm.get('OptionB')?.reset();
+    this.QuestionForm.get('OptionC')?.reset();
+    this.QuestionForm.get('OptionD')?.reset();
+    this.QuestionForm.get('Answer')?.reset();
+    this.QuestionForm.get('incomplete_word')?.reset();
+    this.QuestionForm.get('listen_word')?.reset();
+    this.QuestionForm.get('listen_rec')?.reset([]);
+    this.QuestionForm.get('LetterMatch')?.reset();
+
+  }
 
 
 
-onYoutubeUrlChanged() {
-  const trimmedUrl = this.youtubeUrl.trim();
-  if (trimmedUrl.startsWith('https://www.youtube.com/embed/')) {
-    this.validYoutubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(trimmedUrl);
-  } else {
+  onTabChange(tab: 'local' | 'youtube') {
+    this.selectedTab = tab;
+    this.localVideoUrl = null;
     this.validYoutubeUrl = null;
+    this.youtubeUrl = '';
+    this.VideoFile = ''
   }
-}
+
+  onLocalVideoSelected(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      this.VideoFile = fileInput.files[0];
+      this.localVideoUrl = URL.createObjectURL(file);
+    }
+  }
+
+
+
+  onYoutubeUrlChanged() {
+    const trimmedUrl = this.youtubeUrl.trim();
+    if (trimmedUrl.startsWith('https://www.youtube.com/embed/')) {
+      this.validYoutubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(trimmedUrl);
+    } else {
+      this.validYoutubeUrl = null;
+    }
+  }
 
   // onYoutubeUrlChanged() {
   //   const trimmedUrl = this.youtubeUrl.trim();

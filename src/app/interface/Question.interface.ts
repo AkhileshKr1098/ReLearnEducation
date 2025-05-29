@@ -123,7 +123,8 @@ export interface QuestionData {
     topics: string;
     unit: string;
     week: string;
-    video_url: string;
+    video_url_youtube: string;
+    video_url_local: string;
 
 }
 
