@@ -34,13 +34,6 @@
                             <span *ngIf="!isPlaying">▶️</span>
                             <span *ngIf="isPlaying">⏸️</span>
                         </button>
-
-                        <!-- <input type="range" [value]="progress" (input)="seekVideo($event)" />
-
-                    <button (click)="toggleMute()" title="Mute/Unmute">🔊</button>
-
-                    <input type="range" min="0" max="1" step="0.1" [value]="volume" (input)="changeVolume($event)" /> -->
-
                         <button (click)="toggleFullScreen(videoElement)" title="Fullscreen">⛶</button>
                     </div>
                 </div>

@@ -214,54 +214,54 @@ export class AddQuestionComponent {
       return
     }
 
-  if (this.questionType === 'MCQ') {
-  const formValue = this.QuestionForm.value;
-  const formData = new FormData();
+    if (this.questionType === 'MCQ') {
+      const formValue = this.QuestionForm.value;
+      const formData = new FormData();
 
-  // Include ID only if it's present (used by backend to decide insert/update)
-  if (formValue.id) formData.append('id', formValue.id);
+      // Include ID only if it's present (used by backend to decide insert/update)
+      if (formValue.id) formData.append('id', formValue.id);
 
-  // Append all form fields
-  formData.append('question_type', formValue.question_type || '');
-  formData.append('Question', formValue.Question || '');
-  formData.append('instruction', formValue.instruction || '');
-  formData.append('OptionA', formValue.OptionA || '');
-  formData.append('OptionB', formValue.OptionB || '');
-  formData.append('OptionC', formValue.OptionC || '');
-  formData.append('OptionD', formValue.OptionD || '');
-  formData.append('Answer', formValue.Answer || '');
-  formData.append('class', formValue.class || '');
-  formData.append('week', formValue.week || '');
-  formData.append('day', formValue.day || '');
-  formData.append('sections', formValue.sections || '');
-  formData.append('topics', formValue.topics || '');
-  formData.append('sub_topics', formValue.sub_topics || '');
-  formData.append('unit', formValue.unit || '');
-  formData.append('incomplete_word', formValue.incomplete_word || '');
-  formData.append('listen_rec', formValue.listen_rec || '');
-  formData.append('listen_word', formValue.listen_word || '');
-  formData.append('video_url_youtube', this.youtubeUrl || '');
+      // Append all form fields
+      formData.append('question_type', formValue.question_type || '');
+      formData.append('Question', formValue.Question || '');
+      formData.append('instruction', formValue.instruction || '');
+      formData.append('OptionA', formValue.OptionA || '');
+      formData.append('OptionB', formValue.OptionB || '');
+      formData.append('OptionC', formValue.OptionC || '');
+      formData.append('OptionD', formValue.OptionD || '');
+      formData.append('Answer', formValue.Answer || '');
+      formData.append('class', formValue.class || '');
+      formData.append('week', formValue.week || '');
+      formData.append('day', formValue.day || '');
+      formData.append('sections', formValue.sections || '');
+      formData.append('topics', formValue.topics || '');
+      formData.append('sub_topics', formValue.sub_topics || '');
+      formData.append('unit', formValue.unit || '');
+      formData.append('incomplete_word', formValue.incomplete_word || '');
+      formData.append('listen_rec', formValue.listen_rec || '');
+      formData.append('listen_word', formValue.listen_word || '');
+      formData.append('video_url_youtube', this.youtubeUrl || '');
 
-  // Handle video file if present
-  if (this.VideoFile) {
-    formData.append('video_url_local', this.VideoFile);
-  }
-
-  this._crud.addQuestion(formData).subscribe(
-    (res: any) => {
-      alert(res.message);
-      this.resetForm();
-
-      if (res.success == 1) {
-        // Optional close dialog or reload
-        // this.matref.close(1);
+      // Handle video file if present
+      if (this.VideoFile) {
+        formData.append('video_url_local', this.VideoFile);
       }
-    },
-    (err) => {
-      console.error('Error submitting form:', err);
+
+      this._crud.addQuestion(formData).subscribe(
+        (res: any) => {
+          alert(res.message);
+          this.resetForm();
+
+          if (res.success == 1) {
+            // Optional close dialog or reload
+            // this.matref.close(1);
+          }
+        },
+        (err) => {
+          console.error('Error submitting form:', err);
+        }
+      );
     }
-  );
-}
 
 
     if (this.questionType == 'LetterTracing') {
@@ -324,6 +324,13 @@ export class AddQuestionComponent {
       fromdata.append('Answer', this.QuestionForm.get('Answer')?.value)
       fromdata.append('incomplete_word', this.QuestionForm.get('incomplete_word')?.value)
       fromdata.append('question_Img', this.questionFile)
+      fromdata.append('video_url_youtube', this.youtubeUrl || '');
+
+      // Handle video file if present
+      if (this.VideoFile) {
+        fromdata.append('video_url_local', this.VideoFile);
+      }
+
 
       this._crud.addQuestion_picktheblend(fromdata).subscribe(
         (res: any) => {
@@ -352,6 +359,12 @@ export class AddQuestionComponent {
       fromdata.append('listen_word', this.QuestionForm.get('listen_word')?.value)
       fromdata.append('listen_rec', this.listen_rec)
       fromdata.append('question_Img', this.questionFile)
+      fromdata.append('video_url_youtube', this.youtubeUrl || '');
+
+      // Add video file if present
+      if (this.VideoFile) {
+        fromdata.append('video_url_local', this.VideoFile);
+      }
 
       this._crud.addQuestion_listen(fromdata).subscribe(
         (res: any) => {
@@ -527,9 +540,13 @@ export class AddQuestionComponent {
       if (this.questionFile) {
         fromdata.append('question_Img', this.questionFile)
       }
+      fromdata.append('video_url_youtube', this.youtubeUrl || '');
 
+      if (this.VideoFile) {
+        fromdata.append('video_url_local', this.VideoFile);
+      }
 
-      this._crud.QuestionUpdat_picktheblend(fromdata).subscribe(
+      this._crud.addQuestion_picktheblend(fromdata).subscribe(
         (res: any) => {
           console.log(res);
           this.resetForm()
@@ -560,6 +577,12 @@ export class AddQuestionComponent {
       fromdata.append('listen_word', this.QuestionForm.get('listen_word')?.value)
       fromdata.append('listen_rec', this.listen_rec)
       fromdata.append('question_Img', this.questionFile)
+      fromdata.append('video_url_youtube', this.youtubeUrl || '');
+
+      // Add video file if present
+      if (this.VideoFile) {
+        fromdata.append('video_url_local', this.VideoFile);
+      }
 
       this._crud.addQuestion_listen(fromdata).subscribe(
         (res: any) => {

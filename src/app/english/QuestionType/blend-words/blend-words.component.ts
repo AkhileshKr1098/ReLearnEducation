@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionData } from 'src/app/interface/Question.interface';
 import { CorrectBoxComponent } from '../../correct-box/correct-box.component';
@@ -6,6 +6,7 @@ import { OppsBoxComponent } from '../../opps-box/opps-box.component';
 import { CRUDService } from 'src/app/crud.service';
 import { SharedService } from 'src/app/shared.service';
 import { UserData } from 'src/app/interface/student.interface';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blend-words',
@@ -18,6 +19,7 @@ export class BlendWordsComponent implements OnInit {
   base_url: string = '';
   filledWord: string = '';
   isSaveVisible = false;
+  safeUrl!: SafeResourceUrl;
 
   userData: UserData = {
     LoginId: '',
@@ -53,8 +55,17 @@ export class BlendWordsComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private _crud: CRUDService,
-    private shared: SharedService
-  ) { }
+    private shared: SharedService,
+    private sanitizer: DomSanitizer
+
+  ) {
+    this._crud.img_base_url.subscribe(
+      (res) => {
+        this.base_url = res
+      }
+    )
+
+  }
 
   ngOnInit() {
 
@@ -106,7 +117,7 @@ export class BlendWordsComponent implements OnInit {
 
   onOops() {
     const oopsDialog = this.dialog.open(OppsBoxComponent, {
-     width: "35vw",
+      width: "35vw",
       height: "80vh"
     });
 
@@ -157,5 +168,67 @@ export class BlendWordsComponent implements OnInit {
         alert('Something went wrong while saving the answer!');
       }
     );
+  }
+
+
+  getVerify(url: any) {
+    console.log(url);
+    return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url)
+  }
+
+  @ViewChild('videoElement') videoElementRef!: ElementRef;
+
+  isPlaying = false;
+  progress = 0;
+  volume = 1;
+  duration = 0;
+  currentTime = 0;
+
+  togglePlay() {
+    const video: HTMLVideoElement = this.videoElementRef.nativeElement;
+    if (video.paused) {
+      video.play();
+      this.isPlaying = true;
+    } else {
+      video.pause();
+      this.isPlaying = false;
+    }
+  }
+
+  onTimeUpdate() {
+    const video = this.videoElementRef.nativeElement;
+    this.progress = (video.currentTime / video.duration) * 100;
+    this.currentTime = video.currentTime;
+  }
+
+  onLoadedMetadata() {
+    const video = this.videoElementRef.nativeElement;
+    this.duration = video.duration;
+  }
+
+  seekVideo(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const video = this.videoElementRef.nativeElement;
+    video.currentTime = (+input.value / 100) * video.duration;
+  }
+
+  changeVolume(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const video = this.videoElementRef.nativeElement;
+    video.volume = +input.value;
+    this.volume = +input.value;
+  }
+
+  toggleMute() {
+    const video = this.videoElementRef.nativeElement;
+    video.muted = !video.muted;
+  }
+
+  toggleFullScreen(video: HTMLVideoElement) {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      video.requestFullscreen();
+    }
   }
 }

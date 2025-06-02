@@ -213,10 +213,6 @@ export class CRUDService {
     return this._http.post<any>(`${this.base_url}question_picktheblend.php`, data)
   }
 
-  QuestionUpdat_picktheblend(data: any): Observable<any> {
-    return this._http.post<any>(`${this.base_url}question_picktheblend.php`, data)
-  }
-
   addQuestion_listen(data: any): Observable<any> {
     return this._http.post<any>(`${this.base_url}question_listen.php`, data)
   }

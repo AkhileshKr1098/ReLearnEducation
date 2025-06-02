@@ -14,39 +14,72 @@
         </div>
     </div>
 
-    <div class="qarea">
-        <div class="imgarea">
-            <img [src]="base_url + CurrentQuestion.question_Img" alt="Question Image" />
-        </div>
-
+    <div class="question_area">
         <div class="question-content">
-            <div class="option-buttons">
-                <button mat-button *ngIf="CurrentQuestion.OptionA" (click)="selectOption(CurrentQuestion.OptionA)"
-                    [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionA}">
-                    {{ CurrentQuestion.OptionA }}
-                </button>
-                <button mat-button *ngIf="CurrentQuestion.OptionB" (click)="selectOption(CurrentQuestion.OptionB)"
-                    [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionB}">
-                    {{ CurrentQuestion.OptionB }}
-                </button>
-                <button mat-button *ngIf="CurrentQuestion.OptionC" (click)="selectOption(CurrentQuestion.OptionC)"
-                    [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionC}">
-                    {{ CurrentQuestion.OptionC }}
-                </button>
-                <button mat-button *ngIf="CurrentQuestion.OptionD" (click)="selectOption(CurrentQuestion.OptionD)"
-                    [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionD}">
-                    {{ CurrentQuestion.OptionD }}
-                </button>
-            </div>
+            <div class="left">
 
-            <div class="incomplete-word">
-                <span *ngIf="CurrentQuestion.incomplete_word">
-                    {{ CurrentQuestion.incomplete_word.split('__')[0] }}
-                    <span class="highlight">{{ filledWord || '__' }}</span>
-                    {{ CurrentQuestion.incomplete_word.split('__')[1] }}
-                </span>
+                <iframe *ngIf="CurrentQuestion.video_url_youtube" [src]="getVerify(CurrentQuestion.video_url_youtube)"
+                    frameborder="0" class="iframe-player" width="100%" allowfullscreen>
+                </iframe>
+
+
+                <div class="video-container" *ngIf="CurrentQuestion.video_url_local">
+                    <video #videoElement [src]="base_url + CurrentQuestion.video_url_local"
+                        (timeupdate)="onTimeUpdate()" (loadedmetadata)="onLoadedMetadata()" class="video-player"
+                        controlsList="nodownload">
+                    </video>
+
+                    <div class="controls">
+                        <button (click)="togglePlay()" title="Play/Pause">
+                            <span *ngIf="!isPlaying">▶️</span>
+                            <span *ngIf="isPlaying">⏸️</span>
+                        </button>
+                        <button (click)="toggleFullScreen(videoElement)" title="Fullscreen">⛶</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="right">
+                <div class="imgarea">
+                    <img [src]="base_url+CurrentQuestion.question_Img" alt="Question Image" />
+                </div>
+
+                <div class="innerquestion-content">
+                    <div class="option-buttons">
+                        <button mat-button *ngIf="CurrentQuestion.OptionA"
+                            (click)="selectOption(CurrentQuestion.OptionA)"
+                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionA}">
+                            {{ CurrentQuestion.OptionA }}
+                        </button>
+                        <button mat-button *ngIf="CurrentQuestion.OptionB"
+                            (click)="selectOption(CurrentQuestion.OptionB)"
+                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionB}">
+                            {{ CurrentQuestion.OptionB }}
+                        </button>
+                        <button mat-button *ngIf="CurrentQuestion.OptionC"
+                            (click)="selectOption(CurrentQuestion.OptionC)"
+                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionC}">
+                            {{ CurrentQuestion.OptionC }}
+                        </button>
+                        <button mat-button *ngIf="CurrentQuestion.OptionD"
+                            (click)="selectOption(CurrentQuestion.OptionD)"
+                            [ngClass]="{'active-option': filledWord === CurrentQuestion.OptionD}">
+                            {{ CurrentQuestion.OptionD }}
+                        </button>
+                    </div>
+
+                    <div class="incomplete-word">
+                        <span *ngIf="CurrentQuestion.incomplete_word">
+                            {{ CurrentQuestion.incomplete_word.split('__')[0] }}
+                            <span class="highlight">{{ filledWord || '__' }}</span>
+                            {{ CurrentQuestion.incomplete_word.split('__')[1] }}
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
+
+
     </div>
 
     <div class="button-container">

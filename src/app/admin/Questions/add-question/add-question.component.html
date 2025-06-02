@@ -265,6 +265,39 @@
                         <input type="text" class="form-control" placeholder="Option D" formControlName="OptionD">
                         <label>Option D</label>
                     </div>
+
+
+                </div>
+
+                <div id="header">
+                    <button class="tab-button" [ngClass]="{ active: selectedTab === 'local' }"
+                        (click)="onTabChange('local')" mat-button>
+                        Local
+                    </button>
+                    <button class="tab-button" [ngClass]="{ active: selectedTab === 'youtube' }"
+                        (click)="onTabChange('youtube')" mat-button>
+                        YouTube
+                    </button>
+                </div>
+
+                <br>
+                <hr>
+                <!-- Local Upload -->
+                <div *ngIf="selectedTab === 'local'" id="localVideoarea" class="video-area">
+                    <p>Upload a video from your local device:</p>
+                    <input type="file" accept="video/*" (change)="onLocalVideoSelected($event)" />
+                    <video *ngIf="localVideoUrl" [src]="localVideoUrl" controls class="video-preview"
+                        width="400px"></video>
+                </div>
+
+                <!-- YouTube Embed -->
+                <div *ngIf="selectedTab === 'youtube'" id="youtubeVideoarea" class="video-area">
+                    <p>Paste a YouTube embed URL (e.g., https://www.youtube.com/embed/VIDEO_ID):</p>
+                    <input type="text" [(ngModel)]="youtubeUrl" [ngModelOptions]="{standalone: true}"
+                        (input)="onYoutubeUrlChanged()" placeholder="Paste YouTube embed URL here" />
+
+                    <iframe *ngIf="validYoutubeUrl" [src]="validYoutubeUrl" frameborder="0" allowfullscreen
+                        class="video-preview"></iframe>
                 </div>
             </div>
 
@@ -298,6 +331,37 @@
                                 formControlName="listen_word">
                             <label>Listen Words</label>
                         </div>
+
+
+                    </div>
+
+                    <div id="header">
+                        <button class="tab-button" [ngClass]="{ active: selectedTab === 'local' }"
+                            (click)="onTabChange('local')" mat-button>
+                            Local
+                        </button>
+                        <button class="tab-button" [ngClass]="{ active: selectedTab === 'youtube' }"
+                            (click)="onTabChange('youtube')" mat-button>
+                            YouTube
+                        </button>
+                    </div>
+
+                    <!-- Local Upload -->
+                    <div *ngIf="selectedTab === 'local'" id="localVideoarea" class="video-area">
+                        <p>Upload a video from your local device:</p>
+                        <input type="file" accept="video/*" (change)="onLocalVideoSelected($event)" />
+                        <video *ngIf="localVideoUrl" [src]="localVideoUrl" controls class="video-preview"
+                            width="400px"></video>
+                    </div>
+
+                    <!-- YouTube Embed -->
+                    <div *ngIf="selectedTab === 'youtube'" id="youtubeVideoarea" class="video-area">
+                        <p>Paste a YouTube embed URL (e.g., https://www.youtube.com/embed/VIDEO_ID):</p>
+                        <input type="text" [(ngModel)]="youtubeUrl" [ngModelOptions]="{standalone: true}"
+                            (input)="onYoutubeUrlChanged()" placeholder="Paste YouTube embed URL here" />
+
+                        <iframe *ngIf="validYoutubeUrl" [src]="validYoutubeUrl" frameborder="0" allowfullscreen
+                            class="video-preview"></iframe>
                     </div>
                 </div>
 

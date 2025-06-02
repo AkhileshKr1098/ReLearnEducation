@@ -63,13 +63,13 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     this._crud.getQuestion().subscribe(
       (res: QuestionData) => {
         if (Array.isArray(res)) {
-          this.AllQuestion = res
+          this.AllQuestion = res.slice(1,7)
           // this.AllQuestion = res.reverse()
           // this.AllQuestion = res.reverse().slice(1, 7) // working mode
           console.log(this.AllQuestion)
           this.CurrentQuestion = this.AllQuestion[this.i];
           this.QuestionType = this.CurrentQuestion.question_type
-          // this.NextQuestion()
+          this.NextQuestion()
         }
       }
     )
