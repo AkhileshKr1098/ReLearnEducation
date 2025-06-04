@@ -165,7 +165,7 @@ export class LetterTrackingComponent implements AfterViewInit {
       this.ctx.fill();
     }
 
-    if (this.paintedPixels >= 100) {
+    if (this.paintedPixels >= 60) {
       this.isSaveVisible = true;
     }
   }
@@ -234,8 +234,8 @@ export class LetterTrackingComponent implements AfterViewInit {
   onOops() {
     const oopsDilog = this.dialog.open(OppsBoxComponent, {
       disableClose: true,
-      width: "35vw",
-      height: "80vh"
+          width: "40vw",
+      height: "90vh"
     });
 
     oopsDilog.afterClosed().subscribe((res) => {

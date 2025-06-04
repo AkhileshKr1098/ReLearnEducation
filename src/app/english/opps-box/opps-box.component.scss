@@ -14,9 +14,8 @@
     display: flex;
     gap: 20px;
     margin-top: 15px;
-}
 
-button {
+    button {
     background-color: #ff6347;
     color: white;
     border: none;
@@ -28,6 +27,9 @@ button {
     align-items: center;
     transition: background-color 0.3s;
 }
+}
+
+
 
 #try-again-btn {
     background-color: #ff6347;

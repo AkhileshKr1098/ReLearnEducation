@@ -30,7 +30,7 @@ export class LetterTracingService {
     const now = new Date();
     const formattedDate = now.toLocaleString();
 
-    doc.addImage(logo, 'PNG', margin, 10, 20, 15);
+    // doc.addImage(logo, 'PNG', margin, 10, 20, 15);
     doc.setFontSize(18);
     doc.setTextColor(255, 102, 0);
     doc.setFont('helvetica', 'bold');
