@@ -234,7 +234,7 @@ export class LetterTrackingComponent implements AfterViewInit {
   onOops() {
     const oopsDilog = this.dialog.open(OppsBoxComponent, {
       disableClose: true,
-          width: "40vw",
+      width: "40vw",
       height: "90vh"
     });
 
@@ -247,9 +247,24 @@ export class LetterTrackingComponent implements AfterViewInit {
   }
 
 
+
+
+  LettersList: any[] = [];
+
+
   downloadTracingPDF() {
-    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
-    this.tracingService.generateLetterTracingPDF(letters);
+    this._shared.AllQuestionList.subscribe((res) => {
+
+      res.forEach((question: any) => {
+        if (question.question_type === 'LetterTracing' && question.OptionA) {
+          this.LettersList.push(question.OptionA);
+        }
+      });
+
+      console.log(this.LettersList);
+    });
+    // const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+    this.tracingService.generateLetterTracingPDF(this.LettersList);
     // this.tracingService.generateLargeTracingPDF(['A', 'B', 'C']);
     // this.tracingService.generatePageWith4LettersPDF(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
 

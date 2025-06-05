@@ -265,13 +265,50 @@ export class AddQuestionComponent {
 
 
     if (this.questionType == 'LetterTracing') {
-      this._crud.addQuestion(this.QuestionForm.value).subscribe(
-        (res) => {
+     const formValue = this.QuestionForm.value;
+      const formData = new FormData();
+
+      // Include ID only if it's present (used by backend to decide insert/update)
+      if (formValue.id) formData.append('id', formValue.id);
+
+      // Append all form fields
+      formData.append('question_type', formValue.question_type || '');
+      formData.append('Question', formValue.Question || '');
+      formData.append('instruction', formValue.instruction || '');
+      formData.append('OptionA', formValue.OptionA || '');
+      formData.append('OptionB', formValue.OptionB || '');
+      formData.append('OptionC', formValue.OptionC || '');
+      formData.append('OptionD', formValue.OptionD || '');
+      formData.append('Answer', formValue.Answer || '');
+      formData.append('class', formValue.class || '');
+      formData.append('week', formValue.week || '');
+      formData.append('day', formValue.day || '');
+      formData.append('sections', formValue.sections || '');
+      formData.append('topics', formValue.topics || '');
+      formData.append('sub_topics', formValue.sub_topics || '');
+      formData.append('unit', formValue.unit || '');
+      formData.append('incomplete_word', formValue.incomplete_word || '');
+      formData.append('listen_rec', formValue.listen_rec || '');
+      formData.append('listen_word', formValue.listen_word || '');
+      formData.append('video_url_youtube', this.youtubeUrl || '');
+
+      // Handle video file if present
+      if (this.VideoFile) {
+        formData.append('video_url_local', this.VideoFile);
+      }
+
+      this._crud.addQuestion(formData).subscribe(
+        (res: any) => {
           alert(res.message);
-          this.resetForm()
+          this.resetForm();
+
           if (res.success == 1) {
+            // Optional close dialog or reload
             // this.matref.close(1);
           }
+        },
+        (err) => {
+          console.error('Error submitting form:', err);
         }
       );
     }
@@ -457,29 +494,50 @@ export class AddQuestionComponent {
 
 
     if (this.questionType == 'LetterTracing') {
-      const data = {
-        id: this.QuestionForm.get('id')?.value,
-        OptionA: this.QuestionForm.get('OptionA')?.value,
-        OptionB: '.',
-        OptionC: ',',
-        OptionD: ',',
-        Answer: ',',
-        Question: this.QuestionForm.get('Question')?.value,
-        instruction: this.QuestionForm.get('instruction')?.value,
-        question_type: this.QuestionForm.get('question_type')?.value,
-        class: this.QuestionForm.get('class')?.value,
-        week: this.QuestionForm.get('week')?.value,
-        day: this.QuestionForm.get('day')?.value,
-        sections: this.QuestionForm.get('sections')?.value,
-        topics: this.QuestionForm.get('topics')?.value,
-        sub_topics: this.QuestionForm.get('sub_topics')?.value,
-        unit: this.QuestionForm.get('unit')?.value,
+     const formValue = this.QuestionForm.value;
+      const formData = new FormData();
 
+      // Include ID only if it's present (used by backend to decide insert/update)
+      if (formValue.id) formData.append('id', formValue.id);
+
+      // Append all form fields
+      formData.append('question_type', formValue.question_type || '');
+      formData.append('Question', formValue.Question || '');
+      formData.append('instruction', formValue.instruction || '');
+      formData.append('OptionA', formValue.OptionA || '');
+      formData.append('OptionB', formValue.OptionB || '');
+      formData.append('OptionC', formValue.OptionC || '');
+      formData.append('OptionD', formValue.OptionD || '');
+      formData.append('Answer', formValue.Answer || '');
+      formData.append('class', formValue.class || '');
+      formData.append('week', formValue.week || '');
+      formData.append('day', formValue.day || '');
+      formData.append('sections', formValue.sections || '');
+      formData.append('topics', formValue.topics || '');
+      formData.append('sub_topics', formValue.sub_topics || '');
+      formData.append('unit', formValue.unit || '');
+      formData.append('incomplete_word', formValue.incomplete_word || '');
+      formData.append('listen_rec', formValue.listen_rec || '');
+      formData.append('listen_word', formValue.listen_word || '');
+      formData.append('video_url_youtube', this.youtubeUrl || '');
+
+      // Handle video file if present
+      if (this.VideoFile) {
+        formData.append('video_url_local', this.VideoFile);
       }
-      this._crud.QuestionUpdate(data).subscribe(
-        (res) => {
+
+      this._crud.addQuestion(formData).subscribe(
+        (res: any) => {
           alert(res.message);
-          this.resetForm()
+          this.resetForm();
+
+          if (res.success == 1) {
+            // Optional close dialog or reload
+            // this.matref.close(1);
+          }
+        },
+        (err) => {
+          console.error('Error submitting form:', err);
         }
       );
     }

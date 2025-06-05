@@ -49,6 +49,7 @@ export class SharedService {
   base_url_audio = new BehaviorSubject<string>('')
   base_url_icon = new BehaviorSubject<string>('')
   base_url_answer = new BehaviorSubject<string>('')
+  AllQuestionList = new BehaviorSubject<any>([])
 
   CurrentQuestionStatus = new BehaviorSubject<boolean>(false)
 

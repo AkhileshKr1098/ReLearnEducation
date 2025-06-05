@@ -6,9 +6,21 @@ import { jsPDF } from 'jspdf';
 })
 export class LetterTracingService {
   constructor() {}
+  
+  async loadCustomFont(fontUrl: string): Promise<string> {
+    const response = await fetch(fontUrl);
+    const buffer = await response.arrayBuffer();
+    return btoa(String.fromCharCode(...new Uint8Array(buffer)));
+  }
 
   async generateLetterTracingPDF(letters: string[]): Promise<void> {
     const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+    const fontBase64 = await this.loadCustomFont('../assets/dotline-font/DotlineBold-g25Y.ttf');
+
+    doc.addFileToVFS('Dotline.ttf', fontBase64);
+    doc.addFont('Dotline.ttf', 'Dotline', 'normal');
+    doc.setFont('Dotline'); // <-- use the font
 
     const pageWidth = 210;
     const margin = 10;
@@ -17,20 +29,9 @@ export class LetterTracingService {
     const letterSize = 60;
     const startY = 50;
 
-    const logo = new Image();
-    logo.src = 'https://www.relearntoday.com/assets/images/logo_app.png';
-
-    // Wait for the logo to load
-    await new Promise<void>((resolve) => {
-      logo.onload = () => resolve();
-      logo.onerror = () => resolve();
-    });
-
-    // Header
     const now = new Date();
     const formattedDate = now.toLocaleString();
 
-    // doc.addImage(logo, 'PNG', margin, 10, 20, 15);
     doc.setFontSize(18);
     doc.setTextColor(255, 102, 0);
     doc.setFont('helvetica', 'bold');
@@ -41,15 +42,15 @@ export class LetterTracingService {
     doc.setFont('helvetica', 'normal');
     doc.text(formattedDate, pageWidth - margin, 15, { align: 'right' });
 
-    // Draw letters
+    // Draw letters using custom font
+    doc.setFont('Dotline');
+    doc.setFontSize(letterSize);
+
     letters.forEach((letter, index) => {
       const row = Math.floor(index / lettersPerRow);
       const col = index % lettersPerRow;
-
       const x = margin + col * ((pageWidth - 2 * margin) / lettersPerRow);
       const y = startY + row * spacing;
-
-      doc.setFontSize(letterSize);
       doc.text(letter.toUpperCase(), x + 10, y);
     });
 
