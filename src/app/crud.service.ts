@@ -190,6 +190,16 @@ export class CRUDService {
     return this._http.get<QuestionData>(`${this.base_url}question_mcq.php`)
   }
 
+   getQuestions(filters: any): Observable<QuestionData[]> {
+    let params = new HttpParams();
+    for (const key in filters) {
+      if (filters[key]) {
+        params = params.set(key, filters[key]);
+      }
+    }
+    return this._http.get<QuestionData[]>(`${this.base_url}get_question.php`, { params });
+  }
+
   addQuestion(data: any): Observable<any> {
     return this._http.post<any>(`${this.base_url}question_mcq.php`, data)
   }

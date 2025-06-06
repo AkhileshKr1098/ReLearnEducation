@@ -109,20 +109,22 @@ export class QuestionListComponent {
   }
 
   getData() {
-    this._crud.getQuestion().subscribe(
-      (res: QuestionData) => {
-        if (Array.isArray(res)) {
-          this.Question = res
-          this.FilterQuestion = res
-          console.log(this.FilterQuestion)
-        }
+
+    // this._crud.getQuestion().subscribe(
+    //   (res: QuestionData) => {
+    //     if (Array.isArray(res)) {
+    //       this.Question = res
+    //       this.FilterQuestion = res
+    //       console.log(this.FilterQuestion)
+    //     }
 
 
-      }, (err: Error) => {
-        console.log(err);
+    //   }, (err: Error) => {
+    //     console.log(err);
 
-      }
-    )
+    //   }
+    // )
+    this.getQuestions()
   }
 
   addNew() {
@@ -187,6 +189,26 @@ export class QuestionListComponent {
     this.FilterQuestion = this.Question.filter((res: any) =>
       res.day.toString().toLowerCase().includes(data)
     );
+  }
+
+
+  filters: any = {
+    class: '',
+    week: '',
+    day: '',
+    sections: '',
+    topics: '',
+    sub_topics: '',
+    unit: '',
+    question_type: ''
+  };
+
+
+
+  getQuestions() {
+    this._crud.getQuestions(this.filters).subscribe((res) => {
+      this.FilterQuestion = res;
+    });
   }
 
 }
