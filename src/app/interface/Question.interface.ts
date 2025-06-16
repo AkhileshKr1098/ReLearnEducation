@@ -64,6 +64,17 @@ export interface SectionsRes {
     success: number,
     data: Sections
 }
+export interface SectionsFilter {
+    id: number,
+    class: string,
+    week: string,
+    sections: string
+
+}
+export interface SectionsFilterRes {
+    success: number,
+    data: SectionsFilter
+}
 
 export interface Topics {
     id: number,

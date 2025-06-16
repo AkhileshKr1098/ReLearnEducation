@@ -3,7 +3,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { isArray } from 'chart.js/dist/helpers/helpers.core';
 import { CRUDService } from 'src/app/crud.service';
-import { Sections, SectionsRes, SubTopic, Topics, Week } from 'src/app/interface/Question.interface';
+import { Sections, SectionsFilter, SectionsFilterRes, SectionsRes, SubTopic, Topics, Week } from 'src/app/interface/Question.interface';
 import { SharedService } from 'src/app/shared.service';
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +16,8 @@ export class DashboardComponent {
 
   weeksList: Week[] = []
   TopicsList: Topics[] = []
-  SectionsList: Sections[] = []
+  SectionsList: SectionsFilter[] = []
+  SectionsListFilter: SectionsFilter[] = []
   allTopics: string = ''
   percent: number = 50;
   userLoginData = {
@@ -92,10 +93,12 @@ export class DashboardComponent {
 
 
   getSections() {
-    this._crud.getsections().subscribe(
-      (res: SectionsRes) => {
+    const cls = this.userLoginData.class
+    this._crud.getsectionsFilter(cls).subscribe(
+      (res: SectionsFilterRes) => {
         if (Array.isArray(res.data)) {
           this.SectionsList = res.data
+          this.SectionsListFilter = res.data
         }
       }
     )
@@ -112,7 +115,11 @@ export class DashboardComponent {
 
   onGetSections(week: number) {
     console.log(week);
+
+    this.SectionsList = this.SectionsListFilter.filter((item: any) => item.week == week)
     console.log(this.SectionsList);
+
+
   }
 
 

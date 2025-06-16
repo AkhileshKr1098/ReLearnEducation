@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserProfile } from './interface/student.interface';
-import { AnsReportRes, AnswerWithQuestionRes, ClassRes, DayRes, GradeRes, QuestionData, SectionsRes, SubTopicRes, TopicsRes, Week, WeekInsertRes, WeekRes } from './interface/Question.interface';
+import { AnsReportRes, AnswerWithQuestionRes, ClassRes, DayRes, GradeRes, QuestionData, SectionsFilterRes, SectionsRes, SubTopicRes, TopicsRes, Week, WeekInsertRes, WeekRes } from './interface/Question.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -94,6 +94,10 @@ export class CRUDService {
   // for section 
   getsections(): Observable<SectionsRes> {
     return this._http.get<SectionsRes>(`${this.base_url}sections.php`)
+  }
+
+  getsectionsFilter(cls:string): Observable<SectionsFilterRes> {
+    return this._http.get<SectionsFilterRes>(`${this.base_url}get_section_filter.php?class=${cls}`)
   }
 
   addsections(data: any): Observable<any> {
@@ -190,7 +194,7 @@ export class CRUDService {
     return this._http.get<QuestionData>(`${this.base_url}question_mcq.php`)
   }
 
-   getQuestions(filters: any): Observable<QuestionData[]> {
+  getQuestions(filters: any): Observable<QuestionData[]> {
     let params = new HttpParams();
     for (const key in filters) {
       if (filters[key]) {
