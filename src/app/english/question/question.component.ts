@@ -46,7 +46,17 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   base_url: string = ''
   topicsRightPro: number = 0
   topicsWorngPro: number = 0
-
+  userLoginData = {
+    name: 'MR. Json',
+    age: 11,
+    class: 'LKG',
+    school: 'US, Publics school ',
+    country: 'USA',
+    profile_img: '../../../assets/icon/profile.jpeg',
+    currentPoint: 350
+  }
+  userData: any
+  day: any
   constructor(
     private _crud: CRUDService,
     private dialog: MatDialog,
@@ -57,14 +67,19 @@ export class QuestionComponent implements OnInit, AfterViewInit {
         this.base_url = res
       }
     )
+
+    this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
+this.day = JSON.parse(sessionStorage.getItem('selectedDay') || '""');
   }
 
   ngOnInit() {
-    this._crud.getQuestion().subscribe(
+    console.log(this.userData);
+    
+    this._crud.getQuestionFilter(this.userLoginData.class, this.userData.Week, this.day).subscribe(
       (res: QuestionData) => {
         if (Array.isArray(res)) {
-          this.AllQuestion = res.slice(3, 7)
-          // this.AllQuestion = res.reverse()
+          // this.AllQuestion = res.slice(3, 7)
+          this.AllQuestion = res.reverse()
           // this.AllQuestion = res.reverse().slice(1, 7) // working mode
           console.log(this.AllQuestion)
           this.shared.AllQuestionList.next(res)

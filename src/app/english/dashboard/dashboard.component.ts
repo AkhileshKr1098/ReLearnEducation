@@ -31,16 +31,16 @@ export class DashboardComponent {
   }
 
   days1 = [
-    { name: 'Day 1', url: '../../../assets/icon/day1.png' },
-    { name: 'Day 2', url: '../../../assets/icon/day2.png' },
-    { name: 'Day 3', url: '../../../assets/icon/day3.png' }
+    { name: '1', url: '../../../assets/icon/day1.png' },
+    { name: '2', url: '../../../assets/icon/day2.png' },
+    { name: '3', url: '../../../assets/icon/day3.png' }
 
   ];
 
   days2 = [
-    { name: 'Day 4', url: '../../../assets/icon/day4.png' },
-    { name: 'Day 5', url: '../../../assets/icon/day5.png' },
-    { name: 'Day 6', url: '../../../assets/icon/day6.png' },
+    { name: '4', url: '../../../assets/icon/day4.png' },
+    { name: '5', url: '../../../assets/icon/day5.png' },
+    { name: '6', url: '../../../assets/icon/day6.png' },
 
   ];
 
@@ -107,6 +107,9 @@ export class DashboardComponent {
   }
 
   onTopics(day: any, event: MouseEvent) {
+    console.log(day.name);    
+sessionStorage.setItem('selectedDay', JSON.stringify(day.name));
+
     event.preventDefault();
     console.log(day);
     this._router.navigate(['/english/topics']);

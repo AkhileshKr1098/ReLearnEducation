@@ -96,7 +96,7 @@ export class CRUDService {
     return this._http.get<SectionsRes>(`${this.base_url}sections.php`)
   }
 
-  getsectionsFilter(cls:string): Observable<SectionsFilterRes> {
+  getsectionsFilter(cls: string): Observable<SectionsFilterRes> {
     return this._http.get<SectionsFilterRes>(`${this.base_url}get_section_filter.php?class=${cls}`)
   }
 
@@ -202,6 +202,10 @@ export class CRUDService {
       }
     }
     return this._http.get<QuestionData[]>(`${this.base_url}get_question.php`, { params });
+  }
+
+  getQuestionFilter(cls: string, week: string, day: string): Observable<any> {
+    return this._http.get<any>(`${this.base_url}get_question_filter.php?class=${cls}&week=${week}&day=${day}`)
   }
 
   addQuestion(data: any): Observable<any> {
