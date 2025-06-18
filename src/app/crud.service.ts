@@ -204,8 +204,8 @@ export class CRUDService {
     return this._http.get<QuestionData[]>(`${this.base_url}get_question.php`, { params });
   }
 
-  getQuestionFilter(cls: string, week: string, day: string): Observable<any> {
-    return this._http.get<any>(`${this.base_url}get_question_filter.php?class=${cls}&week=${week}&day=${day}`)
+  getQuestionFilter(cls: string, week: string, day: string, std_id: string): Observable<any> {
+    return this._http.get<any>(`${this.base_url}get_question_filter.php?class=${cls}&week=${week}&day=${day}&std_id=${std_id}`)
   }
 
   addQuestion(data: any): Observable<any> {

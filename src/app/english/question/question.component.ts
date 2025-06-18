@@ -75,7 +75,7 @@ this.day = JSON.parse(sessionStorage.getItem('selectedDay') || '""');
   ngOnInit() {
     console.log(this.userData);
     
-    this._crud.getQuestionFilter(this.userLoginData.class, this.userData.Week, this.day).subscribe(
+    this._crud.getQuestionFilter(this.userLoginData.class, this.userData.Week, this.day, this.userData.ID).subscribe(
       (res: QuestionData) => {
         if (Array.isArray(res)) {
           // this.AllQuestion = res.slice(3, 7)
