@@ -5,7 +5,7 @@ import { ConfirmDialogComponent } from '../QuestionType/confirm-dialog/confirm-d
 import { CorrectBoxComponent } from '../correct-box/correct-box.component';
 import { OppsBoxComponent } from '../opps-box/opps-box.component';
 import { BehaviorSubject } from 'rxjs';
-import { QuestionData } from 'src/app/interface/Question.interface';
+import { QuestionData, QuestionDataRes } from 'src/app/interface/Question.interface';
 import { SharedService } from 'src/app/shared.service';
 
 @Component({
@@ -69,17 +69,17 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     )
 
     this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
-this.day = JSON.parse(sessionStorage.getItem('selectedDay') || '""');
+    this.day = JSON.parse(sessionStorage.getItem('selectedDay') || '""');
   }
 
   ngOnInit() {
     console.log(this.userData);
-    
+
     this._crud.getQuestionFilter(this.userLoginData.class, this.userData.Week, this.day, this.userData.ID).subscribe(
-      (res: QuestionData) => {
-        if (Array.isArray(res)) {
-          // this.AllQuestion = res.slice(3, 7)
-          this.AllQuestion = res.reverse()
+      (res: QuestionDataRes) => {
+        if (Array.isArray(res.data)) {
+          this.AllQuestion = res.data
+          // this.AllQuestion = res.reverse()
           // this.AllQuestion = res.reverse().slice(1, 7) // working mode
           console.log(this.AllQuestion)
           this.shared.AllQuestionList.next(res)

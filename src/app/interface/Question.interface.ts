@@ -113,6 +113,7 @@ export interface DayInfo {
 }
 
 
+
 export interface QuestionData {
     Answer: string;
     OptionA: string;
@@ -137,6 +138,12 @@ export interface QuestionData {
     video_url_youtube: string;
     video_url_local: string;
 
+}
+
+
+export interface QuestionDataRes {
+    success: number,
+    data: QuestionData
 }
 
 export interface AnsReport {

@@ -41,7 +41,7 @@ export class SharedService {
 
   constructor() {
     sessionStorage.setItem("rluser", JSON.stringify(this.userData));
-    console.log(this.userData);
+    // console.log(t his.userData);
 
   }
 
