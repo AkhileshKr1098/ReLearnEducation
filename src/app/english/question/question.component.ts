@@ -60,7 +60,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   constructor(
     private _crud: CRUDService,
     private dialog: MatDialog,
-    private shared: SharedService
+    public shared: SharedService
   ) {
     this._crud.img_base_url.subscribe(
       (res) => {
@@ -75,7 +75,20 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     console.log(this.userData);
 
-    this._crud.getQuestionFilter(this.userLoginData.class, this.userData.Week, this.day, this.userData.ID).subscribe(
+    const startingDate = new Date(this.userData.AsignDate);
+    const currentDate = new Date();
+
+    const timeDiff = currentDate.getTime() - startingDate.getTime();
+    const totalDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+    const currentWeek = Math.floor(totalDays / 6);
+    const currentDay = totalDays % 6;
+
+    console.log('Total Days:', totalDays);
+    console.log('Current Week:', currentWeek);
+    console.log('Current Day:', currentDay);
+
+    this._crud.getQuestionFilter(this.userLoginData.class, currentWeek, currentDay, this.userData.ID).subscribe(
       (res: QuestionDataRes) => {
         if (Array.isArray(res.data)) {
           this.AllQuestion = res.data

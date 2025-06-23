@@ -55,7 +55,7 @@ export class ListenWordsComponent {
   constructor(
     private dialog: MatDialog,
     private _crud: CRUDService,
-    private shared: SharedService,
+    public shared: SharedService,
     private sanitizer: DomSanitizer
 
   ) {

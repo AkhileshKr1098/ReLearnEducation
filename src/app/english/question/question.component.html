@@ -33,19 +33,21 @@
         <div class="reportCard">
             <div class="profileHeader">
                 <div class="profileimage">
-                    <img src="../../../assets/icon/profile.jpeg" alt="">
+                    <img src="https://www.relearntoday.com/assets/images/students_img/{{this.shared.LoginData.ID}}.jpg"
+                        alt="">
+                    <!-- <img src="../../../assets/icon/profile.jpeg" alt=""> -->
                 </div>
                 <div class="name">
-                    MR John
+                    {{this.shared.LoginData.UserName}}
                 </div>
                 <div class="studentid">
-                    Student ID : AB3265
+                    Student ID : {{this.shared.LoginData.ID}}
                 </div>
 
                 <div class="studentid">
-                    <span>Leave 1</span>
-                    <span>Week 9</span>
-                    <span>Day 2</span>
+                    <span>Class {{this.shared.LoginData.Class}}</span>
+                    <span>Week {{this.shared.currentWeek.getValue()}} </span>
+                    <span>Day {{this.shared.currentDay.getValue()}}</span>
                 </div>
 
             </div>
