@@ -6,8 +6,9 @@ import { UserData } from 'src/app/interface/student.interface';
 import { SharedService } from 'src/app/shared.service';
 
 interface datas {
-  day: string,
-  std_id: string
+  day: number,
+  std_id: string,
+  week: number
 }
 @Component({
   selector: 'app-report-page-deatils',
@@ -28,38 +29,7 @@ export class ReportPageDeatilsComponent {
   ];
 
   AnsReports: AnsReport[] = []
-
-  userData: UserData = {
-    LoginId: '',
-    ID: '',
-    UserName: '',
-    DOB: '',
-    AbacusMaster: '',
-    AsignDate: '',
-    AsignDay: '',
-    CSDate: '',
-    ContactNo: '',
-    Course: '',
-    Currency: '',
-    CustomWeek: '',
-    GameTimeInterval: '',
-    GraceDays: '',
-    Group1: '',
-    HolidayFrom: null,
-    HolidayTo: null,
-    Level: '',
-    LittleChamp: '',
-    LittleLeap: '',
-    LittleMaster: '',
-    LittleProdigy: '',
-    LittleStart: '',
-    MaxQToDo: '',
-    Status: '',
-    Validity: null,
-    Week: '',
-    narratorSpeed: ''
-  };
-
+  userData: any
 
   constructor(
     private _crud: CRUDService,
@@ -70,26 +40,18 @@ export class ReportPageDeatilsComponent {
 
   }
   ngOnInit() {
-    const updatedUserDataString = sessionStorage.getItem('rluser');
-    if (updatedUserDataString) {
-      try {
-        this.userData = JSON.parse(updatedUserDataString) as UserData;
-        console.log('User data loaded:', this.userData);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
-    }
-    if (this.data) {
-      this.get_report(this.data.std_id, this.data.day)
-    }
+    this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
+
+    this.get_report(this.userData.ID, this.data.day, this.data.week)
 
   }
 
 
-  get_report(std: string, day: string) {
+  get_report(std: string, day: number, week: number) {
     this._crud.ans_get_topics({
       std_id: std,
-      day: day
+      day: day,
+      week: week
     }).subscribe(
       (res: AnsReportRes) => {
         console.log(res);

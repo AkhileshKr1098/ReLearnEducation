@@ -7,11 +7,30 @@
         <div *ngFor="let item of  AnsQuestionList">
 
             <div *ngIf="item.question_type == 'LetterTracing'" id="LetterTracing">
-                <img src="" alt="">
+                <div id="questionHeader">
+                    <h1>🎨 {{item.Question}} 🖍️</h1>
+                </div>
+                <div id="questionarea">
+                    <div class="imgarea">
+                        <img [src]="base_url_ans_img+item.answer_image" alt="Question Image">
+                    </div>
+                </div>
+
+
             </div>
 
             <div *ngIf="item.question_type == 'LetterMatch'" id="LetterMatch">
-                <img src="" alt="">
+                <div id="questionHeader">
+                    <h1>🎨 {{item.Question}} 🖍️</h1>
+                </div>
+                <div id="questionarea">
+                    <div class="imgarea">
+                        <img [src]="base_url_ans_img+item.answer_image" alt="Question Image" />
+                    </div>
+                </div>
+
+
+
             </div>
 
             <!-- for BlendWords start  -->
@@ -53,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="FooterAns">
                     Status:
                     <span [ngClass]="item.answer_status == 1 ? 'text-green' : 'text-red'">
@@ -88,7 +107,7 @@
 
                     </div>
                 </div>
-            
+
                 <div class="FooterAns">
                     Status:
                     <span [ngClass]="item.answer_status == 1 ? 'text-green' : 'text-red'">

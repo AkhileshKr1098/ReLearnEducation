@@ -33,43 +33,15 @@ export class ReportPageComponent implements OnInit {
   Seletedclass: string = ''
   Seletedweek: string = ''
   Seletedtopics: string = ''
+  userData: any
 
-  userData: UserData = {
-    LoginId: '',
-    ID: '',
-    UserName: '',
-    DOB: '',
-    AbacusMaster: '',
-    AsignDate: '',
-    AsignDay: '',
-    CSDate: '',
-    ContactNo: '',
-    Course: '',
-    Currency: '',
-    CustomWeek: '',
-    GameTimeInterval: '',
-    GraceDays: '',
-    Group1: '',
-    HolidayFrom: null,
-    HolidayTo: null,
-    Level: '',
-    LittleChamp: '',
-    LittleLeap: '',
-    LittleMaster: '',
-    LittleProdigy: '',
-    LittleStart: '',
-    MaxQToDo: '',
-    Status: '',
-    Validity: null,
-    Week: '',
-    narratorSpeed: ''
-  };
 
   constructor(
     private _crud: CRUDService,
     private _shared: SharedService,
     private _dialog: MatDialog
   ) {
+    this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
 
   }
   ngOnInit() {
@@ -108,8 +80,11 @@ export class ReportPageComponent implements OnInit {
   get_week() {
     this._crud.getWeek().subscribe(
       (res: WeekRes) => {
+        console.log(res, 'weeks');
+
         if (Array.isArray(res.data)) {
           this.Weeks = res.data
+          this.Seletedweek = res.data[0].week_num
         }
       }
     )
@@ -173,8 +148,11 @@ export class ReportPageComponent implements OnInit {
 
     const data = {
       day: day,
+      week: this.Seletedweek,
       std_id: this.userData.ID
     }
+    console.log(data, 'redpo');
+    
     const dialogRef = this._dialog.open(ReportPageDeatilsComponent, {
       data: data,
       width: '100vw',

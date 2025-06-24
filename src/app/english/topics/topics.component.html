@@ -1,6 +1,6 @@
 <div id="wrapper">
-        <div *ngFor="let topic of topics_list; let i = index" class="day-container" (click)="onQuestion(topic.id)">
-            <div class="topicsname">{{ topic.topics }}</div>
-            <div class="topicsimg"> <img [src]="base_url+topic.topics_img" alt="" ></div>
-        </div>
+    <div *ngFor="let topic of topics_list; let i = index" class="day-container" (click)="onQuestion(topic)">
+        <div class="topicsname">{{ topic.topics }}</div>
+        <div class="topicsimg"> <img [src]="base_url+topic.topics_img" alt=""></div>
+    </div>
 </div>

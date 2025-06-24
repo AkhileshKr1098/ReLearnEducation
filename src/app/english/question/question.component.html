@@ -54,48 +54,52 @@
 
             <div class="reportarea">
                 <div class="progess">
-                    <span>Today's Progress Report: 0/25</span>
+                    <span>Today's Progress Report:
+                        {{this.CurrentReport.today_report.correct}}/{{this.CurrentReport.today_report.total}}</span>
                     <div class="progessline">
                         <section class="example-section">
-                            <mat-progress-bar class="example-margin" [value]="10">
+                            <mat-progress-bar class="example-margin"
+                                [value]="CurrentReport.today_report.correct_percent">
                             </mat-progress-bar>
                         </section>
                     </div>
                     <div class="progessCricelarea">
                         <div class="rightans">
-                            <circle-progress [percent]="40" [radius]="50" [outerStrokeWidth]="8" [innerStrokeWidth]="4"
-                                [outerStrokeColor]="'green'" [innerStrokeColor]="'lightgray'" [animation]="true"
-                                [animationDuration]="1000">
+                            <circle-progress [percent]="CurrentReport.today_report.correct_percent" [radius]="50"
+                                [outerStrokeWidth]="8" [innerStrokeWidth]="4" [outerStrokeColor]="'green'"
+                                [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="1000">
                             </circle-progress>
                         </div>
                         <div class="worngans">
-                            <circle-progress [percent]="40" [radius]="50" [outerStrokeWidth]="8" [innerStrokeWidth]="4"
-                                [outerStrokeColor]="'red'" [innerStrokeColor]="'lightgray'" [animation]="true"
-                                [animationDuration]="1000">
+                            <circle-progress [percent]="CurrentReport.today_report.incorrect_percent" [radius]="50"
+                                [outerStrokeWidth]="8" [innerStrokeWidth]="4" [outerStrokeColor]="'red'"
+                                [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="1000">
                             </circle-progress>
                         </div>
                     </div>
                 </div>
                 <div class="progess">
-                    <span>{{CurrentQuestion.topics}} Progress Report: {{i}}/{{AllQuestion.length}}
+                    <span>{{CurrentQuestion.topics}} Progress Report:
+                        {{this.CurrentReport.topic_wise_report.correct_percent}}/{{this.CurrentReport.topic_wise_report.correct}}
                     </span>
                     <div class="progessline">
                         <section class="example-section">
-                            <mat-progress-bar class="example-margin" [value]="((i) / AllQuestion.length) * 100">
+                            <mat-progress-bar class="example-margin"
+                                [value]="CurrentReport.topic_wise_report.correct_percent">
                             </mat-progress-bar>
                         </section>
                     </div>
                     <div class="progessCricelarea">
                         <div class="rightans">
-                            <circle-progress [percent]="topicsRightPro" [radius]="50" [outerStrokeWidth]="8"
-                                [innerStrokeWidth]="4" [outerStrokeColor]="'green'" [innerStrokeColor]="'lightgray'"
-                                [animation]="true" [animationDuration]="1000">
+                            <circle-progress [percent]="CurrentReport.topic_wise_report.correct_percent" [radius]="50"
+                                [outerStrokeWidth]="8" [innerStrokeWidth]="4" [outerStrokeColor]="'green'"
+                                [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="1000">
                             </circle-progress>
                         </div>
                         <div class="worngans">
-                            <circle-progress [percent]="topicsWorngPro" [radius]="50" [outerStrokeWidth]="8"
-                                [innerStrokeWidth]="4" [outerStrokeColor]="'red'" [innerStrokeColor]="'lightgray'"
-                                [animation]="true" [animationDuration]="1000">
+                            <circle-progress [percent]="CurrentReport.topic_wise_report.incorrect_percent" [radius]="50"
+                                [outerStrokeWidth]="8" [innerStrokeWidth]="4" [outerStrokeColor]="'red'"
+                                [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="1000">
                             </circle-progress>
                         </div>
                     </div>

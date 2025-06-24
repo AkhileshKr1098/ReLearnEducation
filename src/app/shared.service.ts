@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class SharedService {
   userData = {
     AbacusMaster: "0.00",
-    AsignDate: "2025-06-10",
+    AsignDate: "2025-06-11",
     AsignDay: "1",
     CSDate: "2025-06-15",
     ContactNo: "6202572787",
@@ -47,6 +47,7 @@ export class SharedService {
   }
 
   base_url = new BehaviorSubject<string>('https://ud.mausamstudio.com/relearn_api/')
+  base_url_ans_img = new BehaviorSubject<string>('https://ud.mausamstudio.com/relearn_api/uploads/ans_img/')
   base_url_audio = new BehaviorSubject<string>('')
   base_url_icon = new BehaviorSubject<string>('')
   base_url_answer = new BehaviorSubject<string>('')

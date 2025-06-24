@@ -35,8 +35,9 @@ export class TopicsComponent {
     )
   }
 
-  onQuestion(day: any) {
-    console.log(day)
+  onQuestion(data: any) {
+    console.log(data)
+    sessionStorage.setItem('SelectedTopics', data.topics)
     this._router.navigate(['/english/question'])
   }
 }

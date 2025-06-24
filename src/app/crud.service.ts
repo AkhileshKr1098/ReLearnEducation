@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserProfile } from './interface/student.interface';
 import { AnsReportRes, AnswerWithQuestionRes, ClassRes, DayRes, GradeRes, QuestionData, SectionsFilterRes, SectionsRes, SubTopicRes, TopicsRes, Week, WeekInsertRes, WeekRes } from './interface/Question.interface';
+import { CurrentReportRes } from './interface/report.interafce';
 
 @Injectable({
   providedIn: 'root'
@@ -278,15 +279,35 @@ export class CRUDService {
     return this._http.get<AnsReportRes>(`${this.base_url}ans_save.php`, { params });
   }
 
-  ans_get_topics(filters: { std_id: string, day: string }): Observable<AnsReportRes> {
+  ans_get_topics(filters: { std_id?: string, week?: number, day?: number, topics?: string }): Observable<AnsReportRes> {
     let params = new HttpParams();
+
     if (filters.std_id) {
       params = params.set('std_id', filters.std_id);
+    }
+    if (filters.week) {
+      params = params.set('week', filters.week);
     }
     if (filters.day) {
       params = params.set('day', filters.day);
     }
+    if (filters.topics) {
+      params = params.set('topics', filters.topics);
+    }
+
     return this._http.get<AnsReportRes>(`${this.base_url}get_ans_topics.php`, { params });
+  }
+
+  get_current_report(filters: { std_id: string, class: string, week: number, day: number, topics: string }): Observable<CurrentReportRes> {
+    let params = new HttpParams();
+
+    params = params.set('std_id', filters.std_id);
+    params = params.set('class', filters.class);
+    params = params.set('week', filters.week.toString());
+    params = params.set('day', filters.day.toString());
+    params = params.set('topics', filters.topics);
+
+    return this._http.get<CurrentReportRes>(`${this.base_url}getCurrentReport.php`, { params });
   }
 
   ans_priview(filters: { std_id: string, day: string, week: string }): Observable<AnswerWithQuestionRes> {

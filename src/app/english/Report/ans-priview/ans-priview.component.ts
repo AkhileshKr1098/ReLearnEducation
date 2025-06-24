@@ -16,18 +16,25 @@ interface qdata {
 })
 export class AnsPriviewComponent implements OnInit {
   base_url: string = '';
+  base_url_ans_img: string = '';
   AnsQuestionList: AnswerWithQuestion[] = []
   audio: HTMLAudioElement | null = null;
 
   constructor(
     private _crud: CRUDService,
-    private _shared: SharedService,
+    public _shared: SharedService,
     @Inject(MAT_DIALOG_DATA) public data: qdata,
 
   ) {
     this._crud.img_base_url.subscribe(
       (res) => {
         this.base_url = res
+      }
+    )
+
+    this._shared.base_url_ans_img.subscribe(
+      (res)=>{
+        this.base_url_ans_img = res
       }
     )
   }

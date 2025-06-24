@@ -5,8 +5,9 @@ import { ConfirmDialogComponent } from '../QuestionType/confirm-dialog/confirm-d
 import { CorrectBoxComponent } from '../correct-box/correct-box.component';
 import { OppsBoxComponent } from '../opps-box/opps-box.component';
 import { BehaviorSubject } from 'rxjs';
-import { QuestionData, QuestionDataRes } from 'src/app/interface/Question.interface';
+import { AnsReportRes, QuestionData, QuestionDataRes } from 'src/app/interface/Question.interface';
 import { SharedService } from 'src/app/shared.service';
+import { CurrentReportRes } from 'src/app/interface/report.interafce';
 
 @Component({
   selector: 'app-question',
@@ -17,6 +18,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
 
   isSaveVisible = false;
   QuestionType: string = ''
+  SelectedTopics: string = ''
   AllQuestion: QuestionData[] = []
   CurrentQuestion: QuestionData = {
     Answer: '',
@@ -46,14 +48,22 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   base_url: string = ''
   topicsRightPro: number = 0
   topicsWorngPro: number = 0
-  userLoginData = {
-    name: 'MR. Json',
-    age: 11,
-    class: 'LKG',
-    school: 'US, Publics school ',
-    country: 'USA',
-    profile_img: '../../../assets/icon/profile.jpeg',
-    currentPoint: 350
+  CurrentReport: CurrentReportRes = {
+    success: 0,
+    today_report: {
+      total: 0,
+      correct: 0,
+      incorrect: 0,
+      correct_percent: 0,
+      incorrect_percent: 0
+    },
+    topic_wise_report: {
+      total: 0,
+      correct: 0,
+      incorrect: 0,
+      correct_percent: 0,
+      incorrect_percent: 0
+    }
   }
   userData: any
   day: any
@@ -69,7 +79,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     )
 
     this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
-    this.day = JSON.parse(sessionStorage.getItem('selectedDay') || '""');
+    this.SelectedTopics = sessionStorage.getItem('SelectedTopics') || '';
   }
 
   ngOnInit() {
@@ -88,7 +98,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     console.log('Current Week:', currentWeek);
     console.log('Current Day:', currentDay);
 
-    this._crud.getQuestionFilter(this.userLoginData.class, currentWeek, currentDay, this.userData.ID).subscribe(
+    this._crud.getQuestionFilter(this.userData.Class, currentWeek, currentDay, this.userData.ID).subscribe(
       (res: QuestionDataRes) => {
         if (Array.isArray(res.data)) {
           this.AllQuestion = res.data
@@ -112,6 +122,8 @@ export class QuestionComponent implements OnInit, AfterViewInit {
         }
       }
     )
+
+    this.getCurrentReport()
   }
 
 
@@ -128,7 +140,23 @@ export class QuestionComponent implements OnInit, AfterViewInit {
 
 
 
+  getCurrentReport() {
+    this._crud.get_current_report({
+      std_id: this.userData.ID,
+      class: this.userData.Class,
+      week: this.shared.currentWeek.getValue(),
+      day: this.shared.currentDay.getValue(),
+      topics: this.SelectedTopics
+    }).subscribe(res => {
+      if (res.success) {
+        this.CurrentReport = res
+        console.log('Today Report:', res.today_report);
+        console.log('Topic Wise Report:', res.topic_wise_report);
+      }
+    });
 
+
+  }
 
   NextQuestion() {
     if (this.i < this.AllQuestion.length - 1) {
