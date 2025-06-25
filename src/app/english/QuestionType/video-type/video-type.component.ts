@@ -20,36 +20,9 @@ export class VideoTypeComponent {
   base_url: string = '';
   isSaveVisible = false;
 
-  userData: UserData = {
-    LoginId: '',
-    ID: '',
-    UserName: '',
-    DOB: '',
-    AbacusMaster: '',
-    AsignDate: '',
-    AsignDay: '',
-    CSDate: '',
-    ContactNo: '',
-    Course: '',
-    Currency: '',
-    CustomWeek: '',
-    GameTimeInterval: '',
-    GraceDays: '',
-    Group1: '',
-    HolidayFrom: null,
-    HolidayTo: null,
-    Level: '',
-    LittleChamp: '',
-    LittleLeap: '',
-    LittleMaster: '',
-    LittleProdigy: '',
-    LittleStart: '',
-    MaxQToDo: '',
-    Status: '',
-    Validity: null,
-    Week: '',
-    narratorSpeed: ''
-  };
+  userData: any = {};
+  currentWeek: any = 0;
+  currentDay: any = 0;
 
   safeUrl!: SafeResourceUrl;
 
@@ -65,15 +38,9 @@ export class VideoTypeComponent {
   ngOnInit() {
     console.log(this.CurrentQuestion);
 
-    const updatedUserDataString = sessionStorage.getItem('rluser');
-    if (updatedUserDataString) {
-      try {
-        this.userData = JSON.parse(updatedUserDataString) as UserData;
-        console.log('User data loaded:', this.userData);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
-    }
+    this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
+    this.currentWeek = this.shared.currentWeek.getValue();
+    this.currentDay = this.shared.currentDay.getValue();
 
     if (this.CurrentQuestion?.listen_word) {
       this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.CurrentQuestion.listen_word);

@@ -8,9 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 export class SharedService {
   userData = {
     AbacusMaster: "0.00",
-    AsignDate: "2025-06-11",
+    AsignDate: "2025-06-12",
     AsignDay: "1",
-    CSDate: "2025-06-15",
+    CSDate: "2025-06-10",
     ContactNo: "6202572787",
     Course: "FT with Basics & MT",
     Currency: "",
@@ -34,7 +34,7 @@ export class SharedService {
     UserName: "Akhilesh Kumar",
     Validity: null,
     Week: "2",
-    Class: "LKG",
+    Class: "UKG",
     narratorSpeed: null // or some actual value if needed
   };
 
@@ -61,18 +61,40 @@ export class SharedService {
   }
 
 
+    day: any
+  week: any
+  asignWeek: any
+  asignDays: any
+  asignCSDay: any
+  curDate: any
+
   currentWeek = new BehaviorSubject<number>(1)
   currentDay = new BehaviorSubject<number>(1)
 
+
   WeekCalc() {
-    this.LoginData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
-    const startingDate = new Date(this.LoginData.AsignDate);
-    const currentDate = new Date();
+       console.log(this.userData);
+  let currentDate = new Date();
+let startDate = new Date(this.userData.CSDate);
 
-    const timeDiff = currentDate.getTime() - startingDate.getTime();
-    const totalDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+if (!isNaN(startDate.getTime())) {  
+    let timeDiff = currentDate.getTime() - startDate.getTime();
+    let diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
 
-    this.currentWeek.next(Math.floor(totalDays / 6))
-    this.currentDay.next(totalDays % 6)
+    let asignWeek = Number(this.asignWeek) || 0;
+    let asignDays = Number(this.asignDays) || 0;
+    let asignCSDay = Number(this.asignCSDay) || 0;
+    let totalDays = diffDays + (asignWeek * 7) - 7 + asignDays + asignCSDay - 1;
+
+    this.day = totalDays + 1;
+    this.week = Math.ceil(this.day / 7);
+    this.day = this.day - ((this.week - 1) * 7);
+
+    console.log(this.week, 'week', this.day, 'day');
+    this.currentWeek.next(this.week)
+    this.currentDay.next(this.day)
+} else {
+    console.error("Invalid CSDate:", this.userData.CSDate);
+}
  }
 }

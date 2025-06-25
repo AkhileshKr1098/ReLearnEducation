@@ -21,37 +21,9 @@ export class BlendWordsComponent implements OnInit {
   isSaveVisible = false;
   safeUrl!: SafeResourceUrl;
 
-  userData: UserData = {
-    LoginId: '',
-    ID: '',
-    UserName: '',
-    DOB: '',
-    AbacusMaster: '',
-    AsignDate: '',
-    AsignDay: '',
-    CSDate: '',
-    ContactNo: '',
-    Course: '',
-    Currency: '',
-    CustomWeek: '',
-    GameTimeInterval: '',
-    GraceDays: '',
-    Group1: '',
-    HolidayFrom: null,
-    HolidayTo: null,
-    Level: '',
-    LittleChamp: '',
-    LittleLeap: '',
-    LittleMaster: '',
-    LittleProdigy: '',
-    LittleStart: '',
-    MaxQToDo: '',
-    Status: '',
-    Validity: null,
-    Week: '',
-    narratorSpeed: ''
-  };
-
+  userData: any = {};
+  currentWeek: any = 0;
+  currentDay: any = 0;
   constructor(
     private dialog: MatDialog,
     private _crud: CRUDService,
@@ -64,7 +36,9 @@ export class BlendWordsComponent implements OnInit {
         this.base_url = res
       }
     )
-
+    this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
+    this.currentWeek = this.shared.currentWeek.getValue();
+    this.currentDay = this.shared.currentDay.getValue();
   }
 
   ngOnInit() {
@@ -103,7 +77,7 @@ export class BlendWordsComponent implements OnInit {
 
   onCorrect() {
     const dialogClosed = this.dialog.open(CorrectBoxComponent, {
-          width: "40vw",
+      width: "40vw",
       height: "90vh"
     });
 
@@ -117,7 +91,7 @@ export class BlendWordsComponent implements OnInit {
 
   onOops() {
     const oopsDialog = this.dialog.open(OppsBoxComponent, {
-           width: "40vw",
+      width: "40vw",
       height: "90vh"
     });
 

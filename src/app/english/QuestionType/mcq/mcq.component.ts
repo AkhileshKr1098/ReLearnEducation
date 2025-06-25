@@ -20,41 +20,13 @@ export class MCQComponent implements OnInit {
   isSaveVisible = false;
   safeUrl!: SafeResourceUrl;
 
-  userData: UserData = {
-    LoginId: '',
-    ID: '',
-    UserName: '',
-    DOB: '',
-    AbacusMaster: '',
-    AsignDate: '',
-    AsignDay: '',
-    CSDate: '',
-    ContactNo: '',
-    Course: '',
-    Currency: '',
-    CustomWeek: '',
-    GameTimeInterval: '',
-    GraceDays: '',
-    Group1: '',
-    HolidayFrom: null,
-    HolidayTo: null,
-    Level: '',
-    LittleChamp: '',
-    LittleLeap: '',
-    LittleMaster: '',
-    LittleProdigy: '',
-    LittleStart: '',
-    MaxQToDo: '',
-    Status: '',
-    Validity: null,
-    Week: '',
-    narratorSpeed: ''
-  };
-
+  userData: any = {};
+  currentWeek: any = 0;
+  currentDay: any = 0;
   constructor(
     private dialog: MatDialog,
     private _crud: CRUDService,
-    private shared: SharedService,
+    public shared: SharedService,
     private sanitizer: DomSanitizer
 
   ) {
@@ -64,15 +36,10 @@ export class MCQComponent implements OnInit {
       }
     )
 
-    const updatedUserDataString = sessionStorage.getItem('rluser');
-    if (updatedUserDataString) {
-      try {
-        this.userData = JSON.parse(updatedUserDataString) as UserData;
-        console.log('User data loaded:', this.userData);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
-    }
+
+    this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
+    this.currentWeek = this.shared.currentWeek.getValue();
+    this.currentDay = this.shared.currentDay.getValue();
   }
   ngOnInit(): void {
 
@@ -193,59 +160,59 @@ export class MCQComponent implements OnInit {
 
 
 
-    @ViewChild('videoElement') videoElementRef!: ElementRef;
-  
-    isPlaying = false;
-    progress = 0;
-    volume = 1;
-    duration = 0;
-    currentTime = 0;
-  
-    togglePlay() {
-      const video: HTMLVideoElement = this.videoElementRef.nativeElement;
-      if (video.paused) {
-        video.play();
-        this.isPlaying = true;
-      } else {
-        video.pause();
-        this.isPlaying = false;
-      }
+  @ViewChild('videoElement') videoElementRef!: ElementRef;
+
+  isPlaying = false;
+  progress = 0;
+  volume = 1;
+  duration = 0;
+  currentTime = 0;
+
+  togglePlay() {
+    const video: HTMLVideoElement = this.videoElementRef.nativeElement;
+    if (video.paused) {
+      video.play();
+      this.isPlaying = true;
+    } else {
+      video.pause();
+      this.isPlaying = false;
     }
-  
-    onTimeUpdate() {
-      const video = this.videoElementRef.nativeElement;
-      this.progress = (video.currentTime / video.duration) * 100;
-      this.currentTime = video.currentTime;
+  }
+
+  onTimeUpdate() {
+    const video = this.videoElementRef.nativeElement;
+    this.progress = (video.currentTime / video.duration) * 100;
+    this.currentTime = video.currentTime;
+  }
+
+  onLoadedMetadata() {
+    const video = this.videoElementRef.nativeElement;
+    this.duration = video.duration;
+  }
+
+  seekVideo(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const video = this.videoElementRef.nativeElement;
+    video.currentTime = (+input.value / 100) * video.duration;
+  }
+
+  changeVolume(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const video = this.videoElementRef.nativeElement;
+    video.volume = +input.value;
+    this.volume = +input.value;
+  }
+
+  toggleMute() {
+    const video = this.videoElementRef.nativeElement;
+    video.muted = !video.muted;
+  }
+
+  toggleFullScreen(video: HTMLVideoElement) {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      video.requestFullscreen();
     }
-  
-    onLoadedMetadata() {
-      const video = this.videoElementRef.nativeElement;
-      this.duration = video.duration;
-    }
-  
-    seekVideo(event: Event) {
-      const input = event.target as HTMLInputElement;
-      const video = this.videoElementRef.nativeElement;
-      video.currentTime = (+input.value / 100) * video.duration;
-    }
-  
-    changeVolume(event: Event) {
-      const input = event.target as HTMLInputElement;
-      const video = this.videoElementRef.nativeElement;
-      video.volume = +input.value;
-      this.volume = +input.value;
-    }
-  
-    toggleMute() {
-      const video = this.videoElementRef.nativeElement;
-      video.muted = !video.muted;
-    }
-  
-    toggleFullScreen(video: HTMLVideoElement) {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      } else {
-        video.requestFullscreen();
-      }
-    }
+  }
 }

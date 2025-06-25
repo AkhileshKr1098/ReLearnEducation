@@ -21,37 +21,9 @@ export class ListenWordsComponent {
   audio: HTMLAudioElement | null = null;
   safeUrl!: SafeResourceUrl;
 
-  userData: UserData = {
-    LoginId: '',
-    ID: '',
-    UserName: '',
-    DOB: '',
-    AbacusMaster: '',
-    AsignDate: '',
-    AsignDay: '',
-    CSDate: '',
-    ContactNo: '',
-    Course: '',
-    Currency: '',
-    CustomWeek: '',
-    GameTimeInterval: '',
-    GraceDays: '',
-    Group1: '',
-    HolidayFrom: null,
-    HolidayTo: null,
-    Level: '',
-    LittleChamp: '',
-    LittleLeap: '',
-    LittleMaster: '',
-    LittleProdigy: '',
-    LittleStart: '',
-    MaxQToDo: '',
-    Status: '',
-    Validity: null,
-    Week: '',
-    narratorSpeed: ''
-  };
-
+  userData: any = {};
+  currentWeek: any = 0;
+  currentDay: any = 0;
   constructor(
     private dialog: MatDialog,
     private _crud: CRUDService,
@@ -66,15 +38,10 @@ export class ListenWordsComponent {
       }
     )
 
-    const updatedUserDataString = sessionStorage.getItem('rluser');
-    if (updatedUserDataString) {
-      try {
-        this.userData = JSON.parse(updatedUserDataString) as UserData;
-        console.log('User data loaded:', this.userData);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
-    }
+
+    this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
+    this.currentWeek = this.shared.currentWeek.getValue();
+    this.currentDay = this.shared.currentDay.getValue();
   }
   selectOption(option: string) {
     this.filledWord = option;
@@ -129,7 +96,7 @@ export class ListenWordsComponent {
 
   onOops() {
     const oopsDilog = this.dialog.open(OppsBoxComponent, {
-           width: "40vw",
+      width: "40vw",
       height: "90vh"
     });
     oopsDilog.afterClosed().subscribe(
