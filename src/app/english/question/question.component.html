@@ -33,8 +33,9 @@
         <div class="reportCard">
             <div class="profileHeader">
                 <div class="profileimage">
-                    <img src="https://www.relearntoday.com/assets/images/students_img/{{userData.ID}}.jpg" alt="">
-                    <!-- <img src="../../../assets/icon/profile.jpeg" alt=""> -->
+                    <img [src]="'https://www.relearntoday.com/assets/images/students_img/' + userData?.ID + '.jpg'"
+                        alt="Profile" (error)="setDefaultImage($event)" >
+
                 </div>
                 <div class="name">
                     {{userData.UserName}}

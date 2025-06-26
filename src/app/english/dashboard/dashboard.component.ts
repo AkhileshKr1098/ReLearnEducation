@@ -12,24 +12,15 @@ import { SharedService } from 'src/app/shared.service';
 })
 export class DashboardComponent {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
-  current_day = 5
 
   weeksList: Week[] = []
   TopicsList: Topics[] = []
   SectionsList: SectionsFilter[] = []
   SectionsListFilter: SectionsFilter[] = []
   allTopics: string = ''
-  percent: number = 50;
-  userLoginData = {
-    name: 'MR. Json',
-    age: 11,
-    class: 'LKG',
-    school: 'US, Publics school ',
-    country: 'USA',
-    profile_img: '../../../assets/icon/profile.jpeg',
-    currentPoint: 350
-  }
-
+  userData: any = {};
+  currentWeek: any = 0;
+  currentDay: any = 0;
   days1 = [
     { name: '1', url: '../../../assets/icon/day1.png' },
     { name: '2', url: '../../../assets/icon/day2.png' },
@@ -48,9 +39,13 @@ export class DashboardComponent {
 
   constructor(
     private _crud: CRUDService,
-    private _shared: SharedService,
+    private shared: SharedService,
     private _router: Router
-  ) { }
+  ) {
+    this.userData = JSON.parse(sessionStorage.getItem('rluser') || '{}');
+    this.currentWeek = this.shared.currentWeek.getValue();
+    this.currentDay = this.shared.currentDay.getValue();
+  }
 
 
   ngOnInit() {
@@ -93,7 +88,7 @@ export class DashboardComponent {
 
 
   getSections() {
-    const cls = this.userLoginData.class
+    const cls = this.userData.Class
     this._crud.getsectionsFilter(cls).subscribe(
       (res: SectionsFilterRes) => {
         if (Array.isArray(res.data)) {
@@ -107,8 +102,8 @@ export class DashboardComponent {
   }
 
   onTopics(day: any, event: MouseEvent) {
-    console.log(day.name);    
-sessionStorage.setItem('selectedDay', JSON.stringify(day.name));
+    console.log(day.name);
+    sessionStorage.setItem('selectedDay', JSON.stringify(day.name));
 
     event.preventDefault();
     console.log(day);
@@ -125,6 +120,9 @@ sessionStorage.setItem('selectedDay', JSON.stringify(day.name));
 
   }
 
+    setDefaultImage(event: any) {
+  event.target.src = '../../../assets/icon/profile.jpeg';
+}
 
 }
 

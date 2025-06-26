@@ -16,7 +16,7 @@
             <mat-expansion-panel [hideToggle]="true">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  {{sec.sections}} 
+                  {{sec.sections}}
                   <!-- <span style="font-weight: normal;">{{ allTopics }}</span> -->
                 </mat-panel-title>
               </mat-expansion-panel-header>
@@ -33,14 +33,15 @@
       <div class="profile_section">
         <div class="profile_box">
           <div class="profileimg">
-            <img [src]="userLoginData.profile_img" alt="">
+            <img [src]="'https://www.relearntoday.com/assets/images/students_img/' + userData?.ID + '.jpg'"
+              alt="Profile" (error)="setDefaultImage($event)">
           </div>
           <div class="profiledeatils">
-            <div class="row name">{{userLoginData.name}}</div>
-            <div class="row">{{userLoginData.age}}</div>
-            <div class="row">{{userLoginData.class}}</div>
-            <div class="row">{{userLoginData.school}}</div>
-            <div class="row">{{userLoginData.country}}</div>
+            <div class="row name">{{userData.UserName}}</div>
+            <div class="row">{{userData.DOB}}</div>
+            <div class="row">{{userData.Class }}</div>
+            <div class="row">{{userData.School}}</div>
+            <div class="row">{{userData.Country}}</div>
           </div>
 
         </div>
@@ -64,14 +65,14 @@
     <div class="lower_section">
       <div class="timeline">
         <div *ngFor="let day of days1; let i = index" (click)="onTopics(day, $event)" class="day-container"
-          [ngClass]="{ activeClass: i + 1 === current_day }">
+          [ngClass]="{ activeClass: day.name == currentDay }">
           <img [src]="day.url" alt="" (click)="onTopics(day, $event)">
         </div>
       </div>
 
       <div class="timeline">
         <div *ngFor="let day of days2; let i = index" (click)="onTopics(day, $event)" class="day-container2"
-          [ngClass]="{ activeClass: i + 1 === current_day }">
+          [ngClass]="{ activeClass: day.name == currentDay }">
           <img [src]="day.url" alt="" (click)="onTopics(day, $event)">
         </div>
       </div>

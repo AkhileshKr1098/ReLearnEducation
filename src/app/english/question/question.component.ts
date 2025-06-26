@@ -44,7 +44,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (this.userData?.Class && this.userData?.ID) {
-      this._crud.getQuestionFilter(this.userData.Class, this.currentWeek, this.shared.currentDay.getValue(), this.userData.ID)
+      this._crud.getQuestionFilter(this.userData.Class, this.currentWeek, this.shared.currentDay.getValue(), this.userData.ID, this.SelectedTopics, this.userData?.MaxQToDo)
         .subscribe((res: QuestionDataRes) => {
           if (Array.isArray(res.data)) {
             this.AllQuestion = res.data;
@@ -102,6 +102,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     this.QuestionType = this.CurrentQuestion?.question_type || '';
 
     console.log('Current Question:', this.CurrentQuestion);
+    this.getCurrentReport()
   }
 
   private getEmptyQuestion(): QuestionData {
@@ -150,4 +151,9 @@ export class QuestionComponent implements OnInit, AfterViewInit {
       }
     };
   }
+
+  setDefaultImage(event: any) {
+    event.target.src = '../../../assets/icon/profile.jpeg';
+  }
+
 }
